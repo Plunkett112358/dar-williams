@@ -21,7 +21,7 @@ return array(
     'devMode' => true,
     'generateTransformsAfterPageLoad' => false,
     'backupDbOnUpdate' => false,
-    'siteUrl' => 'http://dar-williams.dev/'
+    'siteUrl' => 'http://dar-williams.craft.dev/'
 
   ),
 

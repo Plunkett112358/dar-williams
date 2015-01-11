@@ -23,7 +23,7 @@
     <input id="fromName" type="text" name="fromName" value="{% if message is defined %}{{ message.fromName }}{% endif %}">
     {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
 
-    <h3><label for="fromEmail">Your Email</label></h3>
+   <h3><label for="fromEmail">Your Email</label></h3>
     <input id="fromEmail" type="text" name="fromEmail" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}">
     {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
 
@@ -32,11 +32,19 @@
     {{ message is defined and message ? errorList(message.getErrors('subject')) }}
 
     <h3><label for="message">Message</label></h3>
-    <textarea rows="10" cols="40" id="message" name="message">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
-    {{ message is defined and message ? errorList(message.getErrors('message')) }}
+    <textarea rows="10" cols="40" id="message" name="message[body]">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
 
-    <input type="submit" value="Send">
-</form>
+    <h3><label for="phone">Your phone number</label></h3>
+    <input id="phone" type="text" name="message[Phone]" value="">
+
+
+    <h3>Which Session are you interested in?</h3>
+    <label><input type="checkbox" name="message[Session][]" value="June"> June 23 - 27</label>
+    <label><input type="checkbox" name="message[Session][]" value="August"> August 29 - September 2 </label>
+    
+
+        <input type="submit" value="Send">
+    </form>
 
 
 {% endblock %}
