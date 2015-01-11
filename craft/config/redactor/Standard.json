@@ -1,0 +1,4 @@
+{
+	buttons: ['html','|','bold','italic','|','unorderedlist','orderedlist','|','link'],
+	plugins: ['fullscreen', 'pagebreak', 'clips']
+}
