@@ -2918,8 +2918,8 @@ fieldset[disabled] .btn-info.active {
 }
 .btn-warning {
   color: #ffffff;
-  background-color: #f0ad4e;
-  border-color: #eea236;
+  background-color: #b6a97c;
+  border-color: #ad9e6c;
 }
 .btn-warning:hover,
 .btn-warning:focus,
@@ -2927,8 +2927,8 @@ fieldset[disabled] .btn-info.active {
 .btn-warning.active,
 .open > .dropdown-toggle.btn-warning {
   color: #ffffff;
-  background-color: #ec971f;
-  border-color: #d58512;
+  background-color: #a4935b;
+  border-color: #8d7f4e;
 }
 .btn-warning:active,
 .btn-warning.active,
@@ -2950,11 +2950,11 @@ fieldset[disabled] .btn-warning:active,
 .btn-warning.disabled.active,
 .btn-warning[disabled].active,
 fieldset[disabled] .btn-warning.active {
-  background-color: #f0ad4e;
-  border-color: #eea236;
+  background-color: #b6a97c;
+  border-color: #ad9e6c;
 }
 .btn-warning .badge {
-  color: #f0ad4e;
+  color: #b6a97c;
   background-color: #ffffff;
 }
 .btn-danger {
@@ -4471,11 +4471,11 @@ a.label:focus {
   background-color: #31b0d5;
 }
 .label-warning {
-  background-color: #f0ad4e;
+  background-color: #b6a97c;
 }
 .label-warning[href]:hover,
 .label-warning[href]:focus {
-  background-color: #ec971f;
+  background-color: #a4935b;
 }
 .label-danger {
   background-color: #d9534f;
@@ -4743,7 +4743,7 @@ a.thumbnail.active {
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 .progress-bar-warning {
-  background-color: #f0ad4e;
+  background-color: #b6a97c;
 }
 .progress-striped .progress-bar-warning {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -6162,5 +6162,39 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+.home {
+  background: url('../images/background.jpg') no-repeat 50% 50% fixed;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.home .intro {
+  color: white;
+  margin-top: 200px;
+  opacity: 1;
+}
+.home .intro h1 {
+  font-size: 60px;
+  text-transform: uppercase;
+}
+.home .intro h2 {
+  font-size: 50px;
+}
+body .header {
+  border-top: 17px solid #b6a97c;
+}
+body .navbar {
+  margin-top: 100px;
+}
+body .navbar a {
+  color: #b6a97c;
+  font-size: 20px;
+  font-weight: 300;
+}
+footer {
+  /*border-top:17px solid @brand-warning;*/
 }
 /*# sourceMappingURL=/styles/styles.map */
