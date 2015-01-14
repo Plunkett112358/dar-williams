@@ -5,7 +5,7 @@
  {% set entry = craft.entries.section('inquiries').first() %}
 {% set fields = entry.getType().getFieldLayout().getFields() %}
 
-<form method="post" action="" accept-charset="UTF-8">
+<form method="post" action="" enctype="multipart/form-data" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="guestEntries/saveEntry">
     <input type="hidden" name="redirect" value="thankyou">
@@ -18,24 +18,26 @@
 
                 <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control"  name="email" id="email" required >
+                        <input type="email" class="form-control"  name="fields[email]" id="email" required >
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="phone" class="form-control"  name="phone" id="phone" required >
+                        <input type="phone" class="form-control"  name="fields[phone]" id="phone" required >
                     </div>
 
     
                     <div class="form-group">
                         <label for="body">Statement</label>
-                        <textarea class="form-control"  name="body" id="body"></textarea>
+                        <textarea class="form-control"  name="fields[body]" id="body"></textarea>
                     </div>
 
+                     <div class="form-group">
                     <label for="image">Images (.png)</label>
-                    <div class="file-upload btn btn-primary">
-                        <span>IMAGE</span>
+                    <div class="file-upload btn btn-warning">
+                        <span>Image</span>
                         <input type="file" id="image" name="fields[image]" class="upload" >
+                    </div>
                     </div>
 
                    <!-- some help below -->
