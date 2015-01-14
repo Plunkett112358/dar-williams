@@ -1,0 +1,21 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    first: true,
+    label: "Api Key",
+    instructions: "Your Api Token, if you dont have one you can create one for your account here. <a href='https://admin.mailchimp.com/account/api/' target='_blank'>https://admin.mailchimp.com/account/api/</a>",
+    name: 'apiKey',
+    value: settings.apiKey,
+    size: 33
+}) }}
+
+{{ forms.textField({
+    first: true,
+    label: "List ID ",
+    instructions: "The ID of the list you want to subscribe people to.",
+    name: 'listId',
+    value: settings.listId,
+    size: 33
+}) }}
+
+<hr>

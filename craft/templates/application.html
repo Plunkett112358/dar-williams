@@ -1,0 +1,33 @@
+{% extends '_layout' %}
+
+{% block content %}
+
+  <form class="newsletter-form" action="" method="POST">
+    <input type="hidden" name="action" value="mailchimpSubscribe/list/Subscribe">
+    <input type="hidden" name="redirect" value="newsletter/receipt">
+
+    {% if mailchimpSubscribe is defined %}
+      {% if (not mailchimpSubscribe.success) and (mailchimpSubscribe.errorCode!='1000') %}
+        <p>An error occured. Please try again.</p>
+      {% endif %}
+    {% endif %}
+
+    <div class="field-line">
+      <label>First name:</label>
+      <input type="text" name="mcvars[FNAME]" value="{% if (mailchimpSubscribe is defined) and (not mailchimpSubscribe.success) %}{{ mailchimpSubscribe.values.vars.FNAME }}{% endif %}"/>
+    </div>
+
+    <div class="field-line">
+      <label>Last name:</label>
+      <input type="text" name="mcvars[LNAME]" value="{% if (mailchimpSubscribe is defined) and (not mailchimpSubscribe.success) %}{{ mailchimpSubscribe.values.vars.LNAME }}{% endif %}"/>
+    </div>
+
+    <div class="field-line">
+      <label{% if (mailchimpSubscribe is defined) and (mailchimpSubscribe.errorCode=='1000') %} class="error"{% endif %}>Email:</label>
+      <input type="text" name="email" value="{% if (mailchimpSubscribe is defined) and (not mailchimpSubscribe.success) %}{{ mailchimpSubscribe.values.email }}{% endif %}"/>
+    </div>
+
+    <input type="submit" name="" value="Subscribe"/>
+  </form>
+
+{% endblock %}
