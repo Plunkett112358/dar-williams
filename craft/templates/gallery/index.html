@@ -1,0 +1,22 @@
+{% extends '_layout' %}
+
+{% block content %}
+{% set photos =  craft.entries.section('gallery').find() %}
+
+<div class="page-header">
+	<h1>Gallery</h1>
+</div>
+
+
+<div class="row">
+{% for photo in photos %}
+	<div class="col-md-4">
+
+		<img class="img-responsive" src="{{ photo.image[0].url}}">
+		<p class="text-center">{{photo.title}}</p>
+	</div>
+{% endfor %}
+
+	
+</div>
+{% endblock %}
