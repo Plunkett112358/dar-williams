@@ -2,32 +2,39 @@
 
 {% block content %}
 
-  <form class="newsletter-form" action="" method="POST">
-    <input type="hidden" name="action" value="mailchimpSubscribe/list/Subscribe">
-    <input type="hidden" name="redirect" value="newsletter/receipt">
+ {% set entry = craft.entries.section('inquiries').first() %}
+{% set fields = entry.getType().getFieldLayout().getFields() %}
 
-    {% if mailchimpSubscribe is defined %}
-      {% if (not mailchimpSubscribe.success) and (mailchimpSubscribe.errorCode!='1000') %}
-        <p>An error occured. Please try again.</p>
-      {% endif %}
-    {% endif %}
+<form method="post" action="" accept-charset="UTF-8">
+    {{ getCsrfInput() }}
+    <input type="hidden" name="action" value="guestEntries/saveEntry">
+    <input type="hidden" name="redirect" value="thankyou">
+    <input type="hidden" name="sectionId" value="3">
 
-    <div class="field-line">
-      <label>First name:</label>
-      <input type="text" name="mcvars[FNAME]" value="{% if (mailchimpSubscribe is defined) and (not mailchimpSubscribe.success) %}{{ mailchimpSubscribe.values.vars.FNAME }}{% endif %}"/>
-    </div>
+                <div class="form-group">
+                    <label for="title">Your Name</label>
+                    <input type="title" class="form-control"  name="title" id="title" required >
+                </div>
 
-    <div class="field-line">
-      <label>Last name:</label>
-      <input type="text" name="mcvars[LNAME]" value="{% if (mailchimpSubscribe is defined) and (not mailchimpSubscribe.success) %}{{ mailchimpSubscribe.values.vars.LNAME }}{% endif %}"/>
-    </div>
+                <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control"  name="email" id="email" required >
+                    </div>
 
-    <div class="field-line">
-      <label{% if (mailchimpSubscribe is defined) and (mailchimpSubscribe.errorCode=='1000') %} class="error"{% endif %}>Email:</label>
-      <input type="text" name="email" value="{% if (mailchimpSubscribe is defined) and (not mailchimpSubscribe.success) %}{{ mailchimpSubscribe.values.email }}{% endif %}"/>
-    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="phone" class="form-control"  name="phone" id="phone" required >
+                    </div>
 
-    <input type="submit" name="" value="Subscribe"/>
-  </form>
+    
+                    <div class="form-group">
+                        <label for="body">Statement</label>
+                        <textarea class="form-control"  name="body" id="body"></textarea>
+                    </div>
+
+
+    <input type="submit" class="btn btn-warning" value="Publish">
+</form>
+
 
 {% endblock %}

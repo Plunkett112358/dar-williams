@@ -19,7 +19,11 @@
     <![endif]-->
   </head>
 
-  <body {% if craft.request.firstSegment == null %} class="home" {% endif %}>
+  <body 
+  {% if craft.request.firstSegment == null %} class="home" {% endif %}
+  {% if craft.request.lastSegment == 'contact' %} class="contact" {% endif %}
+
+  >
 <div class="header">
    <div class="navbar " role="navigation">
       <div class="container">
@@ -36,8 +40,8 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
-            <li><a href="/register">Register</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/application">Application</a></li>
+            <li><a href="/contact">Contact/Questions</a></li>
             <li><a href="/final-details">Final Details</a></li>
           </ul>
         </div><!--/.nav-collapse -->
