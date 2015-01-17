@@ -1,13 +1,17 @@
 {% extends '_layout' %}
 
 {% block content %}
-
- {% set entry = craft.entries.section('inquiries').status('disabled').first() %}
+<div class="page-header">
+  <h1>
+    Application
+  </h1>
+</div>
+ {% set entry = craft.entries.section('inquiries').status('enabled').first() %}
 {% set fields = entry.getType().getFieldLayout().getFields() %}
 
 {% set thisYear= now|date('Y') %}
 
-{{entry.status}}
+
 <form method="post" action="" enctype="multipart/form-data" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="guestEntries/saveEntry">
@@ -29,7 +33,17 @@
                         <label for="phone">Phone</label>
                         <input type="phone" class="form-control"  name="fields[phone]" id="phone" required >
                     </div>
-
+                    {% set dropdown = craft.entries.section('inquiries').find() %}
+                     <div class="form-group">
+                        <label for="phone">Session Date</label>
+                      
+                            <select name="" id="">
+                                 {% for thing in dropdown[0].sessionDate.options %}
+                                <option value="{{ thing.label }}">{{ thing.label }}</option>
+                                  {% endfor %}
+                            </select>
+                     
+                    </div>
     
                     <div class="form-group">
                         <label for="body">Statement</label>
@@ -41,10 +55,18 @@
                     </div>
 
                      <div class="form-group">
-                    <label for="image">Images (.png)</label>
+                    <label for="audio">Audio File</label>
                     <div class="file-upload btn btn-warning">
-                        <span>Image</span>
-                        <input type="file" id="image" name="fields[image]" class="upload" >
+                        <span>Upload a Song</span>
+                        <input type="file" id="audio" name="fields[audio]" class="upload" >
+                    </div>
+                    </div>
+
+                     <div class="form-group">
+                    <label for="file">Lyrics File</label>
+                    <div class="file-upload btn btn-warning">
+                        <span>Upload a word doc or a pdf</span>
+                        <input type="file" id="file" name="fields[lyrics]" class="upload" >
                     </div>
                     </div>
 

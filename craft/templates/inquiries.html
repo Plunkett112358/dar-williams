@@ -1,0 +1,33 @@
+{% extends '_layout' %}
+
+{% block content %}
+
+
+<div class="page-header">
+  <h1>Test</h1>
+</div>
+
+
+{% set applicants = craft.entries.section('inquiries').status('*') %}
+
+{% for a in  applicants %}
+  <h2>{{a.title}}</h2>
+  {% for thing in a.audio %}
+   <audio controls>
+    <source src="{{thing.url}}" type="audio/ogg">
+    <source src="{{thing.url}}" type="audio/mpeg">
+       <source src="{{thing.url}}" type="audio/aiff">
+  Your browser does not support the audio element.
+  </audio>
+  {% endfor %}
+
+  {% for thing in a.audio %}
+    
+  {% endfor %}
+
+{% endfor %}
+  
+
+
+</div>
+{% endblock %}
