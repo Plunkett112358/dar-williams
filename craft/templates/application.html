@@ -2,14 +2,18 @@
 
 {% block content %}
 
- {% set entry = craft.entries.section('inquiries').first() %}
+ {% set entry = craft.entries.section('inquiries').status('disabled').first() %}
 {% set fields = entry.getType().getFieldLayout().getFields() %}
 
+{% set thisYear= now|date('Y') %}
+
+{{entry.status}}
 <form method="post" action="" enctype="multipart/form-data" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="guestEntries/saveEntry">
     <input type="hidden" name="redirect" value="thankyou">
     <input type="hidden" name="sectionId" value="3">
+     <input type="hidden" name="fields[status]" value="live">
 
                 <div class="form-group">
                     <label for="title">Your Name</label>
@@ -30,6 +34,10 @@
                     <div class="form-group">
                         <label for="body">Statement</label>
                         <textarea class="form-control"  name="fields[body]" id="body"></textarea>
+                    </div>
+
+                    <div>
+                       <!-- add returing guest question here? -->
                     </div>
 
                      <div class="form-group">
