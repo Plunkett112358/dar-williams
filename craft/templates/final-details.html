@@ -40,20 +40,28 @@
 
 {% set thisYear= now|date('Y') %}
 
-{{entry.status}}
+
 <form method="post" action="" enctype="multipart/form-data" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="guestEntries/saveEntry">
     <input type="hidden" name="redirect" value="thankyou">
     <input type="hidden" name="sectionId" value="4">
      <input type="hidden" name="fields[status]" value="live">
-
-                <div class="form-group">
+     <div class="row">
+         <div class="col-md-6">
+             <div class="page-header">
+                 <h4>General Information</h4> 
+             </div>
+        
+              <div class="form-group">
                     <label for="title">Your Name</label>
-                    <input type="title" class="form-control"  name="title" id="title" required >
+                    <input type="text" class="form-control"  name="title" id="title" required >
                 </div>
 
-              <!--   <div class="form-group">
+               
+
+
+                    <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control"  name="fields[email]" id="email" required >
                     </div>
@@ -63,23 +71,129 @@
                         <input type="phone" class="form-control"  name="fields[phone]" id="phone" required >
                     </div>
 
-    
+                      <div class="form-group">
+                        <label for="Ephone">Emergency Phone</label>
+                        <input type="phone" class="form-control"  name="fields[emergencyPhone]" id="Ephone" required >
+                    </div>
+                    
                     <div class="form-group">
-                        <label for="body">Statement</label>
-                        <textarea class="form-control"  name="fields[body]" id="body"></textarea>
+                    <label for="street">Street Address 1</label>
+                    <input type="text" class="form-control"  name="fields[streetAddress1]" id="street" required >
+                </div>
+
+                <div class="form-group">
+                    <label for="street2">Street Address 2</label>
+                    <input type="text" class="form-control"  name="fields[streetAddress2]" id="street2" required >
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control"  name="fields[city]" id="city" required >
+                </div>
+
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" class="form-control"  name="fields[state]" id="state" required >
+                </div>
+
+                 <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" class="form-control"  name="fields[state]" id="state" required >
+                </div>
+         </div>
+         <div class="col-md-6">
+           <div class="page-header">
+                <h4>Personal Information</h4> 
+            </div>
+
+             {% set dropdown = craft.entries.section('retreatMembers').find() %}
+                     <div class="form-group">
+                        <label for="phone">Session Date</label>
+                      
+                            <select name="" id="">
+                                 {% for thing in dropdown[0].sessionDate.options %}
+
+                                <option name="fields[sessionDate]" value="{{thing}}">{{ thing.label }}</option>
+                                  {% endfor %}
+                            </select>
+                     
                     </div>
 
-                  <!--   <div>
-                       add returing guest question here?
-                    </div> -->
+                     {% set dropdown = craft.entries.section('retreatMembers').find() %}
+                     <div class="form-group">
+                        <label for="phone">Payment Method</label>
+                      
+                            <select name="" id="">
+                                 {% for thing in dropdown[0].paymentMethod.options %}
 
-                   <!--   <div class="form-group">
-                    <label for="image">Images (.png)</label>
-                    <div class="file-upload btn btn-warning">
-                        <span>Image</span>
-                        <input type="file" id="image" name="fields[image]" class="upload" >
+                                <option name="fields[paymentMethod]" value="{{thing}}">{{ thing.label }}</option>
+                                  {% endfor %}
+                            </select>
+                     
                     </div>
-                    </div>  --> 
+
+
+
+                      <div class="form-group">
+                        <label for="image">Images (.png)</label>
+                        <div class="file-upload btn btn-warning">
+                            <span>Image</span>
+                            <input type="file" id="image" name="fields[image]" class="upload" >
+                        </div>
+                    </div>  
+
+
+
+
+                <div class="form-group">
+                    <label for="travel">Travel Info</label>
+                    <input type="text" class="form-control"  name="fields[travelHotelInformation]" id="travel" required >
+                </div>
+
+                  <div class="form-group">
+                    <label for="foodAll">Food Allergies</label>
+                    <input type="text" class="form-control"  name="fields[foodAllergies]" id="foodAll" required >
+                </div>
+
+                  <div class="form-group">
+                    <label for="travelHotelInformation">Travel Hotel Information</label>
+                    <input type="text" class="form-control"  name="fields[travelHotelInformation]" id="travelHotelInformation" required >
+                </div>
+
+                  <div class="form-group">
+                    <label for="meds">Medical Conditions</label>
+                    <input type="text" class="form-control"  name="fields[medicalConditions]" id="meds" required >
+                </div>
+
+                  <div class="form-group">
+                    <label for="doubleRoom">Double Room</label>
+                    <input type="text" class="form-control"  name="fields[doubleRoom]" id="doubleRoom" required >
+                </div>
+
+                  <div class="form-group">
+                    <label for="instrument">Instrument</label>
+                    <input type="text" class="form-control"  name="fields[instrument]" id="instrument" required >
+                </div>
+
+                  <div class="form-group">
+                    <label for="medications">Medications</label>
+                    <input type="text" class="form-control"  name="fields[medications]" id="medications" required >
+                </div>
+
+                  <div class="form-group">
+                    <label for="doubleRoom">Double Room</label>
+                    <input type="text" class="form-control"  name="fields[doubleRoom]" id="doubleRoom" required >
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="questionsConcerns">Questions Concerns</label>
+                    <input type="text" class="form-control"  name="fields[questionsConcerns]" id="questionsConcerns" required >
+                </div>
+
+         </div>
+     </div>
+               
 
                    <!-- some help below
 <!-- http://buildwithcraft.com/docs/assets-fields#uploading-files-from-front-end-entry-forms -->

@@ -6164,8 +6164,7 @@ button.close {
   }
 }
 .home {
-  background: url('../images/background.jpg') no-repeat 50% 50% fixed;
-  background-repeat: no-repeat;
+  background: url('../images/background50.png') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -6184,7 +6183,6 @@ button.close {
   font-size: 50px;
 }
 .contact {
-  background: url('../images/background50.png') no-repeat 50% 50% fixed;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -6201,6 +6199,14 @@ body .navbar a {
   color: #b6a97c;
   font-size: 20px;
   font-weight: 300;
+}
+footer {
+  border-bottom: 17px solid #b6a97c;
+  width: 100%;
+  height: 80px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 footer {
   /*border-top:17px solid @brand-warning;*/
