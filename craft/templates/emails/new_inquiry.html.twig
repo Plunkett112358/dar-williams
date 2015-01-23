@@ -1,0 +1,20 @@
+Test Email TO PLUNK <br/>
+
+
+Title: {{ entry.title }} <br/>
+Email: {{ entry.email }} <br/>
+Phone: {{entry.phone }} <br/>
+Session Date: {{ entry.sessionDate.label }} <br/>
+Statement: {{entry.statement}} <br/>
+{% set assets = entry.audio %}
+{% if assets | length %}
+    {% for asset in assets %}
+    audio:    {{ asset.url }} <br/>
+    {% endfor %}
+{% endif %}
+{% set assets = entry.lyrics %}
+{% if assets | length %}
+    {% for asset in assets %}
+    lyrics:    {{ asset.url }}
+    {% endfor %}
+{% endif %}
