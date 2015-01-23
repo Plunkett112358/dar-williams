@@ -1,6 +1,35 @@
 {% extends '_layout' %}
 
 {% block content %}
+
+{% if not currentUser %}
+   <form method="post" action="" accept-charset="UTF-8">
+    {{ getCsrfInput() }}
+    <input type="hidden" name="action" value="users/login">
+
+    <h3><label for="loginName">Username or email</label></h3>
+    <input id="loginName" type="text" name="loginName"
+        value="{{ craft.session.rememberedUsername }}">
+
+    <h3><label for="password">Password</label></h3>
+    <input id="password" type="password" name="password">
+
+    <label>
+        <input type="checkbox" name="rememberMe" value="1">
+        Remember me
+    </label>
+
+    <input type="submit" value="Login">
+
+    {% if errorMessage is defined %}
+        <p>{{ errorMessage }}</p>
+    {% endif %}
+</form>
+
+{% endif %}
+
+{% if currentUser %}
+  <a href="{{ logoutUrl }}">Logout</a>
 <div class="page-header">
   <h1>
     Final Details
@@ -16,7 +45,7 @@
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="guestEntries/saveEntry">
     <input type="hidden" name="redirect" value="thankyou">
-    <input type="hidden" name="sectionId" value="3">
+    <input type="hidden" name="sectionId" value="4">
      <input type="hidden" name="fields[status]" value="live">
 
                 <div class="form-group">
@@ -24,7 +53,7 @@
                     <input type="title" class="form-control"  name="title" id="title" required >
                 </div>
 
-                <div class="form-group">
+              <!--   <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control"  name="fields[email]" id="email" required >
                     </div>
@@ -40,19 +69,19 @@
                         <textarea class="form-control"  name="fields[body]" id="body"></textarea>
                     </div>
 
-                    <div>
-                       <!-- add returing guest question here? -->
-                    </div>
+                  <!--   <div>
+                       add returing guest question here?
+                    </div> -->
 
-                     <div class="form-group">
+                   <!--   <div class="form-group">
                     <label for="image">Images (.png)</label>
                     <div class="file-upload btn btn-warning">
                         <span>Image</span>
                         <input type="file" id="image" name="fields[image]" class="upload" >
                     </div>
-                    </div>
+                    </div>  --> 
 
-                   <!-- some help below -->
+                   <!-- some help below
 <!-- http://buildwithcraft.com/docs/assets-fields#uploading-files-from-front-end-entry-forms -->
 
 <!-- remember to add "are you applying again?" -->
@@ -62,5 +91,6 @@
     <input type="submit" class="btn btn-warning" value="Publish">
 </form>
 
+{% endif %}
 
 {% endblock %}
