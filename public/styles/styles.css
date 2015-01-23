@@ -6182,6 +6182,14 @@ button.close {
 .home .intro h2 {
   font-size: 50px;
 }
+.home footer {
+  border-bottom: 17px solid #b6a97c;
+  width: 100%;
+  height: 80px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
 .contact {
   background-repeat: no-repeat;
   -webkit-background-size: cover;
@@ -6199,16 +6207,5 @@ body .navbar a {
   color: #b6a97c;
   font-size: 20px;
   font-weight: 300;
-}
-footer {
-  border-bottom: 17px solid #b6a97c;
-  width: 100%;
-  height: 80px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-footer {
-  /*border-top:17px solid @brand-warning;*/
 }
 /*# sourceMappingURL=/styles/styles.map */
