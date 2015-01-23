@@ -14,7 +14,8 @@ return array(
 		 'resourceTrigger' => 'files',
 		 'useEmailAsUsername' => true,
 		 'autoLoginAfterAccountActivation' => true,
-		 'loginPath' => 'register'
+		 'postLoginRedirect' => 'final-details',
+
 	),
 
   '.dev' => array(
