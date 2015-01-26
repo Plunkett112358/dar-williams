@@ -6403,6 +6403,9 @@ body {
 }
 /*** HEADER BREAKPOINTS ***/
 @media (max-width: 1199px) {
+  .navbar-default.small {
+    background-color: transparent !important;
+  }
   header #logo {
     height: 40px;
     width: 262px;
@@ -6414,6 +6417,9 @@ body {
   }
 }
 @media (max-width: 991px) {
+  .navbar-default.small {
+    background-color: #b6a97c !important;
+  }
   header,
   header.mini,
   header.docked {
@@ -6521,6 +6527,11 @@ body {
   }
 }
 @media (max-width: 767px) {
+  header,
+  header.mini,
+  header.docked {
+    /*background-color: red;*/
+  }
   header #logo,
   header.mini #logo,
   header.docked #logo {
@@ -6533,5 +6544,9 @@ body {
     height: 89vh;
     padding: 0;
   }
+}
+/*feather*/
+.feather {
+  margin-top: 80px;
 }
 /*# sourceMappingURL=/styles/styles.map */

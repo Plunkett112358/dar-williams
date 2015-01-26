@@ -39,17 +39,6 @@
 
   
 	
-body{
-
-  
-
-  .header {
-  
-  }
-
- 
-}
-
 
 .navbar {
   border:0px;
@@ -305,6 +294,10 @@ body {
 /*** HEADER BREAKPOINTS ***/
 
 @media (max-width: @screen-md-max){
+
+   .navbar-default.small {
+      background-color: transparent !important;
+     }
   header {
 
     #logo{
@@ -320,9 +313,14 @@ body {
 }
 
 @media (max-width: @screen-sm-max) {
+
+   .navbar-default.small {
+      background-color: @brand-warning !important;
+     }
   header, header.mini, header.docked {
     position:fixed !important;
     height:auto;
+    
 
     #logo{
       margin-left: -27px;
@@ -332,12 +330,15 @@ body {
     }
     .box-shadow(0px 1px 2px 0px rgba(0,0,0,.3));
 
+
+
     .navbar-default .navbar-nav > li > a{
       color: white;
       border: 0;
       border-radius: 0;
       margin: 0;
       padding: 8px 0;
+
     }
 
     .navbar-main {
@@ -372,6 +373,7 @@ body {
     nav.navbar{
       background-color: @brand-primary;
     }
+
     .navbar-header{
       background-color: @brand-primary;
       #logo{
@@ -431,6 +433,7 @@ body {
       padding-top: 7px;
       padding-bottom: 7px;
 
+
       li > a{
         font-size: 20px;
         padding: 8px 13px;
@@ -442,6 +445,7 @@ body {
 
 @media (max-width: @screen-xs-max){
   header, header.mini, header.docked {
+/*background-color: red;*/
     #logo{
       margin-left: 0;
     }
@@ -455,3 +459,8 @@ body {
   }
 }
 
+/*feather*/
+
+.feather {
+  margin-top: 80px;
+}
