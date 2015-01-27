@@ -11,13 +11,13 @@ return array(
 
 	'*' => array(
 		'tablePrefix' => 'craft',
-    'database' => 'dar_williams_craft'
+    'database' => 'darwilliams'
   ),
 
   '.dev' => array(
     'server' => 'localhost',
-    'user' => 'root',
-    'password' => 'root',
+    'user' => 'homestead',
+    'password' => 'secret',
 
   ),
 

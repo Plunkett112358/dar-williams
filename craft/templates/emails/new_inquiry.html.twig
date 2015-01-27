@@ -5,7 +5,7 @@ Title: {{ entry.title }} <br/>
 Email: {{ entry.email }} <br/>
 Phone: {{entry.phone }} <br/>
 Session Date: {{ entry.sessionDate.label }} <br/>
-Statement: {{entry.statement}} <br/>
+Statement: {{entry.body}} <br/>
 {% set assets = entry.audio %}
 {% if assets | length %}
     {% for asset in assets %}
