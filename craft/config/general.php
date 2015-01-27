@@ -14,15 +14,20 @@ return array(
 		 'resourceTrigger' => 'files',
 		 'useEmailAsUsername' => true,
 		 'autoLoginAfterAccountActivation' => true,
-		 'postLoginRedirect' => 'final-details',
-
+		 'postLoginRedirect' => 'final-details'
+    
+    
+      
 	),
 
   '.dev' => array(
     'devMode' => true,
     'generateTransformsAfterPageLoad' => false,
     'backupDbOnUpdate' => false,
-    'siteUrl' => 'http://dar-williams.craft.dev/'
+    'siteUrl' => 'http://dar-williams.craft.dev/',
+    'defaultCookieDomain' => ''
+   
+   
 
   ),
 
