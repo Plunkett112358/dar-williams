@@ -881,7 +881,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -6552,7 +6552,7 @@ header.docked #logo {
 }
 /*index blocks*/
 .home-first-block {
-  margin: 10px;
+  margin: 0px 10px 10px 0px;
   background-color: #e9eae5;
   padding: 20px;
 }
@@ -6564,6 +6564,16 @@ header.docked #logo {
 }
 .image-1 {
   margin: 10px;
+}
+.images {
+  min-height: 200px;
+  max-height: 200px;
+  width: ;
+}
+.note-block {
+  background-color: #f3f0e7;
+  padding: 40px;
+  margin-top: 10px;
 }
 .quote-block-blue {
   margin: 10px;
@@ -6579,5 +6589,9 @@ header.docked #logo {
   font-size: 15px;
   margin-left: 30px;
   margin-bottom: 20px;
+}
+.pattern {
+  height: 400px;
+  margin-bottom: 10px;
 }
 /*# sourceMappingURL=/styles/styles.map */

@@ -25,7 +25,7 @@ return array(
     'generateTransformsAfterPageLoad' => false,
     'backupDbOnUpdate' => false,
     'siteUrl' => 'http://dar-williams.craft.dev/',
-    'defaultCookieDomain' => ''
+    'overridePhpSessionLocation' => true
    
    
 
