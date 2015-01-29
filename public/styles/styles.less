@@ -6,13 +6,13 @@
 
 	.home {
 	
-   background: url('../images/background50.png') no-repeat 50% 50% fixed;
+   background: url('../images/background.jpg') no-repeat 50% 50% fixed;
      -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
       min-height: 500px;
-    	border-bottom: 17px solid @brand-warning;
+    	border-bottom: 10px solid white;
       overflow: hidden; 
       /*margin-top: -100px;*/
   
@@ -29,6 +29,7 @@ footer {
   left:0;
 }  
 	
+
 
 .navbar {
   border:0px;
@@ -56,7 +57,7 @@ footer {
 
 header {
   /*border-top:2px solid @brand-success;*/
-    border-top:17px solid @brand-warning;
+    border-top:17px solid @brand-info-light;
 
   position:fixed;
   top:0px;
@@ -99,7 +100,12 @@ header.mini, header.docked{
 }
 
 
-
+.nav-pills {
+  a{
+    font-size: 21px;
+    color: white;
+  }
+}
 
 .navbar-brand:hover {
   #logo{
@@ -315,7 +321,7 @@ header.mini, header.docked{
       margin-top: 0px;
   }
    .navbar-default.small {
-      background-color: @brand-warning !important;
+      background-color: @brand-info-light !important;
 
      }
   header, header.mini, header.docked {
@@ -455,7 +461,7 @@ header.mini, header.docked{
   .navbar-collapse{
     overflow-y: scroll; /* has to be scroll, not auto */
     -webkit-overflow-scrolling: touch;
-    height: 89vh;
+    /*height: 89vh;*/
     padding: 0;
   }
 }
@@ -480,15 +486,15 @@ header.mini, header.docked{
   }
 }
 
-.image-1 {
+/*.image-1 {
   margin: 10px;
-}
+}*/
 
-.images {
+/*.images {
   min-height: 200px;
   max-height: 200px;
-  width: ;
-}
+  
+}*/
 
 .note-block{
   background-color: #f3f0e7;
