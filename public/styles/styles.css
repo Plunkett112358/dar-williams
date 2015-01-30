@@ -5166,14 +5166,14 @@ a.list-group-item-danger.active:focus {
 }
 .panel-default > .panel-heading {
   color: #333333;
-  background-color: #b6a97c;
+  background-color: #e9eae5;
   border-color: #dddddd;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #dddddd;
 }
 .panel-default > .panel-heading .badge {
-  color: #b6a97c;
+  color: #e9eae5;
   background-color: #333333;
 }
 .panel-default > .panel-footer + .panel-collapse > .panel-body {
@@ -6163,64 +6163,35 @@ button.close {
     display: none !important;
   }
 }
-.col-xs-1,
-.col-sm-1,
-.col-md-1,
-.col-lg-1,
-.col-xs-2,
-.col-sm-2,
-.col-md-2,
-.col-lg-2,
-.col-xs-3,
-.col-sm-3,
-.col-md-3,
-.col-lg-3,
-.col-xs-4,
-.col-sm-4,
-.col-md-4,
-.col-lg-4,
-.col-xs-5,
-.col-sm-5,
-.col-md-5,
-.col-lg-5,
-.col-xs-6,
-.col-sm-6,
-.col-md-6,
-.col-lg-6,
-.col-xs-7,
-.col-sm-7,
-.col-md-7,
-.col-lg-7,
-.col-xs-8,
-.col-sm-8,
-.col-md-8,
-.col-lg-8,
-.col-xs-9,
-.col-sm-9,
-.col-md-9,
-.col-lg-9,
-.col-xs-10,
-.col-sm-10,
-.col-md-10,
-.col-lg-10,
-.col-xs-11,
-.col-sm-11,
-.col-md-11,
-.col-lg-11,
-.col-xs-12,
-.col-sm-12,
-.col-md-12,
-.col-lg-12 {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-}
 .home {
-  background: url('../images/unnamed-6.jpg') no-repeat 50% 50% fixed;
+  background: url('../images/home-bkg.png') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 900px;
+  min-height: 650px;
+  border-bottom: 10px solid white;
+  overflow: hidden;
+  /*margin-top: -100px;*/
+}
+.about {
+  background: url('../images/about.jpeg') no-repeat 50% 50% fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 500px;
+  border-bottom: 10px solid white;
+  overflow: hidden;
+  /*margin-top: -100px;*/
+}
+.register {
+  background: url('../images/register.jpg') no-repeat 50% 50% fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 500px;
   border-bottom: 10px solid white;
   overflow: hidden;
   /*margin-top: -100px;*/
@@ -6303,7 +6274,7 @@ header.docked #logo {
   margin-top: 44px;
 }
 .nav-pills a {
-  font-size: 21px;
+  font-size: 16px;
   color: white;
 }
 .navbar-brand:hover #logo {
@@ -6578,7 +6549,7 @@ header.docked #logo {
     padding-bottom: 7px;
   }
   #nav-collapse .navbar-sub li > a {
-    font-size: 20px;
+    font-size: 16px;
     padding: 8px 13px;
   }
 }
@@ -6603,12 +6574,14 @@ header.docked #logo {
 }
 /*feather*/
 .feather {
-  margin-top: 180px;
+  margin-top: 60px;
 }
 /*index blocks*/
 .home-first-block {
   margin: 0px 10px 10px 0px;
   background-color: #e9eae5;
+  min-height: 509px;
+  /*margin-right: 10px;*/
   padding: 20px;
 }
 .home-first-block h2 {
@@ -6617,6 +6590,9 @@ header.docked #logo {
 .home-first-block h3 {
   color: #53782d;
 }
+/*.image-row {
+  margin-top: 6px;
+}*/
 /*.image-1 {
   margin: 10px;
 }*/
@@ -6628,15 +6604,17 @@ header.docked #logo {
 .note-block {
   background-color: #f3f0e7;
   padding: 40px;
-  margin-top: 10px;
+  margin-top: 6px;
+  margin-right: 10px;
 }
 .quote-block-blue {
-  margin-top: 10px;
+  margin-top: 6px;
   /*background-color: @brand-info;*/
   color: white;
 }
 .pattern {
-  height: 400px;
-  margin-bottom: 10px;
+  /*height: 400px;*/
+  margin-bottom: 6px;
+  margin-top: 6px;
 }
 /*# sourceMappingURL=/styles/styles.map */

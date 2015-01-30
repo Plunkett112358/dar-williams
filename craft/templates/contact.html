@@ -4,6 +4,8 @@
 
 
 
+<div class="container">
+  
 
 
 {% macro errorList(errors) %}
@@ -17,12 +19,13 @@
 {% endmacro %}
 
 {% from _self import errorList %}
-<div class="page-header">
-  <h1>Contact</h1>
-</div>
+
 
 <div class="row">
     <div class="col-md-6">
+      <div class="page-header">
+        <h3>Contact</h3>
+        </div>
         <form method="post" action="" accept-charset="UTF-8">
             {{ getCsrfInput() }}
             <input type="hidden" name="action" value="contactForm/sendMessage">
@@ -60,7 +63,7 @@
            
 
 
-                <input type="submit" class="btn btn-warning" value="Send">
+                <input type="submit" class="btn btn-warning pull-right" value="Send">
         </form>
     </div>
 
@@ -73,13 +76,13 @@
             <div class="panel-heading" role="tab" id="headingOne">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Collapsible Group Item #1
+                   Do I need to play guitar or play guitar well to join? Are piano players or other instrumentalists welcome?
                 </a>
               </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
               <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                All instruments are welcome. We've had percussionists, xylophone players, keyboard players, and vocalists, too.
               </div>
             </div>
           </div>
@@ -87,13 +90,13 @@
             <div class="panel-heading" role="tab" id="headingTwo">
               <h4 class="panel-title">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Collapsible Group Item #2
+                  I'm nervous and have only played one open mic! How important is performance to this retreat?
                 </a>
               </h4>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
               <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                Some people sit out for a couple of days and some never perform a song.  We aim to create an environment where there is at least one person with whom you feel comfortable sharing your work!
               </div>
             </div>
           </div>
@@ -101,20 +104,77 @@
             <div class="panel-heading" role="tab" id="headingThree">
               <h4 class="panel-title">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Collapsible Group Item #3
+                  What kind of songwriting supplies should we bring?
                 </a>
               </h4>
             </div>
-            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
               <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                We recommend a notebook for lyrics, a notebook for writing other thoughts (it can be the same notebook if you want), your lucky pen, and a simple recording device for ideas such as a cell phone, iPad or laptop.  If you have an instrument that you can't bring, let us know.  We can track something down for you.
+              </div>
+            </div>
+          </div>
+          
+            <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                 Is there internet access?
+                </a>
+              </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+              <div class="panel-body">
+                Yes.
+              </div>
+            </div>
+          </div>
+           <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                 Will Dar actually hear my song? Will we see her individually or as a group?
+                </a>
+              </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+               Dar will be around throughout the day. She will have a short one on one with every person individually and will run the afternoon clinics where everyone will have an opportunity to share a song with the group.
+              </div>
+            </div>
+          </div>
+           <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                Should I expect (am I expected) to write a song by the end of the retreat?
+                </a>
+              </h4>
+            </div>
+            <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                This is a retreat, not a boot camp!  When something matters to us, we reveal it in our own time. The challenge is to find the words we want to say or the practice that feels like the right fit. For some, a deadline and a little pressure is helpful, but Dar is quick to point out that at least one of her songs took three years to write.
+              </div>
+            </div>
+          </div>
+                <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                 Is there a store nearby?
+                </a>
+              </h4>
+            </div>
+            <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                The closest strip of stores (drugstore, grocery, bank, liquor store and post office) is about 5 miles away and we can make a run for you if you don't have a car.   
               </div>
             </div>
           </div>
         </div>
     </div>
 </div>
-
+</div>
 
 
 {% endblock %}

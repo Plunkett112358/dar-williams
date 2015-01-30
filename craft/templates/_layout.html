@@ -20,14 +20,19 @@
   </head>
 
   <body 
-  {% if craft.request.lastSegment == 'contact' %} class="contact" {% endif %}
+ 
 
   >
 
   
 
    
-<div class="home">
+<div 
+{% if craft.request.lastSegment == '' %} class="home" {% endif %}
+{% if craft.request.lastSegment == 'about' %} class="about" {% endif %}
+{% if craft.request.lastSegment == 'application' %} class="register" {% endif %}
+
+>
   
 
 <!-- <header id="header"> -->
@@ -46,24 +51,29 @@
 
         <div class="collapse navbar-collapse" id="nav-collapse">
            <ul class="nav nav-pills nav-justified">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-             <li><a href="/gallery">Gallery</a></li>
-            <li><a href="/application">Application</a></li>
-            <li><a href="/contact">Contact/Questions</a></li>
-            <li><a href="/final-details">Final Details</a></li>
+            <li {% if craft.request.getLastSegment() =='' %} class="active" {% endif %} > 
+              <a href="/">Home </a></li>
+            <li  {% if craft.request.getLastSegment() =='about' %} class="active" {% endif %}>
+              <a href="/about">About</a></li>
+             <!-- <li><a href="/gallery">Gallery</a></li> -->
+            <li {% if craft.request.getLastSegment() =='application' %} class="active" {% endif %}>
+              <a href="/application">Application</a></li>
+            <li {% if craft.request.getLastSegment() =='contact' %} class="active" {% endif %} >
+              <a href="/contact">Contact</a></li>
+            <li {% if craft.request.getLastSegment() =='final-details' %} class="active" {% endif %} >
+              <a href="/final-details">Final Details</a></li>
           </ul>
 
         </div>
 
         <div class="hidden-sm hidden-xs" id="nav-main">
           <ul class="nav nav-pills nav-justified">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-             <li><a href="/gallery">Gallery</a></li>
-            <li><a href="/application">Application</a></li>
-            <li><a href="/contact">Contact/Questions</a></li>
-            <li><a href="/final-details">Final Details</a></li>
+            <li {% if craft.request.getLastSegment() == '' %} class="active" {% endif %}><a href="/">Home</a></li>
+            <li {% if craft.request.getLastSegment() =='about' %} class="active" {% endif %}><a href="/about">About</a></li>
+             <!-- <li{% if craft.request.getLastSegment() =='gallery' %} class="active" {% endif %}><a href="/gallery">Gallery</a></li> -->
+            <li{% if craft.request.getLastSegment() =='application' %} class="active" {% endif %} ><a href="/application">Application</a></li>
+            <li{% if craft.request.getLastSegment() =='contact' %} class="active" {% endif %} ><a href="/contact">Contact</a></li>
+            <li{% if craft.request.getLastSegment() =='final-details' %} class="active" {% endif %} ><a href="/final-details">Final Details</a></li>
           </ul>
         </div>
       </div>
@@ -119,6 +129,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
   </body>

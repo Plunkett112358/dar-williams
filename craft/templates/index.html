@@ -2,7 +2,12 @@
 
 
 {% block content %}
-
+<style>
+  .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  padding-left:0px !important;
+  padding-right:0px !important;
+}
+</style>
 <!-- <div >
 <div class="text-center intro">
 	 <h1>A Song Writing Retreat</h1>
@@ -69,25 +74,28 @@
     </div>
   </div>
 </div>
+
+
 <div class="row">
 
   <div class="col-md-5 col-xs-12">
-  <img class="img-responsive " src="{{ entry.firstBlock[0].photo2[0].getUrl(wide)}}">
-   
-  </div>
-   <div class="col-md-3 col-xs-12">
-  <img class="img-responsive " src="{{ entry.firstBlock[0].photo3[0].url}}">
-  </div>
-   <div class="col-md-4 col-xs-12">
-   <img class="img-responsive " src="{{ entry.firstBlock[0].photo4[0].url}}">
+     
+    <img style="padding-right: 3px;" class="img-responsive gutter" src="{{ entry.firstBlock[0].photo2[0].getUrl(wide)}}">
+     
+    </div>
+     <div class="col-md-3 col-xs-12">
+    <img style="padding-right:3px; padding-left:3px;" class="img-responsive gutter" src="{{ entry.firstBlock[0].photo3[0].url}}">
+    </div>
+     <div class="col-md-4 col-xs-12">
+     <img style="padding-left: 3px;" class="img-responsive " src="{{ entry.firstBlock[0].photo4[0].url}}">
 
+    </div>
   </div>
-</div>
 
 <div class="row">
 
 
-  <div class="col-md-10 col-xs-12">
+  <div class="col-md-9 col-xs-12">
 
     <div class="note-block">
       {{entry.secondBlock[0].body}}
@@ -110,13 +118,16 @@
 
     </div>
   </div>
-  <div class="col-md-2 col-xs-12">
+  <div class="col-md-3 col-xs-12">
+    <img class="img-responsive pattern" src="{{entry.secondBlock[0].pattern[0].url}}" alt="">
 
-     <img class="img-responsive pattern" src="{{entry.secondBlock[0].quote[0].url}}" alt="">
+   
 
-       <img class="img-responsive pattern" src="{{entry.secondBlock[0].pattern[0].url}}" alt="">
+       <!-- <img class="img-responsive pattern" src="{{entry.secondBlock[0].pattern[0].url}}" alt=""> -->
         <img class="img-responsive " src="{{entry.secondBlock[0].photo1[0].url}}" alt="">
-         <img class="img-responsive " src="{{entry.secondBlock[0].photo2[0].url}}" alt="">
+         <img style="margin-top:10px" class="img-responsive " src="{{entry.secondBlock[0].photo2[0].url}}" alt="">
+        <img class="img-responsive pattern" src="{{entry.secondBlock[0].quote[0].url}}" alt="">
+           <img class="img-responsive pattern" src="{{entry.secondBlock[0].pattern[0].url}}" alt="">
   </div>
 </div>
 

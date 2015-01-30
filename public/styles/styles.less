@@ -2,26 +2,51 @@
 @import 'variables.less';
 
 
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
-  padding-left:0px !important;
-  padding-right:0px !important;
-}
+
 
 	.home {
 	
-   background: url('../images/unnamed-6.jpg') no-repeat 50% 50% fixed;
+   background: url('../images/home-bkg.png') no-repeat 50% 50% fixed;
      -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
-      min-height: 900px;
+      min-height: 650px;
     	border-bottom: 10px solid white;
-      overflow: hidden; 
+      overflow: hidden;  
       /*margin-top: -100px;*/
   
   
 
 	} 
+
+    .about {
+  
+   background: url('../images/about.jpeg') no-repeat 50% 50% fixed;
+     -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      min-height: 500px;
+      border-bottom: 10px solid white;
+      overflow: hidden;  
+      /*margin-top: -100px;*/
+
+  } 
+
+    .register {
+  
+   background: url('../images/register.jpg') no-repeat 50% 50% fixed;
+     -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      min-height: 500px;
+      border-bottom: 10px solid white;
+      overflow: hidden;  
+      /*margin-top: -100px;*/
+
+  } 
 
 footer {
   /*border-bottom:17px solid @brand-warning;*/
@@ -105,7 +130,7 @@ header.mini, header.docked{
 
 .nav-pills {
   a{
-    font-size: 21px;
+    font-size: 16px;
     color: white;
   }
 }
@@ -435,7 +460,7 @@ header.mini, header.docked{
 
     .navbar-nav > li.open > .dropdown-menu.pull-right{
       margin-bottom: 10px;
-    }
+    } 
 
     .navbar-sub{
       margin: 0;
@@ -445,7 +470,7 @@ header.mini, header.docked{
 
 
       li > a{
-        font-size: 20px;
+        font-size: 16px;
         padding: 8px 13px;
       }
     }
@@ -472,7 +497,7 @@ header.mini, header.docked{
 /*feather*/
 
 .feather { 
-  margin-top: 180px;
+  margin-top: 60px;
 }
 
 /*index blocks*/
@@ -480,6 +505,8 @@ header.mini, header.docked{
 .home-first-block {
   margin: 0px 10px 10px 0px;
   background-color: @brand-success;
+  min-height: 509px;
+  /*margin-right: 10px;*/
   padding: 20px;
   h2{  
     color: @brand-info;
@@ -488,7 +515,9 @@ header.mini, header.docked{
     color: @brand-success-dark;
   }
 }
-
+/*.image-row {
+  margin-top: 6px;
+}*/
 /*.image-1 {
   margin: 10px;
 }*/
@@ -499,23 +528,30 @@ header.mini, header.docked{
   
 }*/
 
+.gutter {
+  
+}
+
 .note-block{
   background-color: #f3f0e7;
   padding: 40px;
-  margin-top: 10px;
+  margin-top: 6px;
+  margin-right: 10px;
 }
 
 .quote-block-blue {
-  margin-top:10px;
+  margin-top:6px;
   /*background-color: @brand-info;*/
   color: white;
+
 
   
 
 }
 
 .pattern {
-  height: 400px;
-  margin-bottom: 10px;
+  /*height: 400px;*/
+  margin-bottom: 6px;
+    margin-top:6px;
 }
 

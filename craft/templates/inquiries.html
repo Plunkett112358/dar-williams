@@ -2,16 +2,45 @@
 
 {% block content %}
 
+{% if not currentUser %}
+   <form method="post" action="" accept-charset="UTF-8">
+    {{ getCsrfInput() }}
+    <input type="hidden" name="action" value="users/login">
 
+    <h3><label for="loginName">Username or email</label></h3>
+    <input id="loginName" type="text" name="loginName"
+        value="{{ craft.session.rememberedUsername }}">
+
+    <h3><label for="password">Password</label></h3>
+    <input id="password" type="password" name="password">
+
+    <label>
+        <input type="checkbox" name="rememberMe" value="1">
+        Remember me
+    </label>
+
+    <input type="submit" value="Login">
+
+    {% if errorMessage is defined %}
+        <p>{{ errorMessage }}</p>
+    {% endif %}
+</form>
+
+{% endif %}
+
+{% if currentUser %}
 <div class="page-header">
-  <h1>Test</h1>
+  <h1>Applicants</h1>
 </div>
 
 
 {% set applicants = craft.entries.section('inquiries').status('*') %}
 
 {% for a in  applicants %}
+{% if a.title != 'DO NOT DELETE'%}
+<h6>{{a.postDate | date("m/d/Y")}}</h6>
   <h2>{{a.title}}</h2>
+  <p>{{ a.body }}</p>
   {% for thing in a.audio %}
    <audio controls>
     <source src="{{thing.url}}" type="audio/ogg">
@@ -20,14 +49,16 @@
   Your browser does not support the audio element.
   </audio>
   {% endfor %}
-
-  {% for thing in a.audio %}
-    
-  {% endfor %}
-
+{% if a.lyrics|length %}
+  <a target="_blank" href="{{ a.lyrics[0].url}}"><h6><span style="font-size: 20px" class="glyphicon glyphicon-download-alt"></span>Download {{a.title}}'s Lyrics</h6></a>
+  {% endif %}
+<hr>
+{% endif %}
 {% endfor %}
   
 
 
 </div>
+
+{% endif %}
 {% endblock %}
