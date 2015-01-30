@@ -2,17 +2,20 @@
 @import 'variables.less';
 
 
-
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+  padding-left:0px !important;
+  padding-right:0px !important;
+}
 
 	.home {
 	
-   background: url('../images/background50.png') no-repeat 50% 50% fixed;
+   background: url('../images/unnamed-6.jpg') no-repeat 50% 50% fixed;
      -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
-      min-height: 500px;
-    	border-bottom: 17px solid @brand-warning;
+      min-height: 900px;
+    	border-bottom: 10px solid white;
       overflow: hidden; 
       /*margin-top: -100px;*/
   
@@ -29,6 +32,7 @@ footer {
   left:0;
 }  
 	
+
 
 .navbar {
   border:0px;
@@ -56,7 +60,7 @@ footer {
 
 header {
   /*border-top:2px solid @brand-success;*/
-    border-top:17px solid @brand-warning;
+    border-top:17px solid @brand-info-light;
 
   position:fixed;
   top:0px;
@@ -99,7 +103,12 @@ header.mini, header.docked{
 }
 
 
-
+.nav-pills {
+  a{
+    font-size: 21px;
+    color: white;
+  }
+}
 
 .navbar-brand:hover {
   #logo{
@@ -315,7 +324,7 @@ header.mini, header.docked{
       margin-top: 0px;
   }
    .navbar-default.small {
-      background-color: @brand-warning !important;
+      background-color: @brand-info-light !important;
 
      }
   header, header.mini, header.docked {
@@ -462,8 +471,8 @@ header.mini, header.docked{
 
 /*feather*/
 
-.feather {
-  margin-top: 80px;
+.feather { 
+  margin-top: 180px;
 }
 
 /*index blocks*/
@@ -480,15 +489,15 @@ header.mini, header.docked{
   }
 }
 
-.image-1 {
+/*.image-1 {
   margin: 10px;
-}
+}*/
 
-.images {
+/*.images {
   min-height: 200px;
   max-height: 200px;
-  width: ;
-}
+  
+}*/
 
 .note-block{
   background-color: #f3f0e7;
@@ -497,21 +506,11 @@ header.mini, header.docked{
 }
 
 .quote-block-blue {
-  margin:10px;
-  background-color: @brand-info;
+  margin-top:10px;
+  /*background-color: @brand-info;*/
   color: white;
 
-  p{
-    padding: 20px;
-    font-size: 18px;
-  }
-
-  h6 {
-    color: white;
-    font-size: 15px;
-    margin-left: 30px;
-    margin-bottom: 20px;
-  }
+  
 
 }
 
