@@ -50,7 +50,7 @@
 
 
         <div class="collapse navbar-collapse" id="nav-collapse">
-           <ul class="nav nav-pills nav-justified">
+           <ul class="nav nav-pills nav-justified   {% if craft.request.getLastSegment() == 'thankyou' %} blue-nav {% endif %}">
             <li {% if craft.request.getLastSegment() =='' %} class="active" {% endif %} > 
               <a href="/">Home </a></li>
             <li  {% if craft.request.getLastSegment() =='about' %} class="active" {% endif %}>
@@ -67,13 +67,15 @@
         </div>
 
         <div class="hidden-sm hidden-xs" id="nav-main">
-          <ul class="nav nav-pills nav-justified">
+          <ul class="nav nav-pills nav-justified {% if craft.request.getLastSegment() == 'thankyou' %} blue-nav {% endif %}">
+            <li style="color:white; position: relative; top: -4px;">___________________</li>
             <li {% if craft.request.getLastSegment() == '' %} class="active" {% endif %}><a href="/">Home</a></li>
             <li {% if craft.request.getLastSegment() =='about' %} class="active" {% endif %}><a href="/about">About</a></li>
              <!-- <li{% if craft.request.getLastSegment() =='gallery' %} class="active" {% endif %}><a href="/gallery">Gallery</a></li> -->
             <li{% if craft.request.getLastSegment() =='application' %} class="active" {% endif %} ><a href="/application">Application</a></li>
             <li{% if craft.request.getLastSegment() =='contact' %} class="active" {% endif %} ><a href="/contact">Contact</a></li>
             <li{% if craft.request.getLastSegment() =='final-details' %} class="active" {% endif %} ><a href="/final-details">Final Details</a></li>
+              <li style="color:white; position: relative; top: -4px;">___________________</li>
           </ul>
         </div>
       </div>
@@ -81,7 +83,11 @@
     <div class="container">
       <div class="row">
       <div class="col-md-10 col-md-offset-1 ">
+        {% if craft.request.getLastSegment() != 'thankyou' %}
          <img class=" feather img-responsive" src="/images/feather_element.png">
+         {% else %}
+         <img class=" img-responsive" src="../images/thankyouFeather@2x.png" alt="">
+         {% endif %}
      </div>
     </div>
     </div>

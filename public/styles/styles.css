@@ -3683,7 +3683,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #3b7091;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 .nav-stacked > li {
   float: none;
@@ -6186,7 +6186,7 @@ button.close {
   /*margin-top: -100px;*/
 }
 .register {
-  background: url('../images/register.jpg') no-repeat 50% 50% fixed;
+  background: url('../images/cat1.jpg') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -6590,6 +6590,32 @@ header.docked #logo {
 .home-first-block h3 {
   color: #53782d;
 }
+.about-first-block {
+  margin: 0px 10px 10px 0px;
+  background-color: #e9eae5;
+  min-height: 326px;
+  /*margin-right: 10px;*/
+  padding: 20px;
+}
+.about-first-block h2 {
+  color: #75bbc4;
+}
+.about-first-block h3 {
+  color: #53782d;
+}
+.about-sub-block {
+  margin: 0px 10px 10px 0px;
+  background-color: #e9eae5;
+  min-height: 290px;
+  /*margin-right: 10px;*/
+  padding: 20px;
+}
+.about-sub-block h2 {
+  color: #75bbc4;
+}
+.about-sub-block h3 {
+  color: #53782d;
+}
 /*.image-row {
   margin-top: 6px;
 }*/
@@ -6616,5 +6642,8 @@ header.docked #logo {
   /*height: 400px;*/
   margin-bottom: 6px;
   margin-top: 6px;
+}
+.blue-nav li a {
+  color: #5ca7b4;
 }
 /*# sourceMappingURL=/styles/styles.map */
