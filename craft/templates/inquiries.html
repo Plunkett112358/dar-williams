@@ -40,7 +40,13 @@
 {% if a.title != 'DO NOT DELETE'%}
 <h6>{{a.postDate | date("m/d/Y")}}</h6>
   <h2>{{a.title}}</h2>
-  <p>{{ a.body }}</p>
+  <h6>{{ a.email }} | {{a.phone}}</h6>
+  <h4><small>Returning Member: </small>{{ a.returningToRetreat}}</h4>
+  <h4><small>Session Date:</small> {{ a.sessionDate}}</h4>
+
+   <h4><small>Statement:</small> </h4>
+   <p>{{ a.body }}</p>
+
   {% for thing in a.audio %}
    <audio controls>
     <source src="{{thing.url}}" type="audio/ogg">

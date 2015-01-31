@@ -6648,6 +6648,7 @@ header.docked #logo {
 }
 .register-splash {
   background-color: #e9eae6;
+  height: 1500px;
 }
 .register-splash h4 {
   color: #62b1bf;
