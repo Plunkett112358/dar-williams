@@ -3,12 +3,17 @@
 {% block content %}
 
 
+</div> 
+<!-- end container -->
+<div class="register-splash">
+  <div class="container">
+    
+<div class="page-header ">
+  <h4>
+    APPLICATION
 
-
-<div class="page-header">
-  <h1>
-    Application
-  </h1>
+  </h4>
+  <p >{{entry.body}}</p>
 </div>
  {% set entry = craft.entries.section('inquiries').status('enabled').first() %}
 {% set fields = entry.getType().getFieldLayout().getFields() %}
@@ -25,6 +30,19 @@
             <input type="hidden" name="redirect" value="thankyou">
             <input type="hidden" name="sectionId" value="3">
      
+{% set dropdown = craft.entries.section('inquiries').find() %}
+                 <div class="form-group">
+                        <label for="phone">Session Date</label>
+                      
+                            <select name="fields[sessionDate]" id="">
+                                 {% for thing in dropdown[0].sessionDate.options %}
+
+                                <option name="fields[sessionDate]" value="{{thing}}">{{ thing.label }}</option>
+                                  {% endfor %}
+                            </select>
+                     
+                    </div>
+
                 <div class="form-group">
                     <label for="title">Your Name</label>
                     <input type="title" class="form-control"  name="title" id="title" required >
@@ -39,45 +57,41 @@
                         <label for="phone">Phone</label>
                         <input type="phone" class="form-control"  name="fields[phone]" id="phone" required >
                     </div>
-                    {% set dropdown = craft.entries.section('inquiries').find() %}
-                     <div class="form-group">
-                        <label for="phone">Session Date</label>
-                      
-                            <select name="fields[sessionDate]" id="">
-                                 {% for thing in dropdown[0].sessionDate.options %}
 
-                                <option name="fields[sessionDate]" value="{{thing}}">{{ thing.label }}</option>
-                                  {% endfor %}
-                            </select>
-                     
-                    </div>
+                      <div class="form-group">
+                      <label for="audio">Audio File</label>
+                        <div class="file-upload btn btn-primary">
+                            <span>Upload a Song</span>
+                            <input type="file" id="audio" name="fields[audio]" class="upload" >
+                        </div>
+                        </div>
+
+                         <div class="form-group">
+                        <label for="file">Lyrics File</label>
+                        <div class="file-upload btn btn-primary">
+                            <span>Upload a word doc or a pdf</span>
+                            <input type="file" id="file" name="fields[lyrics]" class="upload" >
+                        </div>
+                      </div>
+                    
+                    
         </div>
         <div class="col-md-6">
+
+         
+
+              <!-- <p > </p> -->
                <div class="form-group">
-                        <label for="body">Statement</label>
-                        <textarea class="form-control"  name="fields[body]" id="body"></textarea>
-                    </div>
+                  <label class="statement" for="body">Please talk to us about your experience writing songs and why you'd like to attend this songwriting week. </label>
+                  <textarea style="height:300px" class="form-control"  name="fields[body]" id="body"></textarea>
+                </div>
 
                     <div>
                        <!-- add returing guest question here? -->
                     </div>
 
-                     <div class="form-group">
-                    <label for="audio">Audio File</label>
-                    <div class="file-upload btn btn-warning">
-                        <span>Upload a Song</span>
-                        <input type="file" id="audio" name="fields[audio]" class="upload" >
-                    </div>
-                    </div>
-
-                     <div class="form-group">
-                    <label for="file">Lyrics File</label>
-                    <div class="file-upload btn btn-warning">
-                        <span>Upload a word doc or a pdf</span>
-                        <input type="file" id="file" name="fields[lyrics]" class="upload" >
-                    </div>
-                    </div>
-                     <input type="submit" class="btn btn-warning" value="Publish">
+                    
+                     <input type="submit" class="btn btn-primary pull-right" value="Submit">
         </div>
     </div>
    
@@ -93,6 +107,9 @@
 
    
 </form>
+  </div>
+</div>
+
 
 
 {% endblock %}

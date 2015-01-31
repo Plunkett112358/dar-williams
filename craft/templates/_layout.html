@@ -50,7 +50,7 @@
 
 
         <div class="collapse navbar-collapse" id="nav-collapse">
-           <ul class="nav nav-pills nav-justified   {% if craft.request.getLastSegment() == 'thankyou' %} blue-nav {% endif %}">
+           <ul class="nav nav-pills nav-justified   {% if (craft.request.getLastSegment() == 'thankyou') or (craft.request.getLastSegment() == 'final-details') %} blue-nav {% endif %}">
             <li {% if craft.request.getLastSegment() =='' %} class="active" {% endif %} > 
               <a href="/">Home </a></li>
             <li  {% if craft.request.getLastSegment() =='about' %} class="active" {% endif %}>
@@ -67,7 +67,7 @@
         </div>
 
         <div class="hidden-sm hidden-xs" id="nav-main">
-          <ul class="nav nav-pills nav-justified {% if craft.request.getLastSegment() == 'thankyou' %} blue-nav {% endif %}">
+          <ul class="nav nav-pills nav-justified {% if (craft.request.getLastSegment() == 'thankyou') or (craft.request.getLastSegment() == 'final-details') %} blue-nav {% endif %}">
             <li style="color:white; position: relative; top: -4px;">___________________</li>
             <li {% if craft.request.getLastSegment() == '' %} class="active" {% endif %}><a href="/">Home</a></li>
             <li {% if craft.request.getLastSegment() =='about' %} class="active" {% endif %}><a href="/about">About</a></li>
@@ -75,7 +75,7 @@
             <li{% if craft.request.getLastSegment() =='application' %} class="active" {% endif %} ><a href="/application">Application</a></li>
             <li{% if craft.request.getLastSegment() =='contact' %} class="active" {% endif %} ><a href="/contact">Contact</a></li>
             <li{% if craft.request.getLastSegment() =='final-details' %} class="active" {% endif %} ><a href="/final-details">Final Details</a></li>
-              <li style="color:white; position: relative; top: -4px;">___________________</li>
+              <li style="color:white; position: relative; top: -4px; left: 30px;">___________________</li>
           </ul>
         </div>
       </div>

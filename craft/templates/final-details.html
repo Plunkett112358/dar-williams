@@ -3,7 +3,9 @@
 {% block content %}
 
 {% if not currentUser %}
-   <form method="post" action="" accept-charset="UTF-8">
+
+<h1 class="text-center">This Page Coming Soon!</h1>
+<!--    <form method="post" action="" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="users/login">
 
@@ -24,7 +26,7 @@
     {% if errorMessage is defined %}
         <p>{{ errorMessage }}</p>
     {% endif %}
-</form>
+</form> -->
 
 {% endif %}
 
