@@ -2,7 +2,9 @@
 
 {% block content %}
 
-
+</div> 
+<!-- end container -->
+<div class="register-splash">
 
 <div class="container">
   
@@ -32,7 +34,7 @@
             <input type="hidden" name="redirect" value="contact/thanks">
 
              <div class="form-group">
-                <label for="fromName">Your Name</label>
+                <label for="fromName">Name</label>
                 <input class="form-control" id="fromName" type="text" name="fromName" value="{% if message is defined %}{{ message.fromName }}{% endif %}">
                 {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
             </div>
@@ -40,7 +42,7 @@
             
 
            <div class="form-group">
-                <label for="fromEmail">Your Email</label>
+                <label for="fromEmail">Email</label>
             <input class="form-control" id="fromEmail" type="text" name="fromEmail" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}">
             {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
            </div>
@@ -50,20 +52,22 @@
             <input class="form-control" id="subject" type="text" name="subject" value="{% if message is defined %}{{ message.subject }}{% endif %}">
             {{ message is defined and message ? errorList(message.getErrors('subject')) }}
            </div>
+
+             <div class="form-group">
+              <label for="phone">Phone Number</label>
+            <input class="form-control" id="phone" type="text" name="message[Phone]" value=""> 
+           </div>
           
            <div class="form-group">
                 <label for="message">Message</label>
-            <textarea class="form-control" rows="10" cols="40" id="message" name="message[body]">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
+            <textarea class="form-control" rows="10" cols="20" id="message" name="message[body]">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
            </div>
          
-           <div class="form-group">
-              <label for="phone">Your phone number</label>
-            <input class="form-control" id="phone" type="text" name="message[Phone]" value=""> 
-           </div>
+         
            
 
 
-                <input type="submit" class="btn btn-warning pull-right" value="Send">
+                <input type="submit" class="btn btn-primary pull-right" value="Send">
         </form>
     </div>
 
@@ -173,6 +177,7 @@
           </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 

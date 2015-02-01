@@ -4963,7 +4963,7 @@ a.list-group-item-danger.active:focus {
 }
 .panel {
   margin-bottom: 20px;
-  background-color: #ffffff;
+  background-color: #e9eae5;
   border: 1px solid transparent;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -5165,16 +5165,16 @@ a.list-group-item-danger.active:focus {
   border-color: #dddddd;
 }
 .panel-default > .panel-heading {
-  color: #333333;
-  background-color: #e9eae5;
+  color: #ffffff;
+  background-color: #62b1bf;
   border-color: #dddddd;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #dddddd;
 }
 .panel-default > .panel-heading .badge {
-  color: #e9eae5;
-  background-color: #333333;
+  color: #62b1bf;
+  background-color: #ffffff;
 }
 .panel-default > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #dddddd;
@@ -6191,7 +6191,18 @@ button.close {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 500px;
+  min-height: 300px;
+  border-bottom: 10px solid white;
+  overflow: hidden;
+  /*margin-top: -100px;*/
+}
+.contact {
+  background: url('../images/contact@2x.png') no-repeat 50% 50% fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 300px;
   border-bottom: 10px solid white;
   overflow: hidden;
   /*margin-top: -100px;*/
@@ -6652,6 +6663,13 @@ header.docked #logo {
 }
 .register-splash h4 {
   color: #62b1bf;
+}
+.register-splash h4 a {
+  color: white;
+}
+.register-splash h4 a:hover,
+.register-splash h4 a.active {
+  text-decoration: none !important;
 }
 .register-splash .statement {
   color: #648440;
