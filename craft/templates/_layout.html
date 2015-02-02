@@ -51,7 +51,7 @@
 
 
         <div class="collapse navbar-collapse" id="nav-collapse">
-           <ul class="nav nav-pills nav-justified   {% if (craft.request.getLastSegment() == 'thankyou') or (craft.request.getLastSegment() == 'final-details') %} blue-nav {% endif %}">
+           <ul class="nav nav-pills nav-justified small-nav-blue ">
             <li {% if craft.request.getLastSegment() =='' %} class="active" {% endif %} > 
               <a href="/">Home </a></li>
             <li  {% if craft.request.getLastSegment() =='about' %} class="active" {% endif %}>
@@ -62,7 +62,7 @@
             <li {% if craft.request.getLastSegment() =='contact' %} class="active" {% endif %} >
               <a href="/contact">Contact</a></li>
             <li {% if craft.request.getLastSegment() =='final-details' %} class="active" {% endif %} >
-              <a href="/final-details">Final Details</a></li>
+              <a href="/final-details">Final&nbsp;Details</a></li>
           </ul>
 
         </div>
@@ -75,7 +75,7 @@
              <!-- <li{% if craft.request.getLastSegment() =='gallery' %} class="active" {% endif %}><a href="/gallery">Gallery</a></li> -->
             <li{% if craft.request.getLastSegment() =='application' %} class="active" {% endif %} ><a href="/application">Application</a></li>
             <li{% if craft.request.getLastSegment() =='contact' %} class="active" {% endif %} ><a href="/contact">Contact</a></li>
-            <li{% if craft.request.getLastSegment() =='final-details' %} class="active" {% endif %} ><a href="/final-details">Final Details</a></li>
+            <li{% if craft.request.getLastSegment() =='final-details' %} class="active" {% endif %} ><a href="/final-details">Final&nbsp;Details</a></li>
               <li style="color:white; position: relative; top: -4px; left: 30px;">___________________</li>
           </ul>
         </div>

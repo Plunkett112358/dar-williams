@@ -6657,6 +6657,9 @@ header.docked #logo {
 .blue-nav li a {
   color: #5ca7b4;
 }
+.small-nav-blue li a {
+  color: #5ca7b4 !important;
+}
 .register-splash {
   background-color: #e9eae6;
   height: 1500px;
