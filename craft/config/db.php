@@ -23,8 +23,8 @@ return array(
 
   '.org' => array(
   	'server' => 'localhost',
-    'user' => '',
-    'password' => ''
+    'user' => 'forge',
+    'password' => 'UMk6qQYeWofjRb7p1vNs'
   )
 
 );
