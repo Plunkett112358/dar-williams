@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Database Configuration
  *
@@ -7,24 +6,21 @@
  * You can see a list of the default settings in craft/app/etc/config/defaults/db.php
  */
 
-return array(
 
+
+return array(
 	'*' => array(
 		'tablePrefix' => 'craft',
     'database' => 'dar_williams_craft'
   ),
-
   '.dev' => array(
     'server' => 'localhost',
     'user' => 'root',
     'password' => 'root',
-
   ),
-
-  '104.236.214.47' => array(
-  	'server' => 'localhost',
+  'default' => array(
+    'server' => 'localhost',
     'user' => 'forge',
     'password' => 'UMk6qQYeWofjRb7p1vNs'
   )
-
 );
