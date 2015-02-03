@@ -21,7 +21,7 @@ return array(
 
   ),
 
-  '.org' => array(
+  '104.236.214.47' => array(
   	'server' => 'localhost',
     'user' => 'forge',
     'password' => 'UMk6qQYeWofjRb7p1vNs'
