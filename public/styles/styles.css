@@ -6174,13 +6174,9 @@ button.close {
   overflow: hidden;
   /*margin-top: -100px;*/
 }
-@media (min-width: 992px) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .home {
-    background: url('../images/home-bkg.png') no-repeat 50% 50% fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    max-width: 100%;
   }
 }
 .about {
