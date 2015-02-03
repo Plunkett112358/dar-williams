@@ -31,7 +31,7 @@ return array(
 
   ),
 
-  '.org' => array(
+  '104.236.214.47' => array(
   	'usePathInfo' => true,
   	'generateTransformsAfterPageLoad' => false,
   	'devMode' => false
