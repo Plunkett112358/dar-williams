@@ -135,9 +135,17 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    
+
+{% if '.dev' in craft.request.url %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
      <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    {% else %}
+  <script src="{{ craft.bust.er('/scripts/vendor.js') }}"></script>
+  <script src="{{ craft.bust.er('/scripts/app.js') }}"></script>
+{% endif %}
 
   </body>
 </html>
