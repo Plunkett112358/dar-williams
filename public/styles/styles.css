@@ -6618,8 +6618,8 @@ header.docked #logo {
 .home-first-block h3 {
   color: #53782d;
   font-weight: 400;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 6px;
+  margin-bottom: 6px;
   margin-left: 30px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -6630,14 +6630,34 @@ header.docked #logo {
   font-weight: 400;
   font-size: 23px;
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
 .home-first-block h5 {
-  margin-top: 20px;
+  margin-top: 40px;
   font-size: 16px;
 }
 .home-first-block li {
   font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
   font-size: 16px;
+  letter-spacing: 1px;
+}
+.home-first-block p {
+  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  padding-right: 65px;
+  font-weight: 300;
+}
+.home-first-block .blue-bullets {
+  color: #75bbc4;
+  font-size: 19px;
+}
+.home-first-block .blue-bullets li {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.home-first-block .blue-bullets span {
+  color: #555555;
+  font-size: 16px;
+  font-weight: 300;
 }
 .about-first-block {
   margin: 0px 10px 10px 0px;
@@ -6697,14 +6717,6 @@ header.docked #logo {
 }
 .small-nav-blue li a {
   color: #5ca7b4 !important;
-}
-.blue-bullets {
-  color: #75bbc4;
-  font-size: 17px;
-}
-.blue-bullets span {
-  color: black;
-  font-size: 16px;
 }
 .register-splash {
   background-color: #e9eae6;
