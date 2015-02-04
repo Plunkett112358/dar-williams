@@ -101,25 +101,38 @@
   <div class="col-md-9 col-xs-12">
 
     <div class="note-block">
-      {{entry.secondBlock[0].body}}
+      <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <div class="note-content">
+        
+          <h4>INFO: Application</h4>
+          {{entry.secondBlock[0].body}}
+        </div>
+        </div>
+      </div>
+    
     </div>
       <div class="note-block">
-      <h2>{{entry.secondBlock[0].pricing}}</h2>
-      <h4>{{entry.secondBlock[0].registrationInfo}}</h4>
+         <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+      <h4>{{entry.secondBlock[0].pricing}}</h4>
+      <h5 >{{entry.secondBlock[0].registrationInfo}}</h5>
 
-      <h4>{{entry.secondBlock[0].firstRetreatTitle}}</h4>
+      <h5 class="sessions">{{entry.secondBlock[0].firstRetreatTitle}}</h5>
       <p>{{entry.secondBlock[0].firstRetreat}}</p>
 
-       <h4>{{entry.secondBlock[0].secondRetreatTitle}}</h4>
+       <h5 class="sessions">{{entry.secondBlock[0].secondRetreatTitle}}</h5>
       <p>{{entry.secondBlock[0].secondRetreat}}</p>
 
-       <h2>{{entry.secondBlock[0].lodgingTitle}}</h2>
+       <h5 class="sessions">{{entry.secondBlock[0].lodgingTitle}}</h5>
        <p>{{entry.secondBlock[0].lodging}}</p>
 
-       <h2>{{entry.secondBlock[0].registrationTitle}}</h2>
+       <h5 class="sessions">{{entry.secondBlock[0].registrationTitle}}</h5>
        <p>{{entry.secondBlock[0].regInfo}}</p>
-
+  </div>
+</div>
     </div>
+   
   </div>
   <div class="col-md-3 col-xs-12">
     <img class="img-responsive pattern" src="{{entry.secondBlock[0].pattern[0].url}}" alt="">
