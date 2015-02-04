@@ -6175,11 +6175,6 @@ button.close {
   overflow: hidden;
   /*margin-top: -100px;*/
 }
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  .home-small {
-    height: 100px;
-  }
-}
 .about {
   background: url('../images/about.jpeg') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
@@ -6224,7 +6219,7 @@ footer {
 .navbar {
   border: 0px;
   margin-bottom: 0px !important;
-  margin-top: 100px;
+  margin-top: 40px;
 }
 .navbar.small {
   background-color: transparent;
@@ -6233,14 +6228,14 @@ footer {
   .navbar {
     border: 0px;
     margin-bottom: 0px !important;
-    margin-top: 100px;
+    margin-top: 40px;
   }
   #nav-collapse {
     display: none !important;
   }
 }
 /***** Sticky header ****/
-header {
+#header {
   /*border-top:2px solid @brand-success;*/
   border-top: 17px solid #e9eae5;
   position: fixed;
@@ -6257,19 +6252,19 @@ header {
   -o-transform: translate(0, 0%);
   transform: translate(0, 0%);
 }
-header #logo {
+#header #logo {
   height: 53px;
   width: 347px;
   margin-top: 31px;
   margin-left: -50px;
 }
-header.docked {
+#header.docked {
   -webkit-transform: translate(0, -115%);
   -ms-transform: translate(0, -115%);
   -o-transform: translate(0, -115%);
   transform: translate(0, -115%);
 }
-header.mini {
+#header.mini {
   -webkit-transform: translate(0, -45%);
   -ms-transform: translate(0, -45%);
   -o-transform: translate(0, -45%);
@@ -6278,13 +6273,13 @@ header.mini {
 .navbar-right {
   margin-right: 2px;
 }
-header.mini,
-header.docked {
+#header.mini,
+#header.docked {
   -webkit-box-shadow: 0px 16px 2px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 16px 2px 0px rgba(0, 0, 0, 0.3);
 }
-header.mini #logo,
-header.docked #logo {
+#header.mini #logo,
+#header.docked #logo {
   height: 40px;
   width: 262px;
   margin-left: -39px;
