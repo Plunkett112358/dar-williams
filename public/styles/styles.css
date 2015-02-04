@@ -6751,6 +6751,9 @@ footer {
   border-bottom: 1px solid white;
   padding: 10px;
 }
+.green {
+  color: #53782d;
+}
 .register-splash {
   background-color: #e9eae6;
   height: 1500px;
