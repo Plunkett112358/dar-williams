@@ -6296,6 +6296,11 @@ header.docked #logo {
   font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   font-weight: 100;
   letter-spacing: 3px;
+  padding: 0px;
+  /*border-radius: 0px;*/
+}
+.nav > li > a {
+  border-radius: 0px;
 }
 .navbar-brand:hover #logo {
   opacity: .9;
@@ -6463,6 +6468,9 @@ header.docked #logo {
   header .navbar-main li > a {
     font-size: 28px;
   }
+}
+.nav > li > a {
+  padding: 0px;
 }
 @media (max-width: 991px) {
   .navbar {
