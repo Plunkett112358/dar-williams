@@ -881,7 +881,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: Superclarendon-Regular, Futura, 'Trebuchet MS', Arial, sans-serif;
+  font-family: Archer, 'Trebuchet MS', Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -6169,7 +6169,11 @@ button.close {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+<<<<<<< Updated upstream
   min-height: 650px;
+=======
+  min-height: 600px;
+>>>>>>> Stashed changes
   border-bottom: 10px solid white;
   width: 100%;
   overflow: hidden;
