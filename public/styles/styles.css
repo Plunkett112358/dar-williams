@@ -6328,6 +6328,7 @@ header.docked #logo {
 }
 .navbar-main li.dropdown.open > a.dropdown-toggle {
   color: #62b1bf;
+  border-bottom: 1px solid #555555;
   border-color: #428bca;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -6745,6 +6746,8 @@ header.docked #logo {
 }
 .small-nav-blue li a {
   color: #5ca7b4 !important;
+  border-bottom: 1px solid white;
+  padding: 10px;
 }
 .register-splash {
   background-color: #e9eae6;
