@@ -11,7 +11,9 @@
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
-      min-height: 650px;
+
+      min-height: 600px;
+
     	border-bottom: 10px solid white;
      width:100%;
       overflow: hidden;  
@@ -150,12 +152,22 @@ footer {
 
 
 .nav-pills {
-  a{
+  li {
+    a{
     font-size: 16px;
     color: white;
+    font-family: @font-family-serif;
+    font-weight: 100;
+    letter-spacing: 3px;
+    padding:0px;
+    /*border-radius: 0px;*/
+
   }
 }
-
+}
+.nav > li > a {
+  border-radius: 0px;
+}
 
 
 .navbar-brand:hover {
@@ -171,11 +183,14 @@ footer {
     text-transform:uppercase;
     font-size:32px;
     /*font-family:@font-family-sans-serif-cond;*/
+    font-family: @font-family-serif !important;
     border: 2px solid transparent;
     border-radius: 4px;
     padding: 7px 10px;
     margin: 0 4px;
-
+    font-weight: 300;
+    letter-spacing: 1px;
+  
     &:hover{
       border-color: @brand-primary-light;
     }
@@ -187,18 +202,27 @@ footer {
 
   li.dropdown.open > a.dropdown-toggle{
     color: @brand-primary;
-    border-color: @brand-primary-light;
+    border-bottom: 1px solid @gray;
+    border-color: @brand-info;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom-width: 0;
     z-index: 1001;
     padding-bottom: 9px;
+    font-family: @font-family-serif;
   }
 
   li.dropdown.active > a.dropdown-toggle{
     color: @brand-success;
   }
 
+}
+.navbar-default .navbar-toggle {
+  border-color: @brand-primary;
+  background-color: @brand-primary;
+  .icon-bar{
+    background-color: #e9eae5 ;
+  }
 }
 .navbar-sub {
   // min-height:30px;
@@ -367,6 +391,9 @@ footer {
   }
 }
 
+.nav > li > a {
+  padding: 0px;
+}
 @media (max-width: @screen-sm-max) {
   .navbar{
       margin-top: 0px;
@@ -529,14 +556,71 @@ footer {
   margin: 0px 10px 10px 0px;
   background-color: @brand-success;
   min-height: 509px;
+  font-family: @font-family-serif;
+  
+  font-weight: 900;
   /*margin-right: 10px;*/
+  /*margin-top: 6px;*/
   padding: 20px;
+
+  .home-gutter{
+    margin-left: 30px;
+    margin-right:30px;
+  }
   h2{  
     color: @brand-info;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
   }
   h3{
     color: @brand-success-dark;
+    font-weight: 400;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
+  h4 {
+    color: @brand-success-dark;
+    margin-left: 25px;
+    font-weight: 400;
+    font-size: 23px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+  }
+  h5 {
+    margin-top: 40px;
+    font-size: 18px;
+   
+     }
+  li {
+    font-family: @font-family-sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+
+  }
+
+  p{
+    font-family: @font-family-sans-serif;
+    padding-right: 65px;
+    font-weight: 300;
+  }
+
+  .blue-bullets {
+  color: @brand-info;
+  font-size: 19px;
+  li  {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+  span{
+    color: @gray;
+    font-size: 16px;
+    font-weight: 300;
+  }
+}
 }
 
 .about-first-block {
@@ -588,6 +672,23 @@ footer {
   padding: 40px;
   margin-top: 6px;
   margin-right: 10px;
+
+
+  h4 {
+    color: @brand-success-dark;
+    font-family: @font-family-serif;
+    letter-spacing: 2px;
+  }
+  h5{
+    font-family: @font-family-serif;
+    font-size: 20px;
+  }
+  p{
+    font-family: @font-family-sans-serif;
+  }
+  .sessions {
+    margin-top: 30px;
+  }
 }
 
 .quote-block-blue {
@@ -610,6 +711,7 @@ footer {
     li {
       a {
       color: #5ca7b4;
+
     }
   }
   }
@@ -617,6 +719,8 @@ footer {
 .small-nav-blue  li {
       a {
       color: #5ca7b4 !important;
+      border-bottom: 1px solid white;
+      padding: 10px;
     }
   }
   

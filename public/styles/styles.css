@@ -881,7 +881,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: Superclarendon-Regular, Futura, 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -6169,7 +6169,7 @@ button.close {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 650px;
+  min-height: 600px;
   border-bottom: 10px solid white;
   width: 100%;
   overflow: hidden;
@@ -6285,9 +6285,17 @@ footer {
   margin-left: -39px;
   margin-top: 44px;
 }
-.nav-pills a {
+.nav-pills li a {
   font-size: 16px;
   color: white;
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-weight: 100;
+  letter-spacing: 3px;
+  padding: 0px;
+  /*border-radius: 0px;*/
+}
+.nav > li > a {
+  border-radius: 0px;
 }
 .navbar-brand:hover #logo {
   opacity: .9;
@@ -6299,10 +6307,13 @@ footer {
   text-transform: uppercase;
   font-size: 32px;
   /*font-family:@font-family-sans-serif-cond;*/
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif !important;
   border: 2px solid transparent;
   border-radius: 4px;
   padding: 7px 10px;
   margin: 0 4px;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
 .navbar-main li > a:hover {
   border-color: #428bca;
@@ -6312,15 +6323,24 @@ footer {
 }
 .navbar-main li.dropdown.open > a.dropdown-toggle {
   color: #62b1bf;
-  border-color: #428bca;
+  border-bottom: 1px solid #555555;
+  border-color: #75bbc4;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-width: 0;
   z-index: 1001;
   padding-bottom: 9px;
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
 }
 .navbar-main li.dropdown.active > a.dropdown-toggle {
   color: #e9eae5;
+}
+.navbar-default .navbar-toggle {
+  border-color: #62b1bf;
+  background-color: #62b1bf;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #e9eae5 ;
 }
 .navbar-sub li > a {
   font-size: 18px;
@@ -6451,6 +6471,9 @@ footer {
   header .navbar-main li > a {
     font-size: 28px;
   }
+}
+.nav > li > a {
+  padding: 0px;
 }
 @media (max-width: 991px) {
   .navbar {
@@ -6593,14 +6616,64 @@ footer {
   margin: 0px 10px 10px 0px;
   background-color: #e9eae5;
   min-height: 509px;
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-weight: 900;
   /*margin-right: 10px;*/
+  /*margin-top: 6px;*/
   padding: 20px;
+}
+.home-first-block .home-gutter {
+  margin-left: 30px;
+  margin-right: 30px;
 }
 .home-first-block h2 {
   color: #75bbc4;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 .home-first-block h3 {
   color: #53782d;
+  font-weight: 400;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-left: 30px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.home-first-block h4 {
+  color: #53782d;
+  margin-left: 25px;
+  font-weight: 400;
+  font-size: 23px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.home-first-block h5 {
+  margin-top: 40px;
+  font-size: 18px;
+}
+.home-first-block li {
+  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+.home-first-block p {
+  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  padding-right: 65px;
+  font-weight: 300;
+}
+.home-first-block .blue-bullets {
+  color: #75bbc4;
+  font-size: 19px;
+}
+.home-first-block .blue-bullets li {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.home-first-block .blue-bullets span {
+  color: #555555;
+  font-size: 16px;
+  font-weight: 300;
 }
 .about-first-block {
   margin: 0px 10px 10px 0px;
@@ -6645,6 +6718,21 @@ footer {
   margin-top: 6px;
   margin-right: 10px;
 }
+.note-block h4 {
+  color: #53782d;
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  letter-spacing: 2px;
+}
+.note-block h5 {
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-size: 20px;
+}
+.note-block p {
+  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
+}
+.note-block .sessions {
+  margin-top: 30px;
+}
 .quote-block-blue {
   margin-top: 6px;
   /*background-color: @brand-info;*/
@@ -6660,6 +6748,8 @@ footer {
 }
 .small-nav-blue li a {
   color: #5ca7b4 !important;
+  border-bottom: 1px solid white;
+  padding: 10px;
 }
 .register-splash {
   background-color: #e9eae6;

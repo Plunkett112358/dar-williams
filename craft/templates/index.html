@@ -30,23 +30,26 @@
 <div class="row">
   <div class="col-md-8">
     <div class="home-first-block">
+      <div class="home-gutter">
+        
+   
         <h2>{{ entry.firstBlock[0].headline }}</h2>
         <h3>{{entry.firstBlock[0].date1}}</h3>
         <h3>{{entry.firstBlock[0].date2}}</h3>
         <h4>{{ entry.firstBlock[0].location }}</h4>
         <h5>{{ entry.firstBlock[0].bulletsIntro }}</h5>
         <div class="row">
-          <div class="col-xs-6">
-            <ul>
+          <div class="col-md-3 col-md-offset-1">
+            <ul class="blue-bullets">
             {% for bullet in entry.firstBlock[0].bulletPoints1  %}
-            <li>{{bullet.point}}</li> 
+            <li><span>{{bullet.point}}</span></li> 
             {% endfor %}
              </ul>
           </div>
-          <div class="col-xs-6">
-              <ul>
+          <div class="col-md-8 col-xs-12">
+              <ul class="blue-bullets">
             {% for bullet in entry.firstBlock[0].bulletpoints2  %}
-            <li>{{bullet.points}}</li> 
+            <li><span>{{bullet.points}}</span></li> 
             {% endfor %}
              </ul>
           </div>
@@ -55,7 +58,7 @@
        
 
     </div>
-  
+     </div>
   </div>
   <div class="col-md-4">
     <div class=" col-md-12 col-sm-6 col-xs-12 ">
@@ -98,25 +101,38 @@
   <div class="col-md-9 col-xs-12">
 
     <div class="note-block">
-      {{entry.secondBlock[0].body}}
+      <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <div class="note-content">
+        
+          <h4>INFO: Application</h4>
+          {{entry.secondBlock[0].body}}
+        </div>
+        </div>
+      </div>
+    
     </div>
       <div class="note-block">
-      <h2>{{entry.secondBlock[0].pricing}}</h2>
-      <h4>{{entry.secondBlock[0].registrationInfo}}</h4>
+         <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+      <h4>{{entry.secondBlock[0].pricing}}</h4>
+      <h5 >{{entry.secondBlock[0].registrationInfo}}</h5>
 
-      <h4>{{entry.secondBlock[0].firstRetreatTitle}}</h4>
+      <h5 class="sessions">{{entry.secondBlock[0].firstRetreatTitle}}</h5>
       <p>{{entry.secondBlock[0].firstRetreat}}</p>
 
-       <h4>{{entry.secondBlock[0].secondRetreatTitle}}</h4>
+       <h5 class="sessions">{{entry.secondBlock[0].secondRetreatTitle}}</h5>
       <p>{{entry.secondBlock[0].secondRetreat}}</p>
 
-       <h2>{{entry.secondBlock[0].lodgingTitle}}</h2>
+       <h5 class="sessions">{{entry.secondBlock[0].lodgingTitle}}</h5>
        <p>{{entry.secondBlock[0].lodging}}</p>
 
-       <h2>{{entry.secondBlock[0].registrationTitle}}</h2>
+       <h5 class="sessions">{{entry.secondBlock[0].registrationTitle}}</h5>
        <p>{{entry.secondBlock[0].regInfo}}</p>
-
+  </div>
+</div>
     </div>
+   
   </div>
   <div class="col-md-3 col-xs-12">
     <img class="img-responsive pattern" src="{{entry.secondBlock[0].pattern[0].url}}" alt="">
