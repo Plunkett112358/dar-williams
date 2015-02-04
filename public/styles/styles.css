@@ -881,7 +881,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: Archer, 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -6169,11 +6169,7 @@ button.close {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-<<<<<<< Updated upstream
-  min-height: 650px;
-=======
   min-height: 600px;
->>>>>>> Stashed changes
   border-bottom: 10px solid white;
   width: 100%;
   overflow: hidden;
@@ -6228,7 +6224,7 @@ footer {
 .navbar {
   border: 0px;
   margin-bottom: 0px !important;
-  margin-top: 100px;
+  margin-top: 40px;
 }
 .navbar.small {
   background-color: transparent;
@@ -6237,7 +6233,7 @@ footer {
   .navbar {
     border: 0px;
     margin-bottom: 0px !important;
-    margin-top: 100px;
+    margin-top: 40px;
   }
   #nav-collapse {
     display: none !important;
@@ -6294,9 +6290,10 @@ header.docked #logo {
   margin-left: -39px;
   margin-top: 44px;
 }
-.nav-pills a {
+.nav-pills li a {
   font-size: 16px;
   color: white;
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
 }
 .navbar-brand:hover #logo {
   opacity: .9;
@@ -6308,6 +6305,7 @@ header.docked #logo {
   text-transform: uppercase;
   font-size: 32px;
   /*font-family:@font-family-sans-serif-cond;*/
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif !important;
   border: 2px solid transparent;
   border-radius: 4px;
   padding: 7px 10px;
@@ -6327,6 +6325,7 @@ header.docked #logo {
   border-bottom-width: 0;
   z-index: 1001;
   padding-bottom: 9px;
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
 }
 .navbar-main li.dropdown.active > a.dropdown-toggle {
   color: #e9eae5;
@@ -6602,14 +6601,43 @@ header.docked #logo {
   margin: 0px 10px 10px 0px;
   background-color: #e9eae5;
   min-height: 509px;
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-weight: 900;
   /*margin-right: 10px;*/
+  /*margin-top: 6px;*/
   padding: 20px;
+}
+.home-first-block .home-gutter {
+  margin-left: 30px;
 }
 .home-first-block h2 {
   color: #75bbc4;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 .home-first-block h3 {
   color: #53782d;
+  font-weight: 400;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 30px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.home-first-block h4 {
+  color: #53782d;
+  margin-left: 25px;
+  font-weight: 400;
+  font-size: 23px;
+  text-transform: uppercase;
+}
+.home-first-block h5 {
+  margin-top: 20px;
+  font-size: 16px;
+}
+.home-first-block li {
+  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  font-size: 16px;
 }
 .about-first-block {
   margin: 0px 10px 10px 0px;
@@ -6669,6 +6697,14 @@ header.docked #logo {
 }
 .small-nav-blue li a {
   color: #5ca7b4 !important;
+}
+.blue-bullets {
+  color: #75bbc4;
+  font-size: 17px;
+}
+.blue-bullets span {
+  color: black;
+  font-size: 16px;
 }
 .register-splash {
   background-color: #e9eae6;
