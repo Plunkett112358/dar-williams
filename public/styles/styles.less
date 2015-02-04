@@ -205,7 +205,7 @@ header.mini, header.docked{
   li.dropdown.open > a.dropdown-toggle{
     color: @brand-primary;
     border-bottom: 1px solid @gray;
-    border-color: @brand-primary-light;
+    border-color: @brand-info;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom-width: 0;
@@ -218,6 +218,13 @@ header.mini, header.docked{
     color: @brand-success;
   }
 
+}
+.navbar-default .navbar-toggle {
+  border-color: @brand-primary;
+  background-color: @brand-primary;
+  .icon-bar{
+    background-color: #e9eae5 ;
+  }
 }
 .navbar-sub {
   // min-height:30px;
