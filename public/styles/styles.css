@@ -6781,4 +6781,12 @@ footer {
   /*margin-right: 10px;*/
   padding: 20px;
 }
+.contact-content h3 {
+  color: #62b1bf;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+}
+.blue-header {
+  color: #62b1bf;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+}
 /*# sourceMappingURL=/styles/styles.map */
