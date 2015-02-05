@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+        <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Kreon' rel='stylesheet' type='text/css'>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,8 +11,7 @@
     <link rel="icon" href="../images/thankyouFeather@2x.png">
 
     <title>Dar Williams Retreat</title>
-    <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Kreon' rel='stylesheet' type='text/css'>
+
     <!-- Bootstrap core CSS -->
     
     <link href="/styles/styles.css" rel="stylesheet">
@@ -70,7 +71,7 @@
         </div>
 
         <div class="hidden-sm hidden-xs" id="nav-main">
-          <ul class="nav nav-pills nav-justified {% if (craft.request.getLastSegment() == 'thankyou') or (craft.request.getLastSegment() == 'final-details') %} blue-nav {% endif %}">
+          <ul class="nav nav-pills nav-justified {% if (craft.request.getLastSegment() == 'thankyou') or (craft.request.getLastSegment() == 'final-details')  %} blue-nav {% endif %}">
             <li style="color:white; position: relative; top: -4px;">___________________</li>
             <li {% if craft.request.getLastSegment() == '' %} class="active" {% endif %}><a href="/">HOME</a></li>
             <li {% if craft.request.getLastSegment() =='about' %} class="active" {% endif %}><a href="/about">ABOUT</a></li>
