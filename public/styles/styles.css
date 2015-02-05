@@ -6288,7 +6288,7 @@ footer {
 .nav-pills li a {
   font-size: 16px;
   color: white;
-  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   font-weight: 100;
   letter-spacing: 3px;
   padding: 0px;
@@ -6307,7 +6307,7 @@ footer {
   text-transform: uppercase;
   font-size: 32px;
   /*font-family:@font-family-sans-serif-cond;*/
-  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif !important;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif !important;
   border: 2px solid transparent;
   border-radius: 4px;
   padding: 7px 10px;
@@ -6330,7 +6330,7 @@ footer {
   border-bottom-width: 0;
   z-index: 1001;
   padding-bottom: 9px;
-  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
 }
 .navbar-main li.dropdown.active > a.dropdown-toggle {
   color: #e9eae5;
@@ -6616,7 +6616,7 @@ footer {
   margin: 0px 10px 10px 0px;
   background-color: #e9eae5;
   min-height: 509px;
-  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   font-weight: 900;
   /*margin-right: 10px;*/
   /*margin-top: 6px;*/
@@ -6697,11 +6697,11 @@ footer {
 }
 .note-block h4 {
   color: #53782d;
-  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   letter-spacing: 2px;
 }
 .note-block h5 {
-  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   font-size: 20px;
 }
 .note-block p {
@@ -6766,7 +6766,7 @@ footer {
 }
 .about-content h3 {
   color: #62b1bf;
-  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   font-size: 30px;
   /*margin-left: 30px;*/
 }
