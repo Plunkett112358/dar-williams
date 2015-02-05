@@ -12,7 +12,7 @@
       -o-background-size: cover;
       background-size: cover;
 
-      min-height: 600px;
+      min-height: 680px;
 
     	border-bottom: 10px solid white;
      width:100%;
@@ -23,9 +23,7 @@
 
 	} 
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-  .home-small { height: 100px; }
-}
+
     
 
     .about {
@@ -108,7 +106,7 @@ footer {
 /***** Sticky header ****/
 @header-height: 100px;
 
-header {
+#header {
   /*border-top:2px solid @brand-success;*/
     border-top:17px solid @brand-info-light;
 
@@ -129,11 +127,11 @@ header {
   .translate(0,0%);
 }
 
-header.docked {
+#header.docked {
 .translate(0,-115%);
 }
 
-header.mini {
+#header.mini {
   .translate(0,-45%);
 }
 
@@ -141,7 +139,7 @@ header.mini {
   margin-right:2px;
 }
 
-header.mini, header.docked{
+#header.mini, #header.docked{
   #logo{
     height: 40px;
     width: 262px;
@@ -595,6 +593,9 @@ header.mini, header.docked{
   h5 {
     margin-top: 40px;
     font-size: 18px;
+    a{
+      color: @gray;
+    }
    
      }
   li {
@@ -700,7 +701,11 @@ header.mini, header.docked{
     }
   }
   
-
+.green {
+  color: @brand-success-dark;
+  font-size:23px;
+  font-weight: 300;
+}
 
  .register-splash {
  background-color:  #e9eae6;

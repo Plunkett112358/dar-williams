@@ -881,7 +881,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Nunito', sans-serif, 'Archer', 'Trebuchet MS', Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -6169,16 +6169,11 @@ button.close {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 600px;
+  min-height: 680px;
   border-bottom: 10px solid white;
   width: 100%;
   overflow: hidden;
   /*margin-top: -100px;*/
-}
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  .home-small {
-    height: 100px;
-  }
 }
 .about {
   background: url('../images/about.jpeg') no-repeat 50% 50% fixed;
@@ -6240,7 +6235,7 @@ footer {
   }
 }
 /***** Sticky header ****/
-header {
+#header {
   /*border-top:2px solid @brand-success;*/
   border-top: 17px solid #e9eae5;
   position: fixed;
@@ -6257,19 +6252,19 @@ header {
   -o-transform: translate(0, 0%);
   transform: translate(0, 0%);
 }
-header #logo {
+#header #logo {
   height: 53px;
   width: 347px;
   margin-top: 31px;
   margin-left: -50px;
 }
-header.docked {
+#header.docked {
   -webkit-transform: translate(0, -115%);
   -ms-transform: translate(0, -115%);
   -o-transform: translate(0, -115%);
   transform: translate(0, -115%);
 }
-header.mini {
+#header.mini {
   -webkit-transform: translate(0, -45%);
   -ms-transform: translate(0, -45%);
   -o-transform: translate(0, -45%);
@@ -6278,13 +6273,13 @@ header.mini {
 .navbar-right {
   margin-right: 2px;
 }
-header.mini,
-header.docked {
+#header.mini,
+#header.docked {
   -webkit-box-shadow: 0px 16px 2px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 16px 2px 0px rgba(0, 0, 0, 0.3);
 }
-header.mini #logo,
-header.docked #logo {
+#header.mini #logo,
+#header.docked #logo {
   height: 40px;
   width: 262px;
   margin-left: -39px;
@@ -6293,7 +6288,7 @@ header.docked #logo {
 .nav-pills li a {
   font-size: 16px;
   color: white;
-  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   font-weight: 100;
   letter-spacing: 3px;
   padding: 0px;
@@ -6312,7 +6307,7 @@ header.docked #logo {
   text-transform: uppercase;
   font-size: 32px;
   /*font-family:@font-family-sans-serif-cond;*/
-  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif !important;
+  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif !important;
   border: 2px solid transparent;
   border-radius: 4px;
   padding: 7px 10px;
@@ -6335,7 +6330,7 @@ header.docked #logo {
   border-bottom-width: 0;
   z-index: 1001;
   padding-bottom: 9px;
-  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
 }
 .navbar-main li.dropdown.active > a.dropdown-toggle {
   color: #e9eae5;
@@ -6621,7 +6616,7 @@ header.docked #logo {
   margin: 0px 10px 10px 0px;
   background-color: #e9eae5;
   min-height: 509px;
-  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   font-weight: 900;
   /*margin-right: 10px;*/
   /*margin-top: 6px;*/
@@ -6657,13 +6652,16 @@ header.docked #logo {
   margin-top: 40px;
   font-size: 18px;
 }
+.home-first-block h5 a {
+  color: #555555;
+}
 .home-first-block li {
-  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Nunito', sans-serif, 'Archer', 'Trebuchet MS', Arial, sans-serif;
   font-size: 16px;
   letter-spacing: 1px;
 }
 .home-first-block p {
-  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Nunito', sans-serif, 'Archer', 'Trebuchet MS', Arial, sans-serif;
   padding-right: 65px;
   font-weight: 300;
 }
@@ -6699,15 +6697,15 @@ header.docked #logo {
 }
 .note-block h4 {
   color: #53782d;
-  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   letter-spacing: 2px;
 }
 .note-block h5 {
-  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-family: 'Kreon', serif, 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   font-size: 20px;
 }
 .note-block p {
-  font-family: 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Nunito', sans-serif, 'Archer', 'Trebuchet MS', Arial, sans-serif;
 }
 .note-block .sessions {
   margin-top: 30px;
@@ -6729,6 +6727,11 @@ header.docked #logo {
   color: #5ca7b4 !important;
   border-bottom: 1px solid white;
   padding: 10px;
+}
+.green {
+  color: #53782d;
+  font-size: 23px;
+  font-weight: 300;
 }
 .register-splash {
   background-color: #e9eae6;
