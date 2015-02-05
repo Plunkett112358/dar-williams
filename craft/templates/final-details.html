@@ -2,15 +2,17 @@
 
 {% block content %}
 
+{% if currentUser == 'meghann@familiar-studio.com' %}
+{% redirect 'inquiries' %}
+{% endif %}
+
 {% if not currentUser %}
 
 <h1 class="text-center">This Page Coming Soon!</h1>
- <div  class="text-center">
+<!--  <div  class="text-center">
    <form method="post" action="" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="users/login">
-
-    <!-- <h3><label for="loginName">Username or email</label></h3> -->
     <input type="hidden" id="loginName"  name="loginName"
         value="stormkingretreat@gmail.com">
 
@@ -31,7 +33,7 @@
         <p>{{ errorMessage }}</p>
     {% endif %}
 </form>
-</div>
+</div> -->
 {% endif %}
 
 {% if currentUser %}
