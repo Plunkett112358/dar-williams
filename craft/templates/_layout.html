@@ -64,8 +64,13 @@
               <a href="/application">Application</a></li>
             <li {% if craft.request.getLastSegment() =='contact' %} class="active" {% endif %} >
               <a href="/contact">Contact</a></li>
-            <li {% if craft.request.getLastSegment() =='final-details' %} class="active" {% endif %} >
+                {% if currentUser == 'meghann@familiar-studio.com' %}
+           <li {% if craft.request.getLastSegment() =='inquiries' %} class="active" {% endif %} >
+              <a href="/inquiries">Inquirires</a></li>
+            {% else %}
+             <li {% if craft.request.getLastSegment() =='final-details' %} class="active" {% endif %} >
               <a href="/final-details">Final&nbsp;Details</a></li>
+            {% endif %}
           </ul>
 
         </div>
@@ -78,8 +83,13 @@
              <!-- <li{% if craft.request.getLastSegment() =='gallery' %} class="active" {% endif %}><a href="/gallery">Gallery</a></li> -->
             <li{% if craft.request.getLastSegment() =='application' %} class="active" {% endif %} ><a href="/application">APPLICATION</a></li>
             <li{% if craft.request.getLastSegment() =='contact' %} class="active" {% endif %} ><a href="/contact">CONTACT</a></li>
+            {% if currentUser == 'meghann@familiar-studio.com' %}
+             <li{% if craft.request.getLastSegment() =='inquiries' %} class="active" {% endif %} ><a href="/inquiries">INQUIRIES</a></li>
+            {% else %}
             <li{% if craft.request.getLastSegment() =='final-details' %} class="active" {% endif %} ><a href="/final-details">FINAL&nbsp;DETAILS</a></li>
+            {% endif %}
               <li style="color:white; position: relative; top: -4px; left: 30px;">___________________</li>
+            
           </ul>
         </div>
       </div>
