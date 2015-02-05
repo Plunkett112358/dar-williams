@@ -46,7 +46,7 @@
 
 {% for a in  applicants %}
 {% if a.title != 'DO NOT DELETE'%}
-<h6>{{a.postDate | date("m/d/Y")}}</h6>
+<h6><small>Date Applied</small>{{a.postDate | date("m/d/Y")}}</h6>
   <h2>{{a.title}}</h2>
   <h6>{{ a.email }} | {{a.phone}}</h6>
   <h4><small>Returning Member: </small>{{ a.returningToRetreat}}</h4>
