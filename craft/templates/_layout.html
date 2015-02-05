@@ -76,7 +76,7 @@
         </div>
 
         <div class="hidden-sm hidden-xs" id="nav-main">
-          <ul class="nav nav-pills nav-justified {% if (craft.request.getLastSegment() == 'thankyou') or (craft.request.getLastSegment() == 'final-details')  %} blue-nav {% endif %}">
+          <ul class="nav nav-pills nav-justified {% if (craft.request.getLastSegment() == 'thankyou') or (craft.request.getLastSegment() == 'final-details') or (craft.request.getLastSegment() == 'inquiries')  %} blue-nav {% endif %}">
             <li style="color:white; position: relative; top: -4px;">___________________</li>
             <li {% if craft.request.getLastSegment() == '' %} class="active" {% endif %}><a href="/">HOME</a></li>
             <li {% if craft.request.getLastSegment() =='about' %} class="active" {% endif %}><a href="/about">ABOUT</a></li>
