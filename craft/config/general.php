@@ -35,7 +35,8 @@ return array(
   	'usePathInfo' => true,
   	'generateTransformsAfterPageLoad' => false,
   	'devMode' => false,
-    'siteUrl' => 'http://104.236.214.47/'
+    'siteUrl' => 'http://104.236.214.47/',
+    'maxUploadFileSize' => 33554432
   )
 
 
