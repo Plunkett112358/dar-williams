@@ -3,21 +3,25 @@
 {% block content %}
 
 {% if not currentUser %}
+    <div  class="text-center">
    <form method="post" action="" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="users/login">
 
-    <h3><label for="loginName">Username or email</label></h3>
-    <input id="loginName" type="text" name="loginName"
-        value="{{ craft.session.rememberedUsername }}">
+    <!-- <h3><label for="loginName">Username or email</label></h3> -->
+    <input type="hidden" id="loginName"  name="loginName"
+        value="stormkingretreat@gmail.com">
 
+  
+        
+     
     <h3><label for="password">Password</label></h3>
-    <input id="password" type="password" name="password">
+    <input id="password" type="password" name="password"></br>
 
     <label>
         <input type="checkbox" name="rememberMe" value="1">
         Remember me
-    </label>
+    </label></br>
 
     <input type="submit" value="Login">
 
@@ -25,6 +29,7 @@
         <p>{{ errorMessage }}</p>
     {% endif %}
 </form>
+</div>
 
 {% endif %}
 
