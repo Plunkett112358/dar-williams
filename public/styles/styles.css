@@ -6680,32 +6680,6 @@ header.docked #logo {
   font-size: 16px;
   font-weight: 300;
 }
-.about-first-block {
-  margin: 0px 10px 10px 0px;
-  background-color: #e9eae5;
-  min-height: 326px;
-  /*margin-right: 10px;*/
-  padding: 20px;
-}
-.about-first-block h2 {
-  color: #75bbc4;
-}
-.about-first-block h3 {
-  color: #53782d;
-}
-.about-sub-block {
-  margin: 0px 10px 10px 0px;
-  background-color: #e9eae5;
-  min-height: 290px;
-  /*margin-right: 10px;*/
-  padding: 20px;
-}
-.about-sub-block h2 {
-  color: #75bbc4;
-}
-.about-sub-block h3 {
-  color: #53782d;
-}
 /*.image-row {
   margin-top: 6px;
 }*/
@@ -6773,5 +6747,35 @@ header.docked #logo {
 .register-splash .statement {
   color: #648440;
   font-weight: 100;
+}
+.about-sub-block {
+  margin: 0px 10px 10px 0px;
+  background-color: #e9eae5;
+  min-height: 290px;
+  /*margin-right: 10px;*/
+  padding: 20px;
+}
+.about-sub-block h2 {
+  color: #75bbc4;
+}
+.about-sub-block h3 {
+  color: #53782d;
+}
+.about-content h3 {
+  color: #62b1bf;
+  font-family: 'Rockwell', 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-size: 30px;
+  /*margin-left: 30px;*/
+}
+.about-content p {
+  /*margin-left: 30px; */
+  color: #555555;
+}
+.about-first-block {
+  margin: 0px 10px 10px 0px;
+  background-color: #e9eae5;
+  /*min-height: 326px;*/
+  /*margin-right: 10px;*/
+  padding: 20px;
 }
 /*# sourceMappingURL=/styles/styles.map */

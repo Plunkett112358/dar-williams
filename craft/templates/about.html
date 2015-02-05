@@ -10,12 +10,19 @@
 
 
 
+<div class="about-content">
+  
 
 <div class="row">
   <div class="col-md-9">
     <div class="about-first-block">
-      <h3>{{ entry.aboutBlock[0].aboutHeader }}</h3>
-      {{ entry.aboutBlock[0].body }}
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+             <h3>{{ entry.aboutBlock[0].aboutHeader }}</h3>
+              <p>{{ entry.aboutBlock[0].body }}</p>
+        </div>
+      </div>
+   
     </div>
   </div>
   <div class="col-md-3">
@@ -41,10 +48,14 @@
   <div class="row">
     <div class="col-md-9">
       <div class="about-sub-block">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
         <h3>{{ entry.aboutBlock[0].subHeader1 }}</h3>
-        {{ entry.aboutBlock[0].subBody1}}
+        <p style="margin-top:30px">{{ entry.aboutBlock[0].subBody1}}</p>
       </div>
     </div>
+    </div>
+  </div>
 
     <div class="col-md-3">
       <img class="img-responsive" src="{{ entry.aboutBlock[0].subPhoto1[0].url }}" alt="">
@@ -54,16 +65,20 @@
 <div style="margin-top:6px;">
   <div class="row">
     <div class="col-md-9">
-      <div class="about-sub-block">
+     <div class="about-sub-block">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
         <h3>{{ entry.aboutBlock[0].subHeader2 }}</h3>
-        {{ entry.aboutBlock[0].subBody2}}
+        <p style="margin-top:30px">{{ entry.aboutBlock[0].subBody2}}</p>
       </div>
+    </div>
+  </div>
     </div>
 
     <div class="col-md-3">
-      <img class="img-responsive" src="{{ entry.aboutBlock[0].subPhoto1[0].url }}" alt="">
+      <img class="img-responsive" src="{{ entry.aboutBlock[0].subPhoto2[0].url }}" alt="">
     </div>
   </div>
 </div>
-
+</div>
 {% endblock %}
