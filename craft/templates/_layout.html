@@ -97,8 +97,8 @@
     <div class="container">
       <div class="row">
       <div class="col-md-10 col-md-offset-1 ">
-        
-        {% if (craft.request.getLastSegment() != 'thankyou') or (craft.request.getLastSegment() != 'thanks') %}
+
+        {% if craft.request.getLastSegment() != 'thankyou'  %}
          <img class=" feather img-responsive" src="/images/feather_element.png">
          {% else %}
          <img class=" img-responsive" src="../images/thankyouFeather@2x.png" alt="">
