@@ -9,7 +9,7 @@
 {% if not currentUser %}
 
 <h1 class="text-center">This Page Coming Soon!</h1>
-<!--  <div  class="text-center">
+ <div  class="text-center">
    <form method="post" action="" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="users/login">
@@ -33,17 +33,22 @@
         <p>{{ errorMessage }}</p>
     {% endif %}
 </form>
-</div> -->
+</div>
 {% endif %}
 
 {% if currentUser %}
-<h1 class="text-center">This Page Coming Soon!</h1>
-<a href="{{ logoutUrl }}">Logout</a>
- <!--  <a href="{{ logoutUrl }}">Logout</a>
+<!-- <h1 class="text-center">This Page Coming Soon!</h1> -->
+<!-- <a href="{{ logoutUrl }}">Logout</a> -->
+<div class="final-details-content">
+  
+
+
 <div class="page-header">
+    <a class="pull-right" href="{{ logoutUrl }}">Logout</a>
   <h1>
     Final Details
   </h1>
+
 </div>
  {% set entry = craft.entries.section('retreatMembers').first() %}
 {% set fields = entry.getType().getFieldLayout().getFields() %}
@@ -59,61 +64,8 @@
      <input type="hidden" name="fields[status]" value="live">
      <div class="row">
          <div class="col-md-6">
-             <div class="page-header">
-                 <h4>General Information</h4> 
-             </div>
-        
-              <div class="form-group">
-                    <label for="title">Your Name</label>
-                    <input type="text" class="form-control"  name="title" id="title" required >
-                </div>
-
-               
-
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control"  name="fields[email]" id="email" required >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="phone" class="form-control"  name="fields[phone]" id="phone" required >
-                    </div>
-
-                      <div class="form-group">
-                        <label for="Ephone">Emergency Phone</label>
-                        <input type="phone" class="form-control"  name="fields[emergencyPhone]" id="Ephone" required >
-                    </div>
-                    
-                    <div class="form-group">
-                    <label for="street">Street Address 1</label>
-                    <input type="text" class="form-control"  name="fields[streetAddress1]" id="street" required >
-                </div>
-
-                <div class="form-group">
-                    <label for="street2">Street Address 2</label>
-                    <input type="text" class="form-control"  name="fields[streetAddress2]" id="street2" required >
-                </div>
-
-                <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control"  name="fields[city]" id="city" required >
-                </div>
-
-                <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" class="form-control"  name="fields[state]" id="state" required >
-                </div>
-
-                 <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" class="form-control"  name="fields[state]" id="state" required >
-                </div>
-         </div>
-         <div class="col-md-6">
            <div class="page-header">
-                <h4>Personal Information</h4> 
+                <legend class="text-center">Retreat Information</legend> 
             </div>
 
              {% set dropdown = craft.entries.section('retreatMembers').find() %}
@@ -146,74 +98,117 @@
 
                       <div class="form-group">
                         <label for="image">Images (.png)</label>
-                        <div class="file-upload btn btn-warning">
+                        <div class="file-upload btn btn-primary">
                             <span>Image</span>
                             <input type="file" id="image" name="fields[image]" class="upload" >
                         </div>
                     </div>  
-
-
-
-
-                <div class="form-group">
-                    <label for="travel">Travel Info</label>
-                    <input type="text" class="form-control"  name="fields[travelHotelInformation]" id="travel" required >
+             <div class="page-header">
+                 <legend class="text-center"> General Information</legend> 
+             </div>
+        
+              <div class="form-group">
+                    <label for="title">Your Name</label>
+                    <input type="text" class="form-control"  name="title" id="title" required >
                 </div>
 
-                  <div class="form-group">
-                    <label for="foodAll">Food Allergies</label>
+               
+
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control"  name="fields[email]" id="email" required >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="phone" class="form-control"  name="fields[phone]" id="phone" required >
+                    </div>
+
+                      <div class="form-group">
+                        <label for="Ephone">Emergency Phone</label>
+                        <input type="phone" class="form-control"  name="fields[emergencyPhone]" id="Ephone" required >
+                    </div>
+                    <legend class="text-center">Address</legend>
+                    <div class="form-group">
+                    <label for="street">Street Address 1</label>
+                    <input type="text" class="form-control"  name="fields[streetAddress1]" id="street" required >
+                </div>
+
+                <div class="form-group">
+                    <label for="street2">Street Address 2</label>
+                    <input type="text" class="form-control"  name="fields[streetAddress2]" id="street2" required >
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control"  name="fields[city]" id="city" required >
+                </div>
+
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" class="form-control"  name="fields[state]" id="state" required >
+                </div>
+
+                 <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" class="form-control"  name="fields[state]" id="state" required >
+                </div>
+
+
+         </div>
+         <div class="col-md-6">
+          
+
+
+                   <div class="page-header">
+                      <legend class="text-center">Personal Information</legend> 
+                  </div>
+
+                   <div class="form-group">
+                    <label for="foodAll">Do you have any food allergies or sensitivities?</label>
                     <input type="text" class="form-control"  name="fields[foodAllergies]" id="foodAll" required >
                 </div>
 
                   <div class="form-group">
-                    <label for="travelHotelInformation">Travel Hotel Information</label>
-                    <input type="text" class="form-control"  name="fields[travelHotelInformation]" id="travelHotelInformation" required >
-                </div>
-
-                  <div class="form-group">
-                    <label for="meds">Medical Conditions</label>
+                    <label for="meds">Do you have any medical condition(s) we should be aware of?</label>
                     <input type="text" class="form-control"  name="fields[medicalConditions]" id="meds" required >
                 </div>
 
-                  <div class="form-group">
-                    <label for="doubleRoom">Double Room</label>
-                    <input type="text" class="form-control"  name="fields[doubleRoom]" id="doubleRoom" required >
-                </div>
-
-                  <div class="form-group">
-                    <label for="instrument">Instrument</label>
-                    <input type="text" class="form-control"  name="fields[instrument]" id="instrument" required >
-                </div>
-
-                  <div class="form-group">
-                    <label for="medications">Medications</label>
+                 <div class="form-group">
+                    <label for="medications">Are you currently taking any medications? If so, do they need refrigerated storage? Please list and describe medications we should be aware of.</label>
                     <input type="text" class="form-control"  name="fields[medications]" id="medications" required >
                 </div>
 
-                  <div class="form-group">
-                    <label for="doubleRoom">Double Room</label>
+                 <div class="form-group">
+                    <label for="doubleRoom">Everyone will be given a single room unless otherwise specified. If a double is needed, please provide name of retreater roommate here./label>
                     <input type="text" class="form-control"  name="fields[doubleRoom]" id="doubleRoom" required >
                 </div>
 
-                
                 <div class="form-group">
-                    <label for="questionsConcerns">Questions Concerns</label>
-                    <input type="text" class="form-control"  name="fields[questionsConcerns]" id="questionsConcerns" required >
+                    <label for="travel">How will you be traveling to us? Please let us know if you require any travel/hotel information or assistance.</label>
+                    <input type="text" class="form-control"  name="fields[travelHotelInformation]" id="travel" required >
                 </div>
 
-         </div>
-     </div>
-              -->  
+                <div class="form-group">
+                    <label for="instrument">Will you be bringing a guitar or otherinstrument to work out song ideas? Please let us know if you are having any problems bringing one so we can help you.</label>
+                    <input type="text" class="form-control"  name="fields[instrument]" id="instrument" required >
+                </div>
+
+              
 
                 
+                <div class="form-group">
+                    <label for="questionsConcerns">Please let us know of any otherquestions/concerns so we can ensure you have the most positive retreat experience possible.</label>
+                    <input type="text" class="form-control"  name="fields[questionsConcerns]" id="questionsConcerns" required >
+                </div>
+  <input type="submit" class="btn pull-right btn-primary" value="Submit">
+         </div>
+     </div>
 
-<!-- remember to add "are you applying again?"
-<!-- maybe we can check logic to see if they already have a user id? -->
-
-
- <!--    <input type="submit" class="btn btn-warning" value="Publish">
-</form> -->
-
+  
+</form>
+</div>
 {% endif %}
 
 {% endblock %}
