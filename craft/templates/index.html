@@ -30,12 +30,14 @@
 <div class="row">
   <div class="col-md-8">
     <div class="home-first-block">
-      <div class="home-gutter">
+      <div class=" wow fadeInUp animated home-gutter">
         
  <div class="pull-right">
   <a target="_blank"  href=" https://www.facebook.com/groups/839695362732001/"><img style="width:30px;" src="../images/facebook29.png"></a>
 <a target="_blank"  href=" https://twitter.com/darwilliamstour/status/450467921589186560"><img style="width:30px;" src="../images/twitter14.png"></a>
 </div>
+
+
         <h2>{{ entry.firstBlock[0].headline }}</h2>
         <h3>{{entry.firstBlock[0].date1}}</h3>
         <h3>{{entry.firstBlock[0].date2}}</h3>
@@ -57,6 +59,7 @@
              </ul>
           </div>
         </div>
+
         
         <p>{{ entry.firstBlock[0].body }}</p>
        
@@ -152,5 +155,8 @@
   </div>
 </div>
 
-
+<script src="js/wow.min.js"></script>
+<script>
+ new WOW().init();
+</script>
 {% endblock %}
