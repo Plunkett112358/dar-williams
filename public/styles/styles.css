@@ -6789,6 +6789,12 @@ footer {
   color: #62b1bf;
   font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
 }
+.final-details-content h4 {
+  color: #62b1bf;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  font-size: 30px;
+  /*margin-left: 30px;*/
+}
 .final-details-content legend {
   background-color: #62b1bf;
   color: white;
