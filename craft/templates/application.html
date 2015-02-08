@@ -49,6 +49,18 @@
                      
                     </div>
 
+                           <div class="form-group">
+                        <label for="return">Have you been to this retreat before?</label>
+                      
+                            <select name="fields[returningToRetreat]" id="">
+                                 {% for thing in dropdown[0].returningToRetreat.options %}
+
+                                <option name="fields[returningToRetreat]" value="{{thing}}">{{ thing.label }}</option>
+                                  {% endfor %}
+                            </select>
+                     
+                    </div>
+
                     
      
 
@@ -67,7 +79,7 @@
                         <input type="phone" class="form-control"  name="fields[phone]" id="phone" required >
                     </div>
 
-                      <div class="form-group">
+                       <div class="form-group">
                       <label for="audio">Audio File</label>
                         <div class=" img-responsive file-upload btn btn-primary">
                             <span>Upload an mp3 file</span>
@@ -82,21 +94,16 @@
                             <input type="file" id="file" name="fields[lyrics]" class="upload" >
                         </div>
                       </div>
+
+                    
                     
                     
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-                        <label for="return">Have you been to this retreat before?</label>
-                      
-                            <select name="fields[returningToRetreat]" id="">
-                                 {% for thing in dropdown[0].returningToRetreat.options %}
 
-                                <option name="fields[returningToRetreat]" value="{{thing}}">{{ thing.label }}</option>
-                                  {% endfor %}
-                            </select>
-                     
-                    </div>
+               
+
+     
 
          
 

@@ -6705,6 +6705,7 @@ footer {
   font-size: 20px;
 }
 .note-block p {
+  margin-top: -6px;
   font-family: Futura, 'Nunito', sans-serif;
 }
 .note-block .sessions {
