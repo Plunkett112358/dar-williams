@@ -881,7 +881,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: 'Nunito', sans-serif, 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  font-family: Futura, 'Nunito', sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -6656,12 +6656,12 @@ footer {
   color: #555555;
 }
 .home-first-block li {
-  font-family: 'Nunito', sans-serif, 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  font-family: Futura, 'Nunito', sans-serif;
   font-size: 16px;
   letter-spacing: 1px;
 }
 .home-first-block p {
-  font-family: 'Nunito', sans-serif, 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  font-family: Futura, 'Nunito', sans-serif;
   padding-right: 65px;
   font-weight: 300;
 }
@@ -6705,7 +6705,7 @@ footer {
   font-size: 20px;
 }
 .note-block p {
-  font-family: 'Nunito', sans-serif, 'Archer', 'Trebuchet MS', Arial, sans-serif;
+  font-family: Futura, 'Nunito', sans-serif;
 }
 .note-block .sessions {
   margin-top: 30px;
