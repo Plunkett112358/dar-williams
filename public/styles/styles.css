@@ -6176,7 +6176,7 @@ button.close {
   /*margin-top: -100px;*/
 }
 .about {
-  background: url('../images/about.jpeg') no-repeat 50% 50% fixed;
+  background: url('../images/about.jpg') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
