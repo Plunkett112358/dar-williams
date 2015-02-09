@@ -189,16 +189,22 @@
 
 
 </div>
-<div style="border-top:10px solid white;">
-<div class="row">
+
+</div>
+
+<div  style="border-top:10px solid white;">
+  <div class="container">
+    <div class="row">
   {% for image in entry.photo %}
   <div class="col-md-4">
     <img style="margin-top: 20px;" class="img-responsive" src="{{image.url}}">
   </div>
   {% endfor %}
 </div>
+  </div>
+
 </div>
-</div>
+
 </div>
 
 {% endblock %}
