@@ -6209,7 +6209,7 @@ button.close {
   /*margin-top: -100px;*/
 }
 .contact {
-  background: url('../images/contact@2x.png') no-repeat 50% 50% fixed;
+  background: url('../images/contact-large.png') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
