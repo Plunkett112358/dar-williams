@@ -6175,6 +6175,17 @@ button.close {
   overflow: hidden;
   /*margin-top: -100px;*/
 }
+.final-details {
+  background: url('../images/final-details.png') no-repeat 50% 50% fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 500px;
+  border-bottom: 10px solid white;
+  overflow: hidden;
+  /*margin-top: -100px;*/
+}
 .about {
   background: url('../images/about.jpg') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
@@ -6642,7 +6653,7 @@ footer {
 }
 .home-first-block h4 {
   color: #53782d;
-  margin-left: 25px;
+  margin-left: 30px;
   font-weight: 400;
   font-size: 23px;
   text-transform: uppercase;
@@ -6736,7 +6747,7 @@ footer {
 }
 .register-splash {
   background-color: #e9eae6;
-  height: 1500px;
+  min-height: 900px;
 }
 .register-splash h4 {
   color: #62b1bf;

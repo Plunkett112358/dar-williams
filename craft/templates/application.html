@@ -38,7 +38,7 @@
      
 {% set dropdown = craft.entries.section('inquiries').find() %}
                  <div class="form-group">
-                        <label for="date">Session Date</label>
+                        <label for="date">Session Dates <span style="color:green">*</span></label>
                       
                             <select name="fields[sessionDate]" id="">
                                  {% for thing in dropdown[0].sessionDate.options %}
@@ -50,7 +50,7 @@
                     </div>
 
                            <div class="form-group">
-                        <label for="return">Have you been to this retreat before?</label>
+                        <label for="return">Have you been to this retreat before? <span style="color:green">*</span></label>
                       
                             <select name="fields[returningToRetreat]" id="">
                                  {% for thing in dropdown[0].returningToRetreat.options %}
@@ -65,33 +65,33 @@
      
 
                 <div class="form-group">
-                    <label for="title">Your Name</label>
+                    <label for="title">Your Name <span style="color:green">*</span></label>
                     <input type="title" class="form-control"  name="title" id="title" required >
                 </div>
 
                 <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email <span style="color:green">*</span></label>
                         <input type="email" class="form-control"  name="fields[email]" id="email" required >
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Phone</label>
+                        <label for="phone">Phone <span style="color:green">*</span></label>
                         <input type="phone" class="form-control"  name="fields[phone]" id="phone" required >
                     </div>
 
                        <div class="form-group">
-                      <label for="audio">Audio File</label>
+                      <label for="audio">Audio File <span style="color:green;">*</span></label>
                         <div class=" img-responsive file-upload btn btn-primary">
                             <span>Upload an mp3 file</span>
-                            <input type="file" id="audio" name="fields[audio]" class="upload" >
+                            <input style="width: 443px;" type="file" id="audio" name="fields[audio]" class="upload" >
                         </div>
                         </div>
 
                          <div class="form-group">
-                        <label for="file">Lyrics File</label>
+                        <label for="file">Lyrics File <span style="color:green; ">*</span></label>
                         <div class=" img-responsive file-upload btn btn-primary">
                             <span>Upload a word doc or a pdf</span>
-                            <input type="file" id="file" name="fields[lyrics]" class="upload" >
+                            <input style="width: 443px;" type="file" id="file" name="fields[lyrics]" class="upload" >
                         </div>
                       </div>
 
@@ -135,6 +135,19 @@
    
 </form>
   </div>
+</div>
+<div  style="margin-top:40px; border-top:6px solid white;">
+  <div class="container">
+    <div class="row">
+  {% for image in entry.photo %}
+  <div style="padding-left:5px; padding-right:5px;" class="col-md-4">
+    <img style="margin-top: 20px; " class="img-responsive" src="{{image.url}}">
+  </div>
+  {% endfor %}
+</div>
+  </div>
+
+</div>
 </div>
 
 
