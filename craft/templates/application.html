@@ -21,8 +21,8 @@
   </h3>
   <p >{{entry.body}}</p>
 </div>
- {% set entry = craft.entries.section('inquiries').status('enabled').first() %}
-{% set fields = entry.getType().getFieldLayout().getFields() %}
+ {% set Type = craft.entries.section('inquiries').status('enabled').first() %}
+{% set fields = Type.getType().getFieldLayout().getFields() %}
 
 {% set thisYear= now|date('Y') %}
 
@@ -136,6 +136,7 @@
 </form>
   </div>
 </div>
+hello
 <div  >
   <div class="container">
     <div class="row">
