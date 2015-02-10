@@ -6730,7 +6730,6 @@ footer {
 .pattern {
   /*height: 400px;*/
   margin-bottom: 6px;
-  margin-top: 6px;
 }
 .blue-nav li a {
   color: #5ca7b4;
@@ -6747,7 +6746,7 @@ footer {
 }
 .register-splash {
   background-color: #e9eae6;
-  min-height: 900px;
+  min-height: 681px;
 }
 .register-splash h4 {
   color: #62b1bf;
