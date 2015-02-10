@@ -6203,7 +6203,7 @@ button.close {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 400px;
+  min-height: 500px;
   border-bottom: 10px solid white;
   overflow: hidden;
   /*margin-top: -100px;*/
