@@ -2,11 +2,11 @@
 
 {% block content %}
 
-</div> 
+<!-- </div>  -->
 <!-- end container -->
 <div class="register-splash">
 
-<div class="container">
+<!-- <div class="container"> -->
     <div style="margin-top:20px;" class="pull-right">
         <a target="_blank"  href=" https://www.facebook.com/groups/839695362732001/"><img style="width:30px;" src="../images/facebook29.png"></a>
       <a target="_blank"  href=" https://twitter.com/darwilliamstour/status/450467921589186560"><img style="width:30px;" src="../images/twitter14.png"></a>
@@ -71,7 +71,7 @@
     <div class="col-md-6">
       <div class="form-group">
                 <label for="message">Message</label>
-            <textarea class="form-control" rows="10" cols="20" id="message" name="message[body]">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
+            <textarea class="form-control" rows="8" cols="20" id="message" name="message[body]">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
            </div>
          
          
@@ -83,8 +83,23 @@
             
         </div>
     </div>
-    <div class="row">
+  
+</div>
+
+
+<!-- </div> -->
+
+<!-- </div> -->
+
+
+
+</div>
+
+
+
+  <div class="row">
       <div class="col-md-8">
+        <div class="faq-block">
         <div class="page-header">
 
         <h3>FAQs</h3>
@@ -119,30 +134,15 @@
                
                 <p> The closest strip of stores (drugstore, grocery, bank, liquor store and post office) is about 5 miles away and we can make a run for you if you don't have a car.   </p>
       </div>
+       </div>
       <div class="col-md-4">
-        
+         {% for image in entry.photo %}
+          <div style="padding-left:5px; padding-right:5px;" class="col-md-12">
+            <img style="margin-top: 6px; " class="img-responsive" src="{{image.url}}">
+          </div>
+          {% endfor %}
       </div>
-    </div>
-</div>
-
-
-</div>
-
-</div>
-
-<!-- <div  style="margin-top:40px; border-top:6px solid white;">
-  <div class="container">
-    <div class="row">
-  {% for image in entry.photo %}
-  <div style="padding-left:5px; padding-right:5px;" class="col-md-4">
-    <img style="margin-top: 20px; " class="img-responsive" src="{{image.url}}">
+   
   </div>
-  {% endfor %}
-</div>
-  </div>
-
-</div> -->
-
-</div>
 
 {% endblock %}
