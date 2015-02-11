@@ -6788,6 +6788,18 @@ footer {
 .faq-block h4 a.active {
   text-decoration: none !important;
 }
+.login-time {
+  background-color: #e9eae6;
+  padding: 25px 40px 40px 121px;
+}
+.login-time h3 {
+  color: #62b1bf;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  margin-bottom: 30x !important;
+}
+.login-time .submit {
+  margin-left: 125px;
+}
 .about-sub-block {
   margin: 0px 10px 10px 0px;
   background-color: #e9eae5;
@@ -6829,6 +6841,9 @@ footer {
 .blue-header {
   color: #62b1bf;
   font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+}
+.final-details-content {
+  min-height: 1441px;
 }
 .final-details-content h4 {
   color: #62b1bf;

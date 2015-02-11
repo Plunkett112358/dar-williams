@@ -9,30 +9,41 @@
 {% if not currentUser %}
 
 <!-- <h1 class="text-center">This Page Coming Soon!</h1> -->
- <div  class="text-center">
-   <form method="post" action="" accept-charset="UTF-8">
-    {{ getCsrfInput() }}
-    <input type="hidden" name="action" value="users/login">
-    <input type="hidden" id="loginName"  name="loginName"
-        value="stormkingretreat@gmail.com">
 
-  
+  <div class="row">
+    <div class="col-md-8">
+       <div  class="login-time">
+       <form method="post" action="" accept-charset="UTF-8">
+          {{ getCsrfInput() }}
+          <input type="hidden" name="action" value="users/login">
+          <input type="hidden" id="loginName"  name="loginName"
+              value="stormkingretreat@gmail.com">
+
         
-     
-    <h3><label for="password">Password</label></h3>
-    <input id="password" type="password" name="password"></br>
+              
+           
+          <h3>Login</h3>
+          <input id="password" type="password" placeholder="password" name="password"></br>
 
-    <label>
-        <input type="checkbox" name="rememberMe" value="1">
-        Remember me
-    </label></br>
+          <label>
+              <input type="checkbox" name="rememberMe" value="1">
+              Remember me
+          </label></br>
 
-    <input type="submit" value="Login">
+          <input class="submit btn btn-primary" type="submit" value="Submit">
 
-    {% if errorMessage is defined %}
-        <p>{{ errorMessage }}</p>
-    {% endif %}
-</form>
+          {% if errorMessage is defined %}
+              <p>{{ errorMessage }}</p>
+          {% endif %}
+      </form>
+    </div>
+
+ </div>
+    <div class="col-md-4">
+      <img class="img-responsive" src="{{ entry.photo[0].url }}" alt="">
+    </div>
+ 
+  
 </div>
 {% endif %}
 
@@ -64,45 +75,7 @@
      <input type="hidden" name="fields[status]" value="live">
      <div class="row">
          <div class="col-md-6">
-           <div class="page-header">
-                <legend class="text-center">Retreat Information</legend> 
-            </div>
-
-             {% set dropdown = craft.entries.section('retreatMembers').find() %}
-                     <div class="form-group">
-                        <label for="phone">Session Date</label>
-                      
-                            <select name="" id="">
-                                 {% for thing in dropdown[0].sessionDate.options %}
-
-                                <option name="fields[sessionDate]" value="{{thing}}">{{ thing.label }}</option>
-                                  {% endfor %}
-                            </select>
-                     
-                    </div>
-
-                     {% set dropdown = craft.entries.section('retreatMembers').find() %}
-                     <div class="form-group">
-                        <label for="phone">Payment Method</label>
-                      
-                            <select name="" id="">
-                                 {% for thing in dropdown[0].paymentMethod.options %}
-
-                                <option name="fields[paymentMethod]" value="{{thing}}">{{ thing.label }}</option>
-                                  {% endfor %}
-                            </select>
-                     
-                    </div>
-
-
-
-                      <div class="form-group">
-                        <label for="image">Images (.png)</label>
-                        <div class="file-upload btn btn-default">
-                            <span>Image</span>
-                            <input type="file" id="image" name="fields[image]" class="upload" >
-                        </div>
-                    </div>  
+           
              <div class="page-header">
                  <legend class="text-center"> General Information</legend> 
              </div>
@@ -158,6 +131,46 @@
 
          </div>
          <div class="col-md-6">
+
+          <div class="page-header">
+                <legend class="text-center">Retreat Information</legend> 
+            </div>
+
+             {% set dropdown = craft.entries.section('retreatMembers').find() %}
+                     <div class="form-group">
+                        <label for="phone">Session Date</label>
+                      
+                            <select name="" id="">
+                                 {% for thing in dropdown[0].sessionDate.options %}
+
+                                <option name="fields[sessionDate]" value="{{thing}}">{{ thing.label }}</option>
+                                  {% endfor %}
+                            </select>
+                     
+                    </div>
+
+                     {% set dropdown = craft.entries.section('retreatMembers').find() %}
+                     <div class="form-group">
+                        <label for="phone">Payment Method</label>
+                      
+                            <select name="" id="">
+                                 {% for thing in dropdown[0].paymentMethod.options %}
+
+                                <option name="fields[paymentMethod]" value="{{thing}}">{{ thing.label }}</option>
+                                  {% endfor %}
+                            </select>
+                     
+                    </div>
+
+
+
+                      <div class="form-group">
+                        <label for="image">Images (.png)</label>
+                        <div class="file-upload btn btn-default">
+                            <span>Image</span>
+                            <input type="file" id="image" name="fields[image]" class="upload" >
+                        </div>
+                    </div>  
           
 
 
