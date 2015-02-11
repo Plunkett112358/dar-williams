@@ -6773,6 +6773,10 @@ footer {
   margin-top: 6px;
   min-height: 681px;
 }
+.faq-block h3 {
+  color: #62b1bf;
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+}
 .faq-block h4 {
   color: #62b1bf;
   font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
