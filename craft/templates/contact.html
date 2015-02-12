@@ -41,7 +41,7 @@
             <input type="hidden" name="redirect" value="contact/thanks">
 
              <div class="form-group">
-                <label for="fromName">Name</label>
+                <h5 for="fromName">Name</h5>
                 <input class="form-control" id="fromName" type="text" name="fromName" value="{% if message is defined %}{{ message.fromName }}{% endif %}">
                 {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
             </div>
@@ -49,19 +49,19 @@
             
 
            <div class="form-group">
-                <label for="fromEmail">Email</label>
+                <h5 for="fromEmail">Email</h5>
             <input class="form-control" id="fromEmail" type="text" name="fromEmail" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}">
             {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
            </div>
           
            <div class="form-group">
-                <label for="subject">Subject</label>
+                <h5 for="subject">Subject</h5>
             <input class="form-control" id="subject" type="text" name="subject" value="{% if message is defined %}{{ message.subject }}{% endif %}">
             {{ message is defined and message ? errorList(message.getErrors('subject')) }}
            </div>
 
            <!--   <div class="form-group">
-              <label for="phone">Phone Number</label>
+              <h5 for="phone">Phone Number</h5>
             <input class="form-control" id="phone" type="text" name="message[Phone]" value=""> 
            </div> -->
           
@@ -70,7 +70,7 @@
 
     <div class="col-md-6">
       <div class="form-group">
-                <label for="message">Message</label>
+                <h5 for="message">Message</h5>
             <textarea class="form-control" rows="8" cols="20" id="message" name="message[body]">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
            </div>
          
