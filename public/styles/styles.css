@@ -6175,6 +6175,9 @@ button.close {
   overflow: hidden;
   /*margin-top: -100px;*/
 }
+.gray {
+  color: #555555;
+}
 .final-details {
   background: url('../images/final-details.png') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
