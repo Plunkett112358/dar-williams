@@ -6827,6 +6827,9 @@ footer {
 .about-sub-block h3 {
   color: #53782d;
 }
+.about-sub-block a {
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+}
 .about-content h3 {
   color: #62b1bf;
   font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
