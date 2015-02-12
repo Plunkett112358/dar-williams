@@ -6775,8 +6775,10 @@ footer {
   font-weight: 300;
   padding: 40px;
 }
+.register-splash h5 {
+  font-weight: 100;
+}
 .register-splash h4 {
-  font-weight: 300;
   color: #62b1bf;
 }
 .register-splash h4 a {
