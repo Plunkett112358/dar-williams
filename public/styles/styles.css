@@ -6855,4 +6855,12 @@ footer {
   background-color: #62b1bf;
   color: white;
 }
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid white;
+  color: #62b1bf;
+}
+.btn-outline:hover {
+  color: white;
+}
 /*# sourceMappingURL=/styles/styles.map */
