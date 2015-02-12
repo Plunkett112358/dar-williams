@@ -6772,9 +6772,11 @@ footer {
 .register-splash {
   background-color: #e9eae6;
   min-height: 540px;
+  font-weight: 300;
   padding: 40px;
 }
 .register-splash h4 {
+  font-weight: 300;
   color: #62b1bf;
 }
 .register-splash h4 a {
@@ -6799,6 +6801,7 @@ footer {
   font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
 }
 .faq-block h4 {
+  font-weight: 300;
   color: #62b1bf;
   font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
 }
