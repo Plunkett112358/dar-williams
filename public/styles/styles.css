@@ -6197,6 +6197,20 @@ button.close {
   overflow: hidden;
   /*margin-top: -100px;*/
 }
+.thanks {
+  background-color: #f3f0e7;
+  min-height: 730px;
+  border-bottom: 10px solid white;
+  overflow: hidden;
+  /*margin-top: -100px;*/
+}
+.thankyou {
+  background-color: #f3f0e7;
+  min-height: 730px;
+  border-bottom: 10px solid white;
+  overflow: hidden;
+  /*margin-top: -100px;*/
+}
 .register {
   background: url('../images/trees.jpg') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
@@ -6790,7 +6804,7 @@ footer {
 }
 .login-time {
   background-color: #e9eae6;
-  padding: 25px 40px 40px 121px;
+  padding: 25px 40px 292px 121px;
 }
 .login-time h3 {
   color: #62b1bf;
@@ -6853,6 +6867,14 @@ footer {
 }
 .final-details-content legend {
   background-color: #62b1bf;
+  color: white;
+}
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid white;
+  color: #62b1bf;
+}
+.btn-outline:hover {
   color: white;
 }
 /*# sourceMappingURL=/styles/styles.map */
