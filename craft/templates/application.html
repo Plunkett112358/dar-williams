@@ -38,7 +38,7 @@
      
 {% set dropdown = craft.entries.section('inquiries').find() %}
                  <div class="form-group">
-                        <h3 for="date">Session Dates <span style="color:green">*</span></h3>
+                        <h5 for="date">Session Dates <span style="color:green">*</span></h5>
                       
                             <select name="fields[sessionDate]" id="">
                                  {% for thing in dropdown[0].sessionDate.options %}
@@ -50,7 +50,7 @@
                     </div>
 
                            <div class="form-group">
-                        <h3 for="return">Have you been to this retreat before? <span style="color:green">*</span></h3>
+                        <h5 for="return">Have you been to this retreat before? <span style="color:green">*</span></h5>
                       
                             <select name="fields[returningToRetreat]" id="">
                                  {% for thing in dropdown[0].returningToRetreat.options %}
@@ -65,23 +65,23 @@
      
 
                 <div class="form-group">
-                    <h3 for="title">Your Name <span style="color:green">*</span></h3>
+                    <h5 for="title">Your Name <span style="color:green">*</span></h5>
                     <input type="title" class="form-control"  name="title" id="title" required >
                 </div>
 
                 <div class="form-group">
-                        <h3 for="email">Email <span style="color:green">*</span></h3>
+                        <h5 for="email">Email <span style="color:green">*</span></h5>
                         <input type="email" class="form-control"  name="fields[email]" id="email" required >
                     </div>
 
                     <div class="form-group">
-                        <h3 for="phone">Phone <span style="color:green">*</span></h3>
+                        <h5 for="phone">Phone <span style="color:green">*</span></h5>
                         <input type="phone" class="form-control"  name="fields[phone]" id="phone" required >
                     </div>
 
                        <div class="form-group">
 
-                      <h3 for="audio">Audio File <span style="color:green;">*</span></h3>
+                      <h5 for="audio">Audio File <span style="color:green;">*</span></h5>
 
                         <div class=" img-responsive file-upload btn btn-primary">
                             <span>Upload an mp3 file</span>
@@ -91,7 +91,7 @@
 
                          <div class="form-group">
 
-                        <h3 for="file">Lyrics File <span style="color:green; ">*</span></h3>
+                        <h5 for="file">Lyrics File <span style="color:green; ">*</span></h5>
 
                         <div class=" img-responsive file-upload btn btn-primary">
                             <span>Upload a word doc or a pdf</span>
