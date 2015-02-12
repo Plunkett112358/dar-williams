@@ -6677,6 +6677,12 @@ footer {
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+.home-first-block .garrison {
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+}
+.home-first-block .garrison a {
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+}
 .home-first-block h5 {
   margin-top: 40px;
   font-size: 18px;
