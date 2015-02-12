@@ -6204,6 +6204,13 @@ button.close {
   overflow: hidden;
   /*margin-top: -100px;*/
 }
+.thankyou {
+  background-color: #f3f0e7;
+  min-height: 730px;
+  border-bottom: 10px solid white;
+  overflow: hidden;
+  /*margin-top: -100px;*/
+}
 .register {
   background: url('../images/trees.jpg') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
