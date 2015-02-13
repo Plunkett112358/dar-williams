@@ -33,11 +33,12 @@
               <input type="checkbox" name="rememberMe" value="1">
               Remember me
           </label></br> -->
-<div class="form-group">
+        
           <input style="border-radius:0px;" class="submit btn btn-primary" type="submit" value="Submit">
-</div>
+     
           {% if errorMessage is defined %}
-              <p>{{ errorMessage }}</p>
+              <p>Opps! This is not the right Password!</p>
+              <p>You should have recieved the password in your confirmation email!</p>
           {% endif %}
       </form>
     </div>
