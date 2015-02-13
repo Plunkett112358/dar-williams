@@ -13,6 +13,10 @@
   <div class="row">
     <div class="col-md-8" style="padding-right: 6px;">
        <div  class="login-time">
+
+ 
+
+
        <form class="form-inline" method="post" action="" accept-charset="UTF-8">
           {{ getCsrfInput() }}
           <input type="hidden" name="action" value="users/login">
@@ -21,17 +25,17 @@
 
         
               
-           
+           <div class="form-group">
           <h3>Login</h3>
           <input id="password" type="password" placeholder="password" name="password"></br>
-
+          </div>
           <!-- <label>
               <input type="checkbox" name="rememberMe" value="1">
               Remember me
           </label></br> -->
-
+<div class="form-group">
           <input style="border-radius:0px;" class="submit btn btn-primary" type="submit" value="Submit">
-
+</div>
           {% if errorMessage is defined %}
               <p>{{ errorMessage }}</p>
           {% endif %}
