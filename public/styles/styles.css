@@ -6891,6 +6891,7 @@ footer {
   background-color: transparent;
   border: 2px solid white;
   color: #62b1bf;
+  border-radius: 0px;
 }
 .btn-outline:hover {
   color: white;
