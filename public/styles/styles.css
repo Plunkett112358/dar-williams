@@ -6168,8 +6168,8 @@ button.close {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: contain;
-  min-height: 800px;
+  background-size: cover;
+  /*min-height: 800px;*/
   border-bottom: 10px solid white;
   width: 100%;
   overflow: hidden;
