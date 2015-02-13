@@ -6826,7 +6826,7 @@ footer {
   font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
   margin-bottom: 30x !important;
 }
-.login-time input {
+.login-time #password {
   width: 161px;
   height: 36px;
 }
