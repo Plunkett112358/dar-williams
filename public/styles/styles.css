@@ -6901,4 +6901,10 @@ footer {
 .btn-outline:hover {
   color: white;
 }
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .mobile-photo {
+    padding-top: 10px;
+    padding-botom: 10px;
+  }
+}
 /*# sourceMappingURL=/styles/styles.map */
