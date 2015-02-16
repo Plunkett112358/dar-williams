@@ -6179,7 +6179,7 @@ button.close {
   color: #555555;
 }
 .final-details {
-  background: url('../images/final-details.png') no-repeat 50% 50%;
+  background: url('../images/final-details.png') no-repeat 50% 50% fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -6226,7 +6226,7 @@ button.close {
   /*margin-top: -100px;*/
 }
 .contact {
-  background: url('../images/option.png') no-repeat;
+  background: url('../images/option.png') no-repeat fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
