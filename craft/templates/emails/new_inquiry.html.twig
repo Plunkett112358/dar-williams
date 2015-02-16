@@ -2,10 +2,11 @@ Application for the Dar Williams Retreat
  <br/>
 
 
-Title: {{ entry.title }} <br/>
+Name: {{ entry.title }} <br/>
 Email: {{ entry.email }} <br/>
 Phone: {{entry.phone }} <br/>
 Session Date: {{ entry.sessionDate.label }} <br/>
+Returning Member?: {{entry.returningToRetreat}}</br>
 Statement: {{entry.body}} <br/>
 {% set assets = entry.audio %}
 {% if assets | length %}
