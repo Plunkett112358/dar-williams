@@ -6220,7 +6220,7 @@ button.close {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 560px;
+  min-height: 520px;
   border-bottom: 10px solid white;
   overflow: hidden;
   /*margin-top: -100px;*/
@@ -6231,7 +6231,7 @@ button.close {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 520px;
+  min-height: 620px;
   border-bottom: 10px solid white;
   overflow: hidden;
   /*margin-top: -100px;*/
