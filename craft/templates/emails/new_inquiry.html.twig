@@ -8,7 +8,7 @@
 <strong>Email:</strong> {{ entry.email }} <br/>
 <strong>Phone:</strong> {{entry.phone }} <br/>
 <strong>Session Date:</strong> {{ entry.sessionDate.label }} <br/>
-<strong>Returning Member?:</strong> {{entry.returningToRetreat}}<br/>
+<strong>Returning Member?:</strong> {{entry.returningToRetreat}} <br><br/>
 <strong>Statement:</strong> {{entry.body}} <br/>
 {% set assets = entry.audio %}
 {% if assets | length %}
