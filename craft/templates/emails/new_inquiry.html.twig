@@ -1,24 +1,23 @@
-<h1> Application for the Dar Williams Retreat </h1>
+Application for the Dar Williams Retreat
  <br/>
- <br/>
-  <br/>
-   <br/>
 
-<strong> Name:</strong>  {{ entry.title }} <br/>
-<strong>Email:</strong> {{ entry.email }} <br/>
-<strong>Phone:</strong> {{entry.phone }} <br/>
-<strong>Session Date:</strong> {{ entry.sessionDate.label }} <br/>
-<strong>Returning Member?:</strong> {{entry.returningToRetreat}} <br><br/>
-<strong>Statement:</strong> {{entry.body}} <br/>
+
+Name: {{ entry.title }} <br/>
+Email: {{ entry.email }} <br/>
+Phone: {{entry.phone }} <br/>
+Returning?: {{entry.returningToRetreat }} <br/>
+Session Date: {{ entry.sessionDate.label }} <br/>
+
+Statement: {{entry.body}} <br/>
 {% set assets = entry.audio %}
 {% if assets | length %}
     {% for asset in assets %}
-   <strong> audio: </strong>   {{ asset.url }} <br/>
+    audio:    {{ asset.url }} <br/>
     {% endfor %}
 {% endif %}
 {% set assets = entry.lyrics %}
 {% if assets | length %}
     {% for asset in assets %}
-   <strong> lyrics: </strong>   {{ asset.url }}
+    lyrics:    {{ asset.url }}
     {% endfor %}
 {% endif %}
