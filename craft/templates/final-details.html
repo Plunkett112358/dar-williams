@@ -158,7 +158,7 @@
                      <div class="form-group">
                         <label for="phone">Payment Method</label>
                       
-                            <select name="" id="">
+                            <select name="fields[paymentMethod]" id="">
                                  {% for thing in dropdown[0].paymentMethod.options %}
 
                                 <option name="fields[paymentMethod]" value="{{thing}}">{{ thing.label }}</option>
