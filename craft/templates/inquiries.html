@@ -55,20 +55,8 @@
    <h4><small>Statement:</small> </h4>
    <p>{{ a.body }}</p>
 
-  {% for thing in a.audio %}
-   <audio controls>
-    <source src="{{thing.url}}" type="audio/ogg">
-    <source src="{{thing.url}}" type="audio/mpeg">
-       <source src="{{thing.url}}" type="audio/aiff">
-  Your browser does not support the audio element.
-  </audio>
-  {% endfor %}
-{% if a.lyrics|length %}
-  <a target="_blank" href="{{ a.lyrics[0].url}}"><h6><span style="font-size: 20px" class="glyphicon glyphicon-download-alt"></span>Download {{a.title}}'s Lyrics</h6></a>
-  {% endif %}
-<hr>
-{% endif %}
-{% endfor %}
+  
+
   
 
 
