@@ -3,23 +3,25 @@
 
 <img style=" width: 200px"src="{{entry.image[0].url}}">
 <br/>
-Name: {{entry.title}}
 <br/>
-Session Date: {{entry.sessionDate}}
+<h2>GENERAL INFORMATION</h2>
+<h3> <strong>Name:</strong> {{entry.title}}</h3>
 <br/>
-Phone: {{entry.phone}}
-
+<h3><strong>Session Date:</strong> {{entry.sessionDate}}</h3>
 <br/>
-
-Emergency Phone: {{entry.emergencyPhone}}
+<h3><strong>Phone:</strong> {{entry.phone}}</h3>
 
 <br/>
 
-Email: {{ entry.email}}
+<h3><strong>Emergency Phone:</strong> {{entry.emergencyPhone}}</h3>
 
 <br/>
 
-Address: 
+<h3><strong>Email:</strong> {{ entry.email}}</h3>
+
+<br/>
+
+<h3><strong>Address: </strong>
 <br/>
 {{entry.streetAddress1}}
 <br/>
@@ -27,21 +29,21 @@ Address:
 {{entry.streetAddress2}}
 {% endif %}
 <br/>
-{{entry.city}}, {{entry.state}}  {{entry.postalCode}}
+{{entry.city}}, {{entry.state}}  {{entry.postalCode}}</h3>
 <br/>
 _______________________________________________________
 <br/>
-PERSONAL INFORMATION
+<h2>PERSONAL INFORMATION</h2>
 <br/>
-Payment Method: {{entry.paymentMethod}}
+<h3><strong>Payment Method:</strong> {{entry.paymentMethod}}</h3>
 <br/>
-Food Allergies: {{ entry.foodAllergies}}
+<h3><strong>Food Allergies:</strong> {{ entry.foodAllergies}}</h3>
 <br/>
-Medical Conditions: {{entry.medicalConditions}}
+<h3><strong>Medical Conditions:</strong> {{entry.medicalConditions}}</h3>
 <br/>
-Medications: {{entry.medications}}
+<h3><strong>Medications:</strong> {{entry.medications}}</h3>
 <br/>
-Instrument: {{entry.instrument}}
+<h3><strong>Instrument:</strong> {{entry.instrument}} </h3>
 <br/>
 
 <br/>
