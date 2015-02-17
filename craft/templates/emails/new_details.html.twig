@@ -1,0 +1,44 @@
+Final Details for {{entry.title}}
+<br/>
+
+<img src="{{entry.image[0].url}}">
+<br/>
+Session Date: {{entry.sessionDate}}
+<br/>
+Phone: {{entry.phone}}
+
+<br/>
+
+Emergency Phone: {{entry.emergencyPhone}}
+
+<br/>
+
+Email: {{ entry.email}}
+
+<br/>
+
+Address: 
+<br/>
+{{entry.streetAddress1}}
+<br/>
+{% if entry.streetAddress2 %}
+{{entry.streetAddress2}}
+{% endif %}
+<br/>
+{{entry.city}}, {{entry.state}}  {{entry.postalCode}}
+<br/>
+
+PERSONAL INFORMATION
+<br/>
+Payment Method: {{entry.paymentMethod}}
+<br/>
+Food Allergies: {{ entry.foodAllergies}}
+<br/>
+Medical Conditions: {{entry.medicalConditions}}
+<br/>
+Medications: {{entry.medications}}
+<br/>
+Instrument: {{entry.instrument}}
+<br/>
+
+<br/>
