@@ -2,6 +2,10 @@
 
 {% block content %}
 
+
+
+
+
 {% if not currentUser %}
     <div  class="text-center">
    <form method="post" action="" accept-charset="UTF-8">
@@ -34,31 +38,129 @@
 {% endif %}
 
 {% if currentUser %}
+
+
 <a href="{{ logoutUrl }}">Logout</a>
 <p>Trying to view the Final Details page?</p>
 <p>You must log out from the Inquiries Section to do so!</p>
-<div class="page-header">
-  <h1>Applicants</h1>
+
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><h3>APPLICATIONS FORMS</h3></a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><h3>FINAL DETAIL FORMS</h3></a></li>
+ 
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+      
+
+        <div class="page-header">
+        
+        </div>
+
+
+        {% set applicants = craft.entries.section('inquiries').status('*') %}
+
+        {% for a in  applicants %}
+        {% if a.title != 'DO NOT DELETE'%}
+        <h6><small>Date Applied: </small> {{a.postDate | date("m/d/Y")}}</h6>
+          <h2>{{a.title}}</h2>
+          <h6>{{ a.email }} | {{a.phone}}</h6>
+          <h4><small>Returning Member: </small>{{ a.returningToRetreat}}</h4>
+          <h4><small>Session Date:</small> {{ a.sessionDate}}</h4>
+
+           <h4><small>Statement:</small> </h4>
+           <p>{{ a.body }}</p>
+
+
+        <hr>
+        {% endif %}
+        {% endfor %}
+
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+        {% set final = craft.entries.section('retreatMembers').status('*') %}
+
+        {% for f in final %}
+          {% if f.title != 'DO NOT DELETE'%}
+
+          <div class="row">
+            <div class="col-md-6">
+             
+              <h2>GENERAL INFORMATION</h2>
+                <p> <strong>Name:</strong> {{f.title}}</p>
+                <br/>
+                <p><strong>Session Date:</strong> {{f.sessionDate}}</p>
+                <br/>
+
+                <p><strong>Payment Method:</strong> {{f.paymentMethod}}</p>
+                <br/>
+                <p><strong>Phone:</strong> {{f.phone}}</p>
+
+                <br/>
+
+                <p><strong>Emergency Phone:</strong> {{f.emergencyPhone}}</p>
+
+                <br/>
+
+                <p><strong>Email:</strong> {{ f.email}}</p>
+
+                <br/> 
+
+                <p><strong>Address: </strong>
+                <br/>
+                {{f.streetAddress1}}
+                <br/>
+                {% if f.streetAddress2 %}
+                {{f.streetAddress2}}
+                {% endif %}
+                <br/>
+                {{f.city}}, {{f.state}}  {{f.postalCode}}</p>
+                <br/>
+
+
+
+            </div>
+            <div class="col-md-6">
+             {% if f.image|length %}
+              <img style=" width: 200px"src="{{f.image[0].url}}">
+              {% endif %}
+              <h2>PERSONAL INFORMATION</h2>
+
+                <br/>
+                  <p><strong>Food Allergies:</strong> {{ f.foodAllergies}}</p>
+                  <br/>
+                  <p><strong>Medical Conditions:</strong> {{f.medicalConditions}}</p>
+                  <br/>
+                  <p><strong>Medications:</strong> {{f.medications}}</p>
+                  <br/>
+                  <p><strong>Travel/Hotel Info:</strong> {{f.travelHotelInformation}} </p>
+                  <br/>
+                  <p><strong>Doublt Room:</strong> {{f.doubleRoom}} </p>
+                  <br/>
+                  <p><strong>Questions/Concerns:</strong> {{f.questionsConcerns}} </p>
+                  <br/>
+            </div>
+          </div>
+      <hr>
+
+
+          {% endif %}
+        {% endfor %}
+
+
+    </div>
+
+  </div>
+
 </div>
 
 
-{% set applicants = craft.entries.section('inquiries').status('*') %}
-
-{% for a in  applicants %}
-{% if a.title != 'DO NOT DELETE'%}
-<h6><small>Date Applied: </small> {{a.postDate | date("m/d/Y")}}</h6>
-  <h2>{{a.title}}</h2>
-  <h6>{{ a.email }} | {{a.phone}}</h6>
-  <h4><small>Returning Member: </small>{{ a.returningToRetreat}}</h4>
-  <h4><small>Session Date:</small> {{ a.sessionDate}}</h4>
-
-   <h4><small>Statement:</small> </h4>
-   <p>{{ a.body }}</p>
-
-
-<hr>
-{% endif %}
-{% endfor %}
   
 
 
