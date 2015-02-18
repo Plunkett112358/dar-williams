@@ -84,7 +84,7 @@
 
     </div>
     <div role="tabpanel" class="tab-pane" id="profile">
-        {% set final = craft.entries.section('retreatMembers').status('*') %}
+        {% set final = craft.entries.section('retreatMembers').status('*').order('title asc')  %}
 
         {% for f in final %}
           {% if f.title != 'DO NOT DELETE'%}
