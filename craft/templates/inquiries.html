@@ -89,6 +89,10 @@
         {% for f in final %}
           {% if f.title != 'DO NOT DELETE'%}
 
+             {% if f.image|length %}
+              <img style=" width: 200px"src="{{f.image[0].url}}">
+              {% endif %}
+              
           <div class="row">
             <div class="col-md-6">
              
@@ -127,9 +131,7 @@
 
             </div>
             <div class="col-md-6">
-             {% if f.image|length %}
-              <img style=" width: 200px"src="{{f.image[0].url}}">
-              {% endif %}
+          
               <h2>PERSONAL INFORMATION</h2>
 
                 <br/>
