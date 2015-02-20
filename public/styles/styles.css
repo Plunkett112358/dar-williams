@@ -6888,6 +6888,9 @@ footer {
   font-size: 30px;
   /*margin-left: 30px;*/
 }
+.final-details-content p {
+  color: #53782d;
+}
 .final-details-content legend {
   background-color: #62b1bf;
   color: white;
