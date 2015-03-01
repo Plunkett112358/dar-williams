@@ -52,7 +52,7 @@
 
 {% endif %}
 
-   
+{% cache %}   
 <div 
 {% if craft.request.lastSegment == '' %} class=" img-responsive home home-small" {% endif %}
 {% if craft.request.lastSegment == 'about' %} class=" img-responsive about" {% endif %}
@@ -62,7 +62,7 @@
 {% if craft.request.lastSegment == 'thanks' %} class=" img-responsive thanks" {% endif %}
 {% if craft.request.lastSegment == 'thankyou' %} class=" img-responsive thankyou" {% endif %}
 >
-  
+ {% endcache %} 
 
 <!-- <header id="header"> -->
     <nav class="navbar navbar-default small" role="navigation">
