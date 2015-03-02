@@ -6321,7 +6321,7 @@ footer {
   letter-spacing: 3px;
   padding: 0px;
   /*border-radius: 0px;*/
-  text-shadow: 1px 1px #555555;
+  /*text-shadow: 1px 1px @gray;*/
 }
 .nav-pills li a:hover {
   color: #547091;
