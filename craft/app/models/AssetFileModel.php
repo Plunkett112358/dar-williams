@@ -299,15 +299,18 @@ class AssetFileModel extends BaseElementModel
 	 */
 	public function hasThumb()
 	{
-		if ($this->kind == 'image' && $this->_getHeight() && $this->_getWidth())
+		if ($this->kind == 'image')
 		{
-			// Gd doesn't process bitmaps
-			if ($this->getExtension() == 'bmp' && craft()->images->isGd())
+			if ($this->_getHeight() && $this->_getWidth())
 			{
-				return false;
-			}
+				// Gd doesn't process bitmaps
+				if (in_array($this->getExtension(), array('svg', 'bmp')) && craft()->images->isGd())
+				{
+					return false;
+				}
 
-			return true;
+				return true;
+			}
 		}
 
 		return false;
@@ -341,6 +344,11 @@ class AssetFileModel extends BaseElementModel
 
 	public function getHeight($transform = null)
 	{
+		if ($transform && !ImageHelper::isImageManipulatable($this->getExtension()))
+		{
+			return $this->_getDimension('height', null);
+		}
+
 		return $this->_getDimension('height', $transform);
 	}
 
@@ -353,6 +361,11 @@ class AssetFileModel extends BaseElementModel
 	 */
 	public function getWidth($transform = null)
 	{
+		if ($transform && !ImageHelper::isImageManipulatable($this->getExtension()))
+		{
+			return $this->_getDimension('width', null);
+		}
+
 		return $this->_getDimension('width', $transform);
 	}
 

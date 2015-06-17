@@ -610,10 +610,7 @@ class SectionsService extends BaseApplicationComponent
 					{
 						case SectionType::Single:
 						{
-							// In a nut, we want to make sure that there is one and only one Entry Type and Entry for this
-							// section. We also want to make sure the entry has rows in the i18n tables
-							// for each of the sections' locales.
-
+							// Make sure that there is one and only one Entry Type and Entry for this section.
 							$singleEntryId = null;
 
 							if (!$isNewSection)
@@ -664,38 +661,11 @@ class SectionsService extends BaseApplicationComponent
 							if (!$singleEntryId)
 							{
 								// Create it, baby
-
-								craft()->db->createCommand()->insert('elements', array(
-									'type' => ElementType::Entry
-								));
-
-								$singleEntryId = craft()->db->getLastInsertID();
-
-								craft()->db->createCommand()->insert('entries', array(
-									'id'        => $singleEntryId,
-									'sectionId' => $section->id,
-									'typeId'    => $entryTypeId,
-									'postDate'  => DateTimeHelper::currentTimeForDb()
-								));
-							}
-
-							// Now make sure we've got all of the i18n rows in place.
-							foreach ($sectionLocales as $localeId => $sectionLocale)
-							{
-								craft()->db->createCommand()->insertOrUpdate('elements_i18n', array(
-									'elementId' => $singleEntryId,
-									'locale'    => $localeId,
-								), array(
-									'slug' => $section->handle,
-									'uri'  => $sectionLocale->urlFormat
-								));
-
-								craft()->db->createCommand()->insertOrUpdate('content', array(
-									'elementId' => $singleEntryId,
-									'locale'    => $localeId
-								), array(
-									'title' => $section->name
-								));
+								$singleEntry = new EntryModel();
+								$singleEntry->sectionId = $section->id;
+								$singleEntry->typeId = $entryTypeId;
+								$singleEntry->getContent()->title = $section->name;
+								craft()->entries->saveEntry($singleEntry);
 							}
 
 							break;
@@ -737,16 +707,23 @@ class SectionsService extends BaseApplicationComponent
 					if (!$isNewSection)
 					{
 						$criteria = craft()->elements->getCriteria(ElementType::Entry);
-						$criteria->locale = array_shift(array_keys($oldSectionLocales));
-						$criteria->sectionId = $section->id;
-						$criteria->status = null;
-						$criteria->localeEnabled = null;
-						$criteria->limit = null;
 
-						craft()->tasks->createTask('ResaveElements', Craft::t('Resaving {section} entries', array('section' => $section->name)), array(
-							'elementType' => ElementType::Entry,
-							'criteria'    => $criteria->getAttributes()
-						));
+						// Get the most-primary locale that this section was already enabled in
+						$locales = array_values(array_intersect(craft()->i18n->getSiteLocaleIds(), array_keys($oldSectionLocales)));
+
+						if ($locales)
+						{
+							$criteria->locale = $locales[0];
+							$criteria->sectionId = $section->id;
+							$criteria->status = null;
+							$criteria->localeEnabled = null;
+							$criteria->limit = null;
+
+							craft()->tasks->createTask('ResaveElements', Craft::t('Resaving {section} entries', array('section' => $section->name)), array(
+								'elementType' => ElementType::Entry,
+								'criteria'    => $criteria->getAttributes()
+							));
+						}
 					}
 
 					$success = true;
@@ -804,48 +781,64 @@ class SectionsService extends BaseApplicationComponent
 			return false;
 		}
 
-		$transaction = craft()->db->getCurrentTransaction() === null ? craft()->db->beginTransaction() : null;
-		try
+		// Fire an 'onBeforeDeleteSection' event
+		$event = new Event($this, array(
+			'sectionId' => $sectionId
+		));
+
+		$this->onBeforeDeleteSection($event);
+
+		if ($event->performAction)
 		{
-			// Grab the entry ids so we can clean the elements table.
-			$entryIds = craft()->db->createCommand()
-				->select('id')
-				->from('entries')
-				->where(array('sectionId' => $sectionId))
-				->queryColumn();
+			$transaction = craft()->db->getCurrentTransaction() === null ? craft()->db->beginTransaction() : null;
 
-			craft()->elements->deleteElementById($entryIds);
-
-			// Delete the structure, if there is one
-			$structureId = craft()->db->createCommand()
-				->select('structureId')
-				->from('sections')
-				->where(array('id' => $sectionId))
-				->queryScalar();
-
-			if ($structureId)
+			try
 			{
-				craft()->structures->deleteStructureById($structureId);
+				// Grab the entry ids so we can clean the elements table.
+				$entryIds = craft()->db->createCommand()
+					->select('id')
+					->from('entries')
+					->where(array('sectionId' => $sectionId))
+					->queryColumn();
+
+				craft()->elements->deleteElementById($entryIds);
+
+				// Delete the structure, if there is one
+				$structureId = craft()->db->createCommand()
+					->select('structureId')
+					->from('sections')
+					->where(array('id' => $sectionId))
+					->queryScalar();
+
+				if ($structureId)
+				{
+					craft()->structures->deleteStructureById($structureId);
+				}
+
+				// Delete the section.
+				$affectedRows = craft()->db->createCommand()->delete('sections', array('id' => $sectionId));
+
+				if ($transaction !== null)
+				{
+					$transaction->commit();
+				}
+
+				// Fire an 'onDeleteSection' event
+				$this->onDeleteSection(new Event($this, array(
+					'sectionId' => $sectionId
+				)));
+
+				return (bool)$affectedRows;
 			}
-
-			// Delete the section.
-			$affectedRows = craft()->db->createCommand()->delete('sections', array('id' => $sectionId));
-
-			if ($transaction !== null)
+			catch (\Exception $e)
 			{
-				$transaction->commit();
-			}
+				if ($transaction !== null)
+				{
+					$transaction->rollback();
+				}
 
-			return (bool) $affectedRows;
-		}
-		catch (\Exception $e)
-		{
-			if ($transaction !== null)
-			{
-				$transaction->rollback();
+				throw $e;
 			}
-
-			throw $e;
 		}
 	}
 
@@ -1289,6 +1282,30 @@ class SectionsService extends BaseApplicationComponent
 	public function onSaveSection(Event $event)
 	{
 		$this->raiseEvent('onSaveSection', $event);
+	}
+
+	/**
+	 * Fires an 'onBeforeDeleteSection' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @return null
+	 */
+	public function onBeforeDeleteSection(Event $event)
+	{
+		$this->raiseEvent('onBeforeDeleteSection', $event);
+	}
+
+	/**
+	 * Fires an 'onDeleteSection' event.
+	 *
+	 * @param Event $event
+	 *
+	 * @return null
+	 */
+	public function onDeleteSection(Event $event)
+	{
+		$this->raiseEvent('onDeleteSection', $event);
 	}
 
 	// Private Methods

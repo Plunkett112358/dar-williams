@@ -814,7 +814,7 @@ class PluginsService extends BaseApplicationComponent
 		if (IOHelper::folderExists($migrationsFolder))
 		{
 			$migrations = array();
-			$migrationFiles = IOHelper::getFolderContents($migrationsFolder, false, "(m(\d{6}_\d{6})_.*?)\.php");
+			$migrationFiles = IOHelper::getFolderContents($migrationsFolder, false, "(m(\d{6}_\d{6})_.*?)\.php$");
 
 			if ($migrationFiles)
 			{
@@ -874,7 +874,7 @@ class PluginsService extends BaseApplicationComponent
 			}
 			else
 			{
-				throw new Exception(Craft::t('The plugin “{handle}” tried to register a service “{service}” that conflicts with a core service name.', array('handle' => $handle, 'service' => $serviceName)));
+				throw new Exception(Craft::t('The plugin “{handle}” tried to register a service “{service}” that conflicts with a core service name.', array('handle' => $class, 'service' => $serviceName)));
 			}
 		}
 

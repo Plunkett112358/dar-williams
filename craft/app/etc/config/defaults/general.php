@@ -32,13 +32,20 @@ return array(
 
 	/**
 	 * Whether or not to allow auto-updating in Craft. Does not affect manual updates.
+	 *
+	 * Possible values are:
+	 *
+	 * - `true` (all updates are allowed)
+	 * - `'minor-only'` (only minor and build updates are allowed)
+	 * - `'build-only'` (only build updates are allowed)
+	 * - `false` (no updates are allowed)
 	 */
 	'allowAutoUpdates' => true,
 
 	/**
 	 * A list of file extensions that Craft will allow when a user is uploading files.
 	 */
-	'allowedFileExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,htm,html,jpeg,jpg,js,mid,mov,mp3,mp4,m4a,m4v,mpc,mpeg,mpg,ods,odt,ogg,ogv,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,svg,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,webm,wma,wmv,xls,xlsx,zip',
+	'allowedFileExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,htm,html,jpeg,jpg,js,mid,mov,mp3,mp4,m4a,m4v,mpc,mpeg,mpg,ods,odt,ogg,ogv,pdf,png,potx,pps,ppsm,ppsx,ppt,pptm,pptx,ppz,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,svg,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,webm,wma,wmv,xls,xlsx,zip',
 
 	/**
 	 * Whether or not to allow uppercase letters in the slug. Defaults to false.
@@ -110,6 +117,12 @@ return array(
 	'cacheMethod' => 'file',
 
 	/**
+	 * If set to true, any uploaded file names will have multi-byte characters (Chinese, Japanese, etc.) stripped
+	 * and any high-ASCII characters converted to their low ASCII counterparts (i.e. ñ → n).
+	 */
+	'convertFilenamesToAscii' => false,
+
+	/**
 	 * The amount of time a user must wait before re-attempting to log in after their account is locked due to too many
 	 * failed login attempts.
 	 *
@@ -143,6 +156,12 @@ return array(
 	 * for all subdomains, for example, you could set this to '.domain.com'.
 	 */
 	'defaultCookieDomain' => '',
+
+	/**
+	 * Defines the default language the control panel should get set to if the logged-in user doesn't have a
+	 * preferred language set.
+	 */
+	'defaultCpLanguage' => '',
 
 	/**
 	 * The default permissions Craft will use when creating a file on the file system.
@@ -184,6 +203,13 @@ return array(
 	 * Also, see the 'csrfTokenName' config setting.
 	 */
 	'enableCsrfProtection' => false,
+
+	/**
+	 * Whether to enable Craft's template `{% cache %}` tag on a global basis.
+	 *
+	 * @see http://buildwithcraft.com/docs/templating/cache
+	 */
+	'enableTemplateCaching' => true,
 
 	/**
 	 * Any environment-specific variables that should be swapped out in URL and Path settings.
@@ -344,6 +370,13 @@ return array(
 	'phpMaxMemoryLimit' => '256M',
 
 	/**
+	 * The name of the PHP session cookie.
+	 *
+	 * @see https://php.net/manual/en/function.session-name.php
+	 */
+	'phpSessionName' => 'CraftSessionId',
+
+	/**
 	 * The path that users should be redirected to after logging in from the Control Panel.
 	 *
 	 * This setting will also come into effect if the user visits the CP’s Login page (/admin/login)
@@ -358,6 +391,11 @@ return array(
 	 * setting) when they are already logged in.
 	 */
 	'postLoginRedirect' => '',
+
+	/**
+	 * Whether the X-Powered-By header should be sent on each request, helping clients identify that the site is powered by Craft.
+	 */
+	'sendPoweredByHeader' => true,
 
 	/**
 	 * The template path segment prefix that should be used to identify "private" templates -- templates that aren't
@@ -418,6 +456,17 @@ return array(
 	 * Whether Craft should rotate images according to their EXIF data on upload.
 	 */
 	'rotateImagesOnUploadByExifData' => true,
+
+	/**
+	 * Whether Craft should run pending background tasks automatically over HTTP requests, or leave it up to something
+	 * like a Cron job to call index.php/actions/tasks/runPendingTasks at a regular interval.
+	 *
+	 * This setting should be disabled for servers running Win32, or with Apache’s mod_deflate/mod_gzip installed,
+	 * where PHP’s [flush()](http://php.net/manual/en/function.flush.php) method won’t work.
+	 *
+	 * If disabled, an alternate task running trigger *must* be set up separately.
+	 */
+	'runTasksAutomatically' => true,
 
 	/**
 	 * Words that should be ignored when indexing search keywords and preparing search terms to be matched against the
@@ -508,6 +557,15 @@ return array(
 	 * and cache the test results for 24 hours.
 	 */
 	'usePathInfo' => 'auto',
+
+	/**
+	 * Determines whether Craft will set the "secure" flag when saving cookies when calling `craft()->userSession->saveCookie()`.
+	 *
+	 * Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page
+	 * you're currently accessing is over `https://`. `true` will always set the flag, regardless of protocol and `false`
+	 * will never automatically set the flag.
+	 */
+	'useSecureCookies' => 'auto',
 
 	/**
 	 * The amount of time a user stays logged in.

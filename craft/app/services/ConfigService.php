@@ -179,7 +179,7 @@ class ConfigService extends BaseApplicationComponent
 	{
 		craft()->deprecator->log('ConfigService::getDbItem()', 'ConfigService::getDbItem() is deprecated. Use get(\'key\', ConfigFile::Db) instead.');
 
-		if ($value = craft()->config->get($item, Config::Db))
+		if ($value = craft()->config->get($item, ConfigFile::Db))
 		{
 			return $value;
 		}
@@ -702,6 +702,44 @@ class ConfigService extends BaseApplicationComponent
 		{
 			return $this->get('resourceTrigger');
 		}
+	}
+
+	/**
+	 * Returns whether the system is allowed to be auto-updated to the latest release.
+	 *
+	 * @return bool
+	 */
+	public function allowAutoUpdates()
+	{
+		$updateInfo = craft()->updates->getUpdates();
+
+		if (!$updateInfo)
+		{
+			return false;
+		}
+
+		$configVal = $this->get('allowAutoUpdates');
+
+		if (is_bool($configVal))
+		{
+			return $configVal;
+		}
+
+		if ($configVal === 'build-only')
+		{
+			// Return whether the version number has changed at all
+			return ($updateInfo->app->latestVersion === craft()->getVersion());
+		}
+
+		if ($configVal === 'minor-only')
+		{
+			// Return whether the major version number has changed
+			$localMajorVersion = array_shift(explode('.', craft()->getVersion()));
+			$updateMajorVersion = array_shift(explode('.', $updateInfo->app->latestVersion));
+			return ($localMajorVersion === $updateMajorVersion);
+		}
+
+		return false;
 	}
 
 	// Private Methods

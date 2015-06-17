@@ -383,6 +383,7 @@ class AssetTransformsService extends BaseApplicationComponent
 				->where('fileId = :fileId', array(':fileId' => $file->id))
 				->andWhere(array('in', 'location', $possibleLocations))
 				->andWhere('id <> :indexId', array(':indexId' => $index->id))
+				->andWhere('fileExists = 1')
 				->queryAll();
 
 			foreach ($results as $result)
@@ -392,7 +393,7 @@ class AssetTransformsService extends BaseApplicationComponent
 				if ($transform->isNamedTransform() && $result['dateIndexed'] < $transform->dimensionChangeTime)
 				{
 					$source->deleteTransform($file, new AssetTransformIndexModel($result));
-					$this->deleteTransform($result['id']);
+					$this->deleteTransformIndex($result['id']);
 				}
 				// Any other should do.
 				else
@@ -602,6 +603,7 @@ class AssetTransformsService extends BaseApplicationComponent
 	{
 		craft()->db->createCommand()->delete('assettransformindex', 'id = :id', array(':id' => $indexId));
 	}
+
 	/**
 	 * Get a thumb server path by file model and size.
 	 *
@@ -623,7 +625,7 @@ class AssetTransformsService extends BaseApplicationComponent
 		{
 			$imageSource = $this->getLocalImageSource($fileModel);
 
-			craft()->images->loadImage($imageSource)
+			craft()->images->loadImage($imageSource, $size, $size)
 				->scaleAndCrop($size, $size)
 				->saveAs($thumbPath);
 
@@ -735,7 +737,10 @@ class AssetTransformsService extends BaseApplicationComponent
 		if ($maxCachedImageSize > 0 && ImageHelper::isImageManipulatable($localCopy))
 		{
 
-			craft()->images->loadImage($localCopy)->scaleToFit($maxCachedImageSize, $maxCachedImageSize)->setQuality(100)->saveAs($destination);
+			craft()->images->loadImage($localCopy, $maxCachedImageSize, $maxCachedImageSize)
+				->scaleToFit($maxCachedImageSize, $maxCachedImageSize)
+				->setQuality(100)
+				->saveAs($destination);
 
 			if ($localCopy != $destination)
 			{
@@ -1032,7 +1037,7 @@ class AssetTransformsService extends BaseApplicationComponent
 		$imageSource = $file->getTransformSource();
 		$quality = $transform->quality ? $transform->quality : craft()->config->get('defaultImageQuality');
 
-		$image = craft()->images->loadImage($imageSource);
+		$image = craft()->images->loadImage($imageSource, $transform->width, $transform->height);
 		$image->setQuality($quality);
 
 		switch ($transform->mode)
@@ -1083,6 +1088,11 @@ class AssetTransformsService extends BaseApplicationComponent
 		// For non-web-safe formats we go with jpg.
 		if (!in_array(mb_strtolower(IOHelper::getExtension($file->filename)), ImageHelper::getWebSafeFormats()))
 		{
+			if ($file->getExtension() == 'svg' && craft()->images->isImagick())
+			{
+				return 'png';
+			}
+
 			return 'jpg';
 		}
 		else

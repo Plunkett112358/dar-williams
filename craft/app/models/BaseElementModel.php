@@ -828,7 +828,7 @@ abstract class BaseElementModel extends BaseModel
 
 			if (!$this->_content)
 			{
-				$this->_content = craft()->content->createContent($this);
+				$this->_content = $this->createContent();
 			}
 		}
 
@@ -848,7 +848,7 @@ abstract class BaseElementModel extends BaseModel
 		{
 			if (!isset($this->_content))
 			{
-				$this->_content = craft()->content->createContent($this);
+				$this->_content = $this->createContent();
 			}
 
 			$this->_content->setAttributes($content);
@@ -900,7 +900,8 @@ abstract class BaseElementModel extends BaseModel
 					// Do we have any post data for this field?
 					if (isset($content[$handle]))
 					{
-						$value = $this->_rawPostContent[$handle] = $content[$handle];
+						$value = $content[$handle];
+						$this->setRawPostContent($handle, $value);
 					}
 					// Were any files uploaded for this field?
 					else if (!empty($this->_contentPostLocation) && UploadedFile::getInstancesByName($this->_contentPostLocation.'.'.$handle))
@@ -927,6 +928,17 @@ abstract class BaseElementModel extends BaseModel
 				}
 			}
 		}
+	}
+
+	/**
+	 * Sets a field’s raw post content.
+	 *
+	 * @param string $handle The field handle.
+	 * @param string|array   The posted field value.
+	 */
+	public function setRawPostContent($handle, $value)
+	{
+		$this->_rawPostContent[$handle] = $value;
 	}
 
 	/**
@@ -1114,6 +1126,16 @@ abstract class BaseElementModel extends BaseModel
 			'rgt'           => AttributeType::Number,
 			'level'         => AttributeType::Number,
 		);
+	}
+
+	/**
+	 * Creates the content model associated with this element.
+	 *
+	 * @return ContentModel The content model associated with this element
+	 */
+	protected function createContent()
+	{
+		return craft()->content->createContent($this);
 	}
 
 	// Private Methods

@@ -53,13 +53,15 @@
 
 {% endif %}
 
+{% set heroImages = craft.entries.section('heroImages') %}
+
 {% cache %}   
 <div 
-{% if craft.request.lastSegment == '' %} class=" img-responsive home home-small" {% endif %}
+{% if craft.request.lastSegment == '' %} style="background-image: url('{{ heroImages[0].images3[0].url }}' ); background-size: cover;" class=" img-responsive home home-small" {% endif %}
 {% if craft.request.lastSegment == 'about' %} class=" img-responsive about" {% endif %}
-{% if craft.request.lastSegment == 'application' %} class=" img-responsive register" {% endif %}
-{% if craft.request.lastSegment == 'contact' %} class=" img-responsive contact" {% endif %}
-{% if craft.request.lastSegment == 'final-details' %} class=" img-responsive final-details" {% endif %}
+{% if craft.request.lastSegment == 'application' %} class=" img-responsive register" style="background-image: url('{{ heroImages[1].images3[0].url }}' ); background-size: cover;" {% endif %}
+{% if craft.request.lastSegment == 'contact' %} class=" img-responsive contact"  {% endif %}
+{% if craft.request.lastSegment == 'final-details' %} class=" img-responsive final-details" style="background-image: url('{{ heroImages[3].images3[0].url }}' ); background-size: cover;" {% endif %}
 {% if craft.request.lastSegment == 'thanks' %} class=" img-responsive thanks" {% endif %}
 {% if craft.request.lastSegment == 'thankyou' %} class=" img-responsive thankyou" {% endif %}
 >

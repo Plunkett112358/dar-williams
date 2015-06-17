@@ -1440,7 +1440,7 @@ class IOHelper
 			'pdf'         => array('label' => Craft::t('PDF'),         'extensions' => array('pdf')),
 			'photoshop'   => array('label' => Craft::t('Photoshop'),   'extensions' => array('psd','psb')),
 			'php'         => array('label' => Craft::t('PHP'),         'extensions' => array('php')),
-			'powerpoint'  => array('label' => Craft::t('PowerPoint'),  'extensions' => array('ppt','pptx','pps','pptm','potx')),
+			'powerpoint'  => array('label' => Craft::t('PowerPoint'),  'extensions' => array('pps','ppsm','ppsx','ppt','pptm','pptx','potx')),
 			'text'        => array('label' => Craft::t('Text'),        'extensions' => array('txt','text')),
 			'video'       => array('label' => Craft::t('Video'),       'extensions' => array('avchd','asf','asx','avi','flv','fla','mov','m4v','mng','mpeg','mpg','m1s','mp2v','m2v','m2s','mp4','mkv','qt','flv','mp4','ogg','ogv','rm','wmv','webm')),
 			'word'        => array('label' => Craft::t('Word'),        'extensions' => array('doc','docx','dot','docm','dotm')),
@@ -1490,13 +1490,13 @@ class IOHelper
 	/**
 	 * Cleans a filename.
 	 *
-	 * @param string $fileName
-	 * @param bool   $onlyAlphaNumeric
-	 * @param string $separator
+	 * @param string $fileName  The filename to clean.
+	 * @param bool   $onlyAscii Whether to only allow ASCII characters in the filename.
+	 * @param string $separator The separator to use for any whitespace. Defaults to '-'.
 	 *
 	 * @return mixed
 	 */
-	public static function cleanFilename($fileName, $onlyAlphaNumeric = false, $separator = '-')
+	public static function cleanFilename($fileName, $onlyAscii = false, $separator = '-')
 	{
 		$disallowedChars = array('â€”', 'â€“', '&#8216;', '&#8217;', '&#8220;', '&#8221;', '&#8211;', '&#8212;', '+', '%', '^', '~', '?', '[', ']', '/', '\\', '=', '<', '>', ':', ';', ',', '\'', '"', '&', '$', '#', '*', '(', ')', '|', '~', '`', '!', '{', '}');
 
@@ -1514,7 +1514,7 @@ class IOHelper
 		// Nuke any trailing or leading .-_
 		$fileName = trim($fileName, '.-_');
 
-		$fileName = ($onlyAlphaNumeric) ? preg_replace('/[^a-zA-Z0-9]/', '', $fileName) : $fileName;
+		$fileName = ($onlyAscii) ? StringHelper::asciiString($fileName) : $fileName;
 
 		return $fileName;
 	}

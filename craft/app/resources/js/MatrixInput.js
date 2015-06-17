@@ -164,9 +164,21 @@ Craft.MatrixInput = Garnish.Base.extend(
 			{
 				if (this.showingAddBlockMenu)
 				{
-					this.$addBlockBtnGroup.removeClass('hidden');
 					this.$addBlockMenuBtn.addClass('hidden');
+					this.$addBlockBtnGroup.removeClass('hidden');
 					this.showingAddBlockMenu = false;
+
+					// Because Safari is awesome
+					if (navigator.userAgent.indexOf('Safari') !== -1)
+					{
+						Garnish.requestAnimationFrame($.proxy(function() {
+							this.$addBlockBtnGroup.css('opacity', 0.99);
+
+							Garnish.requestAnimationFrame($.proxy(function() {
+								this.$addBlockBtnGroup.css('opacity', '');
+							}, this));
+						}, this));
+					}
 				}
 			}
 		}
@@ -259,6 +271,7 @@ Craft.MatrixInput = Garnish.Base.extend(
 
 		$(bodyHtml).appendTo($fieldsContainer);
 
+		// Animate the block into position
 		$block.css(this.getHiddenBlockCss($block)).velocity({
 			opacity: 1,
 			'margin-bottom': 10
@@ -271,6 +284,12 @@ Craft.MatrixInput = Garnish.Base.extend(
 			this.blockSort.addItems($block);
 			this.blockSelect.addItems($block);
 			this.updateAddBlockBtn();
+
+			Garnish.requestAnimationFrame(function()
+			{
+				// Scroll to the block
+				Garnish.scrollContainerToElement($block);
+			});
 		}, this));
 	},
 

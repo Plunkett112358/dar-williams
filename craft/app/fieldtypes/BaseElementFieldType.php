@@ -58,6 +58,11 @@ abstract class BaseElementFieldType extends BaseFieldType
 	 */
 	protected $sortable = true;
 
+	/**
+	 * @var bool
+	 */
+	private $_makeExistingRelationsTranslatable = false;
+
 	// Public Methods
 	// =========================================================================
 
@@ -281,6 +286,41 @@ abstract class BaseElementFieldType extends BaseFieldType
 		}
 	}
 
+	/**
+	 * @inheritDoc IFieldType::onBeforeSave()
+	 *
+	 * @return null
+	 */
+	public function onBeforeSave()
+	{
+		$this->_makeExistingRelationsTranslatable = false;
+
+		if ($this->model->id && $this->model->translatable)
+		{
+			$existingField = craft()->fields->getFieldById($this->model->id);
+
+			if ($existingField && $existingField->translatable == 0)
+			{
+				$this->_makeExistingRelationsTranslatable = true;
+			}
+		}
+	}
+
+	/**
+	 * @inheritDoc IFieldType::onAfterSave()
+	 *
+	 * @return null
+	 */
+	public function onAfterSave()
+	{
+		if ($this->_makeExistingRelationsTranslatable)
+		{
+			craft()->tasks->createTask('LocalizeRelations', null, array(
+				'fieldId' => $this->model->id,
+			));
+		}
+	}
+
 	// Protected Methods
 	// =========================================================================
 
@@ -351,7 +391,7 @@ abstract class BaseElementFieldType extends BaseFieldType
 			'criteria'           => $selectionCriteria,
 			'sourceElementId'    => (isset($this->element->id) ? $this->element->id : null),
 			'limit'              => ($this->allowLimit ? $settings->limit : null),
-			'addButtonLabel'     => $this->getAddButtonLabel(),
+			'selectionLabel'     => Craft::t($this->getSettings()->selectionLabel),
 		);
 	}
 
@@ -461,6 +501,8 @@ abstract class BaseElementFieldType extends BaseFieldType
 		{
 			$settings['limit'] = array(AttributeType::Number, 'min' => 0);
 		}
+
+		$settings['selectionLabel'] = array(AttributeType::String, 'default' => $this->getAddButtonLabel());
 
 		return $settings;
 	}

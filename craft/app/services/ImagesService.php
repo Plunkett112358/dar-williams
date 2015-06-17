@@ -74,13 +74,19 @@ class ImagesService extends BaseApplicationComponent
 	 * Loads an image from a file system path.
 	 *
 	 * @param string $path
+	 * @param int $minSvgWidth The minimum width that the image should be loaded with if it’s an SVG.
+	 * @param int $minSvgHeight The minimum width that the image should be loaded with if it’s an SVG.
 	 *
 	 * @throws \Exception
 	 * @return Image
 	 */
-	public function loadImage($path)
+	public function loadImage($path, $minSvgWidth = 1000, $minSvgHeight = 1000)
 	{
 		$image = new Image();
+
+		$image->minSvgWidth = $minSvgWidth;
+		$image->minSvgHeight = $minSvgHeight;
+
 		$image->loadImage($path);
 		return $image;
 	}
@@ -143,15 +149,21 @@ class ImagesService extends BaseApplicationComponent
 	 */
 	public function cleanImage($filePath)
 	{
-		if (craft()->config->get('rotateImagesOnUploadByExifData'))
+		try
 		{
-			$this->rotateImageByExifData($filePath);
+			if (craft()->config->get('rotateImagesOnUploadByExifData'))
+			{
+				$this->rotateImageByExifData($filePath);
+			}
+
+			$this->stripOrientationFromExifData($filePath);
+		}
+		catch (\Exception $e)
+		{
+			Craft::log('Tried to rotate or strip EXIF data from image and failed: '.$e->getMessage(), LogLevel::Error);
 		}
 
-		$this->stripOrientationFromExifData($filePath);
-
 		return $this->loadImage($filePath)->saveAs($filePath, true);
-
 	}
 
 	/**

@@ -141,12 +141,20 @@ var CP = Garnish.Base.extend(
 
 			if (this.$confirmUnloadForms.length)
 			{
-				this.initialFormValues = [];
+				if (!Craft.forceConfirmUnload)
+				{
+					this.initialFormValues = [];
+				}
 
 				for (var i = 0; i < this.$confirmUnloadForms.length; i++)
 				{
 					var $form = $(this.$confirmUnloadForms);
-					this.initialFormValues[i] = $form.serialize();
+
+					if (!Craft.forceConfirmUnload)
+					{
+						this.initialFormValues[i] = $form.serialize();
+					}
+
 					this.addListener($form, 'submit', function()
 					{
 						this.removeListener(Garnish.$win, 'beforeunload');
@@ -157,9 +165,10 @@ var CP = Garnish.Base.extend(
 				{
 					for (var i = 0; i < this.$confirmUnloadForms.length; i++)
 					{
-						var newFormValue = $(this.$confirmUnloadForms[i]).serialize();
-
-						if (this.initialFormValues[i] != newFormValue)
+						if (
+							Craft.forceConfirmUnload ||
+							this.initialFormValues[i] != $(this.$confirmUnloadForms[i]).serialize()
+						)
 						{
 							var message = Craft.t('Any changes will be lost if you leave this page.');
 
@@ -247,11 +256,10 @@ var CP = Garnish.Base.extend(
 			else
 			{
 				// See if we can fit any more nav items in the main menu
-				do
+				while ((this.$nav.height() == CP.navHeight) && (this.visibleNavItems < this.totalNavItems))
 				{
 					this.addFirstOverflowNavItemToMainMenu();
 				}
-				while ((this.$nav.height() == CP.navHeight) && (this.visibleNavItems < this.totalNavItems));
 
 				// Now kick the last one back.
 				this.addLastVisibleNavItemToOverflowMenu();
@@ -388,6 +396,11 @@ var CP = Garnish.Base.extend(
 			.velocity('fadeIn', { display: 'inline-block', duration: 'fast' })
 			.delay(notificationDuration)
 			.velocity('fadeOut');
+
+		this.trigger('displayNotification', {
+			notificationType: type,
+			message: message
+		});
 	},
 
 	/**
@@ -556,17 +569,23 @@ var CP = Garnish.Base.extend(
 
 	runPendingTasks: function()
 	{
-		Craft.queueActionRequest('tasks/runPendingTasks', $.proxy(function(taskInfo, textStatus)
+		if (Craft.runTasksAutomatically)
 		{
-			if (taskInfo)
+			Craft.queueActionRequest('tasks/runPendingTasks', $.proxy(function(taskInfo, textStatus)
 			{
-				this.setRunningTaskInfo(taskInfo);
-				this.trackTaskProgress();
-			}
-		}, this));
+				if (textStatus == 'success')
+				{
+					this.trackTaskProgress(0);
+				}
+			}, this));
+		}
+		else
+		{
+			this.trackTaskProgress(0);
+		}
 	},
 
-	trackTaskProgress: function()
+	trackTaskProgress: function(delay)
 	{
 		// Ignore if we're already tracking tasks
 		if (this.trackTaskProgressTimeout)
@@ -576,22 +595,26 @@ var CP = Garnish.Base.extend(
 
 		this.trackTaskProgressTimeout = setTimeout($.proxy(function()
 		{
-			this.trackTaskProgressTimeout = null;
-
 			Craft.queueActionRequest('tasks/getRunningTaskInfo', $.proxy(function(taskInfo, textStatus)
 			{
 				if (textStatus == 'success')
 				{
+					this.trackTaskProgressTimeout = null;
 					this.setRunningTaskInfo(taskInfo, true);
 
 					if (taskInfo.status == 'running')
 					{
-						// Keep checking
+						// Check again in one second
 						this.trackTaskProgress();
+					}
+					else if (taskInfo.status == 'pending')
+					{
+						// Check again in 30 seconds
+						this.trackTaskProgress(30000);
 					}
 				}
 			}, this));
-		}, this), 1000);
+		}, this), (typeof delay != typeof undefined ? delay : 1000));
 	},
 
 	stopTrackingTaskProgress: function()
@@ -614,7 +637,7 @@ var CP = Garnish.Base.extend(
 				this.taskProgressIcon = new TaskProgressIcon();
 			}
 
-			if (taskInfo.status == 'running')
+			if (taskInfo.status == 'running' || taskInfo.status == 'pending')
 			{
 				this.taskProgressIcon.hideFailMode();
 				this.taskProgressIcon.setDescription(taskInfo.description);

@@ -157,6 +157,10 @@ class AssetsFieldType extends BaseElementFieldType
 						$fileIds = array_merge($value, $fileIds);
 					}
 
+					// Make it look like the actual POST data contained these file IDs as well,
+					// so they make it into entry draft/version data
+					$this->element->setRawPostContent($this->model->handle, $fileIds);
+
 					return $fileIds;
 				}
 			}
@@ -175,14 +179,13 @@ class AssetsFieldType extends BaseElementFieldType
 		$handle = $this->model->handle;
 		$elementFiles = $this->element->{$handle};
 
-		if (is_object($elementFiles))
+		if ($elementFiles instanceof ElementCriteriaModel)
 		{
 			$elementFiles = $elementFiles->find();
 		}
 
 		if (is_array($elementFiles) && count($elementFiles))
 		{
-
 			$fileIds = array();
 
 			foreach ($elementFiles as $elementFile)
@@ -418,7 +421,7 @@ class AssetsFieldType extends BaseElementFieldType
 
 		foreach ($pathParts as &$part)
 		{
-			$part = IOHelper::cleanFilename($part);
+			$part = IOHelper::cleanFilename($part, craft()->config->get('convertFilenamesToAscii'));
 		}
 
 		$subpath = join('/', $pathParts);

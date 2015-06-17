@@ -1,7 +1,7 @@
 {% extends "_layouts/basecp" %}
 
 {% includeCssResource "css/cp.css" first %}
-{%- includeTranslations
+{% includeTranslations
 	"week",
 	"weeks",
 	"day",
@@ -61,6 +61,7 @@
 	"New child",
 	"Upload failed for {filename}",
 	"{ctrl}C to copy.",
+	"Search in subfolders",
 	"New subfolder",
 	"Rename folder",
 	"Delete folder",
@@ -80,7 +81,9 @@
 	"Delete users",
 	"(blank)",
 	"Are you sure you want to delete the selected blocks?"
--%}
+%}
+
+{% set forceConfirmUnload = craft.session.hasFlash('error') %}
 
 
 {% block body %}
@@ -174,7 +177,7 @@
 					{% for handle, item in craft.cp.nav() %}
 						<li id="nav-{{ handle }}">
 							<a{% if item.sel %} class="sel"{% endif %} href="{{ item.url }}">
-								{{- item.name -}}
+								{{- item.label -}}
 								{%- if item.badge is defined and item.badge -%}
 									<span class="badge">{{ item.badge }}</span>
 								{%- endif -%}

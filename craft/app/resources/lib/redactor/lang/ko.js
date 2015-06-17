@@ -30,11 +30,11 @@ $.Redactor.opts.langs['ko'] = {
 	save: '저장',
 	_delete: '삭제',
 	insert_table: '표 삽입',
-	insert_row_above: '열을 위에 추가',
-	insert_row_below: '열을 아래에 추가',
-	insert_column_left: '행을 왼쪽에 추가',
-	insert_column_right: '행을 오른쪽에 추가',
-	delete_column: '컬럼 삭제',
+	insert_row_above: '행을 위에 추가',
+	insert_row_below: '행을 아래에 추가',
+	insert_column_left: '열을 왼쪽에 추가',
+	insert_column_right: '열을 오른쪽에 추가',
+	delete_column: '열 삭제',
 	delete_row: '행 삭제',
 	delete_table: '표 삭제',
 	rows: '행',
@@ -70,6 +70,7 @@ $.Redactor.opts.langs['ko'] = {
 	alignment: '정렬',
 	filename: '파일명 (선택)',
 	edit: '편집',
-	center: 'Center'
+	center: 'Center',
+	upload_label: 'Drop file here or '
 };
 })( jQuery );

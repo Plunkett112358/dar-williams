@@ -6164,7 +6164,7 @@ button.close {
   }
 }
 .home {
-  background: url('../images/home-bkg.png') no-repeat center center;
+  /*background: url('../images/home-bkg.png') no-repeat center center;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -6179,7 +6179,7 @@ button.close {
   color: #555555;
 }
 .final-details {
-  background: url('../images/final-details.png') no-repeat 50% 50%;
+  /*background: url('../images/final-details.png') no-repeat 50% 50% ;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -6215,7 +6215,7 @@ button.close {
   /*margin-top: -100px;*/
 }
 .register {
-  background: url('../images/trees.jpg') no-repeat 50% 50%;
+  /*background: url('../images/trees.jpg') no-repeat 50% 50% ;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

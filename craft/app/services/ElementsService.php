@@ -621,7 +621,7 @@ class ElementsService extends BaseApplicationComponent
 			$contentService = craft()->content;
 			$originalFieldColumnPrefix = $contentService->fieldColumnPrefix;
 
-			// TODO: $fields should already be defined by now in Carft 3.0
+			// TODO: $fields should already be defined by now in Craft 3.0
 			$fields = $elementType->getFieldsForElementsQuery($criteria);
 			$extraCriteriaAttributes = $criteria->getExtraAttributeNames();
 
@@ -1376,11 +1376,25 @@ class ElementsService extends BaseApplicationComponent
 	 * @param BaseElementModel $element            The element to update.
 	 * @param bool             $updateOtherLocales Whether the element’s other locales should also be updated.
 	 * @param bool             $updateDescendants  Whether the element’s descendants should also be updated.
+	 * @param bool             $asTask             Whether the element’s slug and URI should be updated via a background task.
 	 *
 	 * @return null
 	 */
-	public function updateElementSlugAndUri(BaseElementModel $element, $updateOtherLocales = true, $updateDescendants = true)
+	public function updateElementSlugAndUri(BaseElementModel $element, $updateOtherLocales = true, $updateDescendants = true, $asTask = false)
 	{
+		if ($asTask)
+		{
+			craft()->tasks->createTask('UpdateElementSlugsAndUris', null, array(
+				'elementId'          => $element->id,
+				'elementType'        => $element->getElementType(),
+				'locale'             => $element->locale,
+				'updateOtherLocales' => $updateOtherLocales,
+				'updateDescendants'  => $updateDescendants,
+			));
+
+			return;
+		}
+
 		ElementHelper::setUniqueUri($element);
 
 		craft()->db->createCommand()->update('elements_i18n', array(
@@ -1401,7 +1415,7 @@ class ElementsService extends BaseApplicationComponent
 
 		if ($updateDescendants)
 		{
-			$this->updateDescendantSlugsAndUris($element);
+			$this->updateDescendantSlugsAndUris($element, $updateOtherLocales);
 		}
 	}
 
@@ -1433,22 +1447,45 @@ class ElementsService extends BaseApplicationComponent
 	/**
 	 * Updates an element’s descendants’ slugs and URIs.
 	 *
-	 * @param BaseElementModel $element The element whose descendants should be updated.
+	 * @param BaseElementModel $element            The element whose descendants should be updated.
+	 * @param bool             $updateOtherLocales Whether the element’s other locales should also be updated.
+	 * @param bool             $asTask             Whether the descendants’ slugs and URIs should be updated via a background task.
 	 *
 	 * @return null
 	 */
-	public function updateDescendantSlugsAndUris(BaseElementModel $element)
+	public function updateDescendantSlugsAndUris(BaseElementModel $element, $updateOtherLocales = true, $asTask = false)
 	{
 		$criteria = $this->getCriteria($element->getElementType());
 		$criteria->descendantOf = $element;
 		$criteria->descendantDist = 1;
 		$criteria->status = null;
 		$criteria->localeEnabled = null;
-		$children = $criteria->find();
+		$criteria->locale = $element->locale;
 
-		foreach ($children as $child)
+		if ($asTask)
 		{
-			$this->updateElementSlugAndUri($child);
+			$childIds = $criteria->ids();
+
+			if ($childIds)
+			{
+				craft()->tasks->createTask('UpdateElementSlugsAndUris', null, array(
+					'elementId'          => $childIds,
+					'elementType'        => $element->getElementType(),
+					'locale'             => $element->locale,
+					'updateOtherLocales' => $updateOtherLocales,
+					'updateDescendants'  => true,
+				));
+			}
+
+		}
+		else
+		{
+			$children = $criteria->find();
+
+			foreach ($children as $child)
+			{
+				$this->updateElementSlugAndUri($child, $updateOtherLocales, true, false);
+			}
 		}
 	}
 

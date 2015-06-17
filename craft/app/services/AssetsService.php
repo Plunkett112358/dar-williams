@@ -771,21 +771,26 @@ class AssetsService extends BaseApplicationComponent
 				$source = craft()->assetSources->getSourceTypeById($file->sourceId);
 
 				// Fire an 'onBeforeDeleteAsset' event
-				$this->onBeforeDeleteAsset(new Event($this, array(
+				$event = new Event($this, array(
 					'asset' => $file
-				)));
+				));
 
-				if ($deleteFile)
+				$this->onBeforeDeleteAsset($event);
+
+				if ($event->performAction)
 				{
-					$source->deleteFile($file);
+					if ($deleteFile)
+					{
+						$source->deleteFile($file);
+					}
+
+					craft()->elements->deleteElementById($fileId);
+
+					// Fire an 'onDeleteAsset' event
+					$this->onDeleteAsset(new Event($this, array(
+						'asset' => $file
+					)));
 				}
-
-				craft()->elements->deleteElementById($fileId);
-
-				// Fire an 'onDeleteAsset' event
-				$this->onDeleteAsset(new Event($this, array(
-					'asset' => $file
-				)));
 			}
 
 			$response->setSuccess();
@@ -829,6 +834,18 @@ class AssetsService extends BaseApplicationComponent
 		$results = array();
 
 		$response = new AssetOperationResponseModel();
+
+		// Make sure the filename is allowed
+		if ($filename)
+		{
+			$extension = IOHelper::getExtension($filename);
+
+			if (!IOHelper::isExtensionAllowed($extension))
+			{
+				$response->setError(Craft::t('This file type is not allowed'));
+				return $response;
+			}
+		}
 
 		$folder = $this->getFolderById($folderId);
 		$newSourceType = craft()->assetSources->getSourceTypeById($folder->sourceId);

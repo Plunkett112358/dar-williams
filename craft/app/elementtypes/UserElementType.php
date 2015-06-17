@@ -58,7 +58,7 @@ class UserElementType extends BaseElementType
 			UserStatus::Pending   => Craft::t('Pending'),
 			UserStatus::Locked    => Craft::t('Locked'),
 			UserStatus::Suspended => Craft::t('Suspended'),
-			UserStatus::Archived  => Craft::t('Archived')
+			//UserStatus::Archived  => Craft::t('Archived')
 		);
 	}
 
@@ -91,6 +91,9 @@ class UserElementType extends BaseElementType
 				);
 			}
 		}
+
+		// Allow plugins to modify the sources
+		craft()->plugins->call('modifyUserSources', array(&$sources, $context));
 
 		return $sources;
 	}
@@ -247,7 +250,7 @@ class UserElementType extends BaseElementType
 
 				if ($email)
 				{
-					return '<a href="mailto:'.$email.'">'.$email.'</a>';
+					return HtmlHelper::encodeParams('<a href="mailto:{email}">{email}</a>', array('email' => $email));
 				}
 				else
 				{

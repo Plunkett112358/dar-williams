@@ -389,6 +389,10 @@ class EntriesController extends BaseEntriesController
 		{
 			$entry = $this->_getEntryModel();
 			$this->enforceEditEntryPermissions($entry);
+
+			// Set the language to the user's preferred locale so DateFormatter returns the right format
+			craft()->setLanguage(craft()->getTargetLanguage(true));
+
 			$this->_populateEntryModel($entry);
 		}
 
@@ -748,6 +752,16 @@ class EntriesController extends BaseEntriesController
 				else
 				{
 					$variables['entry'] = craft()->entries->getEntryById($variables['entryId'], $variables['localeId']);
+
+					if (craft()->getEdition() == Craft::Pro)
+					{
+						$versions = craft()->entryRevisions->getVersionsByEntryId($variables['entryId'], $variables['localeId'], 1, true);
+
+						if (isset($versions[0]))
+						{
+							$variables['entry']->revisionNotes = $versions[0]->revisionNotes;
+						}
+					}
 				}
 
 				if (!$variables['entry'])
@@ -766,6 +780,20 @@ class EntriesController extends BaseEntriesController
 				{
 					$variables['entry']->locale = $variables['localeId'];
 				}
+
+				if (craft()->isLocalized())
+				{
+					// Set the default locale status based on the section's settings
+					foreach ($variables['section']->getLocales() as $locale)
+					{
+						if ($locale->locale == $variables['entry']->locale)
+						{
+							$variables['entry']->localeEnabled = $locale->enabledByDefault;
+							break;
+						}
+					}
+				}
+
 			}
 		}
 

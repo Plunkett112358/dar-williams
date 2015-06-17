@@ -215,8 +215,6 @@ class UserModel extends BaseElementModel
 	public function setActive()
 	{
 		$this->pending = false;
-		$this->locked = false;
-		$this->suspended = false;
 		$this->archived = false;
 	}
 
@@ -231,7 +229,8 @@ class UserModel extends BaseElementModel
 	{
 		if ($this->photo)
 		{
-			return UrlHelper::getResourceUrl('userphotos/'.$this->username.'/'.$size.'/'.$this->photo);
+			$username = AssetsHelper::cleanAssetName($this->username, false);
+			return UrlHelper::getResourceUrl('userphotos/'.$username.'/'.$size.'/'.$this->photo);
 		}
 	}
 
@@ -341,10 +340,16 @@ class UserModel extends BaseElementModel
 	{
 		if ($this->status == UserStatus::Locked)
 		{
-			$cooldownEnd = clone $this->lockoutDate;
-			$cooldownEnd->add(new DateInterval(craft()->config->get('cooldownDuration')));
+			// There was an old bug that where a user's lockoutDate could be null if they've
+			// passed their cooldownDuration already, but there account status is still locked.
+			// If that's the case, just let it return null as if they are past the cooldownDuration.
+			if ($this->lockoutDate)
+			{
+				$cooldownEnd = clone $this->lockoutDate;
+				$cooldownEnd->add(new DateInterval(craft()->config->get('cooldownDuration')));
 
-			return $cooldownEnd;
+				return $cooldownEnd;
+			}
 		}
 	}
 
@@ -412,7 +417,7 @@ class UserModel extends BaseElementModel
 			{
 				if (!$user->getRemainingCooldownTime())
 				{
-					craft()->users->activateUser($user);
+					craft()->users->unlockUser($user);
 				}
 			}
 		}
@@ -456,7 +461,7 @@ class UserModel extends BaseElementModel
 
 		return array_merge(parent::defineAttributes(), array(
 			'username'                   => array(AttributeType::String, 'maxLength' => 100, 'required' => $requireUsername),
-			'photo'                      => AttributeType::String,
+			'photo'                      => array(AttributeType::String, 'maxLength' => 100),
 			'firstName'                  => AttributeType::String,
 			'lastName'                   => AttributeType::String,
 			'email'                      => array(AttributeType::Email, 'required' => !$requireUsername),
