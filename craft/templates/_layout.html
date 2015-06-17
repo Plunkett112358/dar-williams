@@ -54,7 +54,7 @@
 {% endif %}
 
 {% set heroImages = craft.entries.section('heroImages') %}
-
+    
 {% cache %}   
 <div 
 {% if craft.request.lastSegment == '' %} style="background-image: url('{{ heroImages[0].images3[0].url }}' ); background-size: cover;" class=" img-responsive home home-small" {% endif %}
