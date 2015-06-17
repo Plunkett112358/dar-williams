@@ -9,7 +9,7 @@ craft.zip
 public/bower_components
 
 craft/app/*
-craft/storage/*
+craft/storage/* 
 
 codekit-config.json
 
