@@ -105,8 +105,13 @@
 
         <h3>FAQs</h3>
     </div>
+
+        {% for faq in entry.faq %}
+         <h4>{{ faq.question}}</h4>
+         <p>{{ faq.answer }}</p>
+        {% endfor %}
         
-                   <h4>Do I need to play guitar or play guitar well to join? Are piano players or other instrumentalists welcome?</h4>
+<!--                 <h4>Do I need to play guitar or play guitar well to join? Are piano players or other instrumentalists welcome?</h4>
                 
             
                 <p>All instruments are welcome. We've had percussionists, xylophone players, keyboard players, and vocalists, too.</p>
@@ -133,7 +138,7 @@
               
                 <h4> Is there a store nearby?</h4>
                
-                <p> The closest strip of stores (drugstore, grocery, bank, liquor store and post office) is about 5 miles away and we can make a run for you if you don't have a car.   </p>
+                <p> The closest strip of stores (drugstore, grocery, bank, liquor store and post office) is about 5 miles away and we can make a run for you if you don't have a car.   </p> -->
       </div>
        </div>
       <div class="col-md-4" style="padding-left:0px;">
