@@ -41,10 +41,11 @@
                         <h5 for="date">Session Dates <span style="color:green">*</span></h5>
                       
                             <select name="fields[sessionDate]" id="">
-                                 {% for thing in dropdown[0].sessionDate.options %}
+                                 
 
-                                <option name="fields[sessionDate]" value="{{thing}}">{{ thing.label }}</option>
-                                  {% endfor %}
+                                <option name="fields[sessionDate]" value="{{firstSessionDate.date}}">{{ firstSessionDate.date }}</option>
+                                <option name="fields[sessionDate]" value="{{secondSessionDate.date}}">{{ secondSessionDate.date }}</option>
+                                  
                             </select>
                      
                     </div>
