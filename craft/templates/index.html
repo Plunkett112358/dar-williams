@@ -38,9 +38,10 @@
 </div>
 
 
+
         <h2>{{ entry.firstBlock[0].headline }}</h2>
-        <h3>{{entry.firstBlock[0].date1}}</h3>
-        <h3>{{entry.firstBlock[0].date2}}</h3>
+        <h3>{{ firstSessionDate.date | upper }}, 2016 </h3>
+        <h3>{{ secondSessionDate.date | upper}}, 2016</h3>
         <h4>{{ entry.firstBlock[0].location }}</h4>
         <h5>{{ entry.firstBlock[0].bulletsIntro }}</h5>
         <div class="row">
@@ -125,10 +126,10 @@
       <h4>{{entry.secondBlock[0].pricing}}</h4>
       <h5 >Early bird registration: $1500 <span class="green">/</span> Regular registration: $1700</h5>
 
-      <h5 class="sessions">FIRST RETREAT <span class="green">/</span> JUNE 27 – JULY 1</h5>
+      <h5 class="sessions">FIRST RETREAT <span class="green">/</span> {{ firstSessionDate.date |upper }}</h5>
       <p>{{entry.secondBlock[0].firstRetreat}}</p>
 
-       <h5 class="sessions">SECOND RETREAT <span class="green">/</span> JULY 25 – 29</h5>
+       <h5 class="sessions">SECOND RETREAT <span class="green">/</span> {{ secondSessionDate.date | upper }}</h5>
       <p>{{entry.secondBlock[0].secondRetreat}}</p>
 
        <h5 class="sessions">{{entry.secondBlock[0].lodgingTitle}}</h5>
