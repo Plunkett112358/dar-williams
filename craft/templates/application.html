@@ -26,7 +26,7 @@
 
 {% set thisYear= now|date('Y') %}
 
-
+<!-- 
 <form method="post" action="" enctype="multipart/form-data" accept-charset="UTF-8">
     {{ getCsrfInput() }}
 
@@ -80,6 +80,29 @@
                         <input type="phone" class="form-control"  name="fields[phone]" id="phone" required >
                     </div>
 
+
+                    
+                    
+                    
+        </div>
+        <div class="col-md-6">
+
+               <div class="form-group">
+                  <label class="statement" for="body">Please talk to us about your experience writing songs and why you'd like to attend this songwriting week. </label>
+                  <textarea style="height:300px" class="form-control"  name="fields[body]" id="body"></textarea>
+                </div>
+
+                   
+
+                    <div class="g-recaptcha" data-sitekey="6LcLjAETAAAAAEpky4Tlkc54KFG5dcvukGNHovTi" required></div>
+              <input type="submit" class="btn btn-lg btn-outline pull-right" value="Submit">
+        </div>
+    </div>
+   
+</form>
+ -->
+<!-- old audio inputs that used to be in form: -->
+
                     <!--    <div class="form-group">
 
                       <h5 for="audio">Audio File– <span>Upload an mp3 file</span><span style="color:green;">*</span></h5>
@@ -100,44 +123,8 @@
                         </div>
                       </div> -->
 
-                    
-                    
-                    
-        </div>
-        <div class="col-md-6">
-
-               
-
-     
-
-         
-
-              <!-- <p > </p> -->
-               <div class="form-group">
-                  <label class="statement" for="body">Please talk to us about your experience writing songs and why you'd like to attend this songwriting week. </label>
-                  <textarea style="height:300px" class="form-control"  name="fields[body]" id="body"></textarea>
-                </div>
-
-                   
-
-                    <div class="g-recaptcha" data-sitekey="6LcLjAETAAAAAEpky4Tlkc54KFG5dcvukGNHovTi" required></div>
-              <input type="submit" class="btn btn-lg btn-outline pull-right" value="Submit">
-        </div>
-    </div>
-   
-    
-                 
-
-                   <!-- some help below -->
-<!-- http://buildwithcraft.com/docs/assets-fields#uploading-files-from-front-end-entry-forms -->
-
-<!-- remember to add "are you applying again?" -->
-<!-- maybe we can check logic to see if they already have a user id? -->
 
 
-   
-</form>
-  <!-- </div> -->
 </div>
 
 <div  >
