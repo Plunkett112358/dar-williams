@@ -8,8 +8,8 @@ craft()->requireEdition(Craft::Pro);
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -128,46 +128,25 @@ class UserGroupsService extends BaseApplicationComponent
 	 */
 	public function assignUserToGroups($userId, $groupIds = null)
 	{
-		// Make sure $groupIds is an array
-		if (!is_array($groupIds))
+		craft()->db->createCommand()
+			->delete('usergroups_users', array('userId' => $userId));
+
+		if ($groupIds)
 		{
-			$groupIds = $groupIds ? array($groupIds) : array();
-		}
-
-		// Fire an 'onBeforeAssignUserToGroups' event
-		$event = new Event($this, array(
-			'userId'   => $userId,
-			'groupIds' => $groupIds
-		));
-
-		$this->onBeforeAssignUserToGroups($event);
-
-		if ($event->performAction)
-		{
-			// Delete their existing groups
-			craft()->db->createCommand()->delete('usergroups_users', array('userId' => $userId));
-
-			if ($groupIds)
+			if (!is_array($groupIds))
 			{
-				// Add the new ones
-				foreach ($groupIds as $groupId)
-				{
-					$values[] = array($groupId, $userId);
-				}
-
-				craft()->db->createCommand()->insertAll('usergroups_users', array('groupId', 'userId'), $values);
+				$groupIds = array($groupIds);
 			}
 
-			// Fire an 'onAssignUserToGroups' event
-			$this->onAssignUserToGroups(new Event($this, array(
-				'userId'   => $userId,
-				'groupIds' => $groupIds
-			)));
+			foreach ($groupIds as $groupId)
+			{
+				$values[] = array($groupId, $userId);
+			}
 
-			return true;
+			craft()->db->createCommand()->insertAll('usergroups_users', array('groupId', 'userId'), $values);
 		}
 
-		return false;
+		return true;
 	}
 
 	/**
@@ -229,30 +208,6 @@ class UserGroupsService extends BaseApplicationComponent
 
 	// Events
 	// -------------------------------------------------------------------------
-
-	/**
-	 * Fires an 'onBeforeAssignUserToGroups' event.
-	 *
-	 * @param Event $event
-	 *
-	 * @return null
-	 */
-	public function onBeforeAssignUserToGroups(Event $event)
-	{
-		$this->raiseEvent('onBeforeAssignUserToGroups', $event);
-	}
-
-	/**
-	 * Fires an 'onAssignUserToGroups' event.
-	 *
-	 * @param Event $event
-	 *
-	 * @return null
-	 */
-	public function onAssignUserToGroups(Event $event)
-	{
-		$this->raiseEvent('onAssignUserToGroups', $event);
-	}
 
 	/**
 	 * Fires an 'onBeforeAssignUserToDefaultGroup' event.

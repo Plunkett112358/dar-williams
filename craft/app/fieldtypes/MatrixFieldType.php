@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.fieldtypes
  * @since     1.3
  */
@@ -50,13 +50,13 @@ class MatrixFieldType extends BaseFieldType
 		craft()->templates->includeJs('new Craft.MatrixConfigurator('.JsonHelper::encode($fieldTypeInfo).', "'.craft()->templates->getNamespace().'");');
 
 		craft()->templates->includeTranslations(
-			'Are you sure you want to delete this block type?',
-			'Are you sure you want to delete this field?',
-			'Field Type',
+			'What this block type will be called in the CP.',
 			'How you’ll refer to this block type in the templates.',
+			'Are you sure you want to delete this block type?',
 			'This field is required',
 			'This field is translatable',
-			'What this block type will be called in the CP.'
+			'Field Type',
+			'Are you sure you want to delete this field?'
 		);
 
 		$fieldTypeOptions = array();
@@ -222,37 +222,6 @@ class MatrixFieldType extends BaseFieldType
 	}
 
 	/**
-	 * @inheritDoc IFieldType::modifyElementsQuery()
-	 *
-	 * @param DbCommand $query
-	 * @param mixed     $value
-	 *
-	 * @return null|false
-	 */
-	public function modifyElementsQuery(DbCommand $query, $value)
-	{
-		if ($value == 'not :empty:')
-		{
-			$value = ':notempty:';
-		}
-
-		if ($value == ':notempty:' || $value == ':empty:')
-		{
-			$alias = 'matrixblocks_'.$this->model->handle;
-			$operator = ($value == ':notempty:' ? '!=' : '=');
-
-			$query->andWhere(
-				"(select count({$alias}.id) from {{matrixblocks}} {$alias} where {$alias}.ownerId = elements.id and {$alias}.fieldId = :fieldId) {$operator} 0",
-				array(':fieldId' => $this->model->id)
-			);
-		}
-		else if ($value !== null)
-		{
-			return false;
-		}
-	}
-
-	/**
 	 * @inheritDoc IFieldType::getInputHtml()
 	 *
 	 * @param string $name
@@ -292,17 +261,7 @@ class MatrixFieldType extends BaseFieldType
 			($settings->maxBlocks ? $settings->maxBlocks : 'null') .
 		');');
 
-		craft()->templates->includeTranslations(
-			'Actions',
-			'Add a block',
-			'Add {type} above',
-			'Are you sure you want to delete the selected blocks?',
-			'Collapse',
-			'Disable',
-			'Disabled',
-			'Enable',
-			'Expand'
-		);
+		craft()->templates->includeTranslations('Disabled', 'Actions', 'Collapse', 'Expand', 'Disable', 'Enable', 'Add {type} above', 'Add a block');
 
 		return $html;
 	}
@@ -521,7 +480,7 @@ class MatrixFieldType extends BaseFieldType
 	}
 
 	/**
-	 * @inheritDoc IFieldType::getStaticHtml()
+	 * @inheritDoc BaseFieldType::getStaticHtml()
 	 *
 	 * @param mixed $value
 	 *
@@ -606,7 +565,7 @@ class MatrixFieldType extends BaseFieldType
 	}
 
 	/**
-	 * Returns info about each block type and their field types for the Matrix field input.
+	 * Returns info about each field type for the configurator.
 	 *
 	 * @param string $name
 	 *
@@ -631,7 +590,6 @@ class MatrixFieldType extends BaseFieldType
 			if ($this->element)
 			{
 				$block->setOwner($this->element);
-				$block->locale = $this->element->locale;
 			}
 
 			$fieldLayoutFields = $blockType->getFieldLayout()->getFields();

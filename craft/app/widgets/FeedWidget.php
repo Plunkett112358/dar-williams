@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.widgets
  * @since     1.0
  */
@@ -44,16 +44,6 @@ class FeedWidget extends BaseWidget
 		return craft()->templates->render('_components/widgets/Feed/settings', array(
 			'settings' => $this->getSettings()
 		));
-	}
-
-	/**
-	 * @inheritDoc IWidget::getIconPath()
-	 *
-	 * @return string
-	 */
-	public function getIconPath()
-	{
-		return craft()->path->getResourcesPath().'images/widgets/feed.svg';
 	}
 
 	/**

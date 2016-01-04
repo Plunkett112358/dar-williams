@@ -2,12 +2,12 @@
 namespace Craft;
 
 /**
- * Helper class for updating.
+ * Class UpdateHelper
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.helpers
  * @since     1.0
  */
@@ -26,11 +26,10 @@ class UpdateHelper
 
 	/**
 	 * @param $manifestData
-	 * @param $handle
 	 *
 	 * @return null
 	 */
-	public static function rollBackFileChanges($manifestData, $handle)
+	public static function rollBackFileChanges($manifestData)
 	{
 		foreach ($manifestData as $row)
 		{
@@ -45,7 +44,7 @@ class UpdateHelper
 			}
 
 			$rowData = explode(';', $row);
-			$file = IOHelper::normalizePathSeparators($handle == 'craft' ? craft()->path->getAppPath() : craft()->path->getPluginsPath().$handle.'/'.$rowData[0]);
+			$file = IOHelper::normalizePathSeparators(craft()->path->getAppPath().$rowData[0]);
 
 			// It's a folder
 			if (static::isManifestLineAFolder($file))
@@ -88,11 +87,10 @@ class UpdateHelper
 	/**
 	 * @param $manifestData
 	 * @param $sourceTempFolder
-	 * @param $handle
 	 *
 	 * @return bool
 	 */
-	public static function doFileUpdate($manifestData, $sourceTempFolder, $handle)
+	public static function doFileUpdate($manifestData, $sourceTempFolder)
 	{
 		try
 		{
@@ -116,8 +114,8 @@ class UpdateHelper
 					$tempPath = $rowData[0];
 				}
 
-				$destFile = IOHelper::normalizePathSeparators($handle == 'craft' ? craft()->path->getAppPath() : craft()->path->getPluginsPath().$handle).'/'.$tempPath;
-				$sourceFile = IOHelper::getRealPath(IOHelper::normalizePathSeparators($sourceTempFolder.($handle == 'craft' ? '/app/' : '/').$tempPath));
+				$destFile = IOHelper::normalizePathSeparators(craft()->path->getAppPath().$tempPath);
+				$sourceFile = IOHelper::getRealPath(IOHelper::normalizePathSeparators($sourceTempFolder.'/app/'.$tempPath));
 
 				switch (trim($rowData[1]))
 				{
@@ -152,7 +150,7 @@ class UpdateHelper
 		catch (\Exception $e)
 		{
 			Craft::log('Error updating files: '.$e->getMessage(), LogLevel::Error);
-			UpdateHelper::rollBackFileChanges($manifestData, $handle);
+			UpdateHelper::rollBackFileChanges($manifestData);
 			return false;
 		}
 
@@ -236,19 +234,18 @@ class UpdateHelper
 	 * Returns the relevant lines from the update manifest file starting with the current local version/build.
 	 *
 	 * @param $manifestDataPath
-	 * @param $handle
 	 *
 	 * @throws Exception
 	 * @return array
 	 */
-	public static function getManifestData($manifestDataPath, $handle)
+	public static function getManifestData($manifestDataPath)
 	{
 		if (static::$_manifestData == null)
 		{
-			if (IOHelper::fileExists($manifestDataPath.'/'.$handle.'_manifest'))
+			if (IOHelper::fileExists($manifestDataPath.'/craft_manifest'))
 			{
 				// get manifest file
-				$manifestFileData = IOHelper::getFileContents($manifestDataPath.'/'.$handle.'_manifest', true);
+				$manifestFileData = IOHelper::getFileContents($manifestDataPath.'/craft_manifest', true);
 
 				if ($manifestFileData === false)
 				{
@@ -264,28 +261,10 @@ class UpdateHelper
 				$manifestData = array_map('trim', $manifestFileData);
 				$updateModel = craft()->updates->getUpdates();
 
-				$localVersion = null;
-
-				if ($handle == 'craft')
-				{
-					$localVersion = $updateModel->app->localVersion.'.'.$updateModel->app->localBuild;
-				}
-				else
-				{
-					foreach ($updateModel->plugins as $plugin)
-					{
-						if (strtolower($plugin->class) == $handle)
-						{
-							$localVersion = $plugin->localVersion;
-							break;
-						}
-					}
-				}
-
 				// Only use the manifest data starting from the local version
 				for ($counter = 0; $counter < count($manifestData); $counter++)
 				{
-					if (mb_strpos($manifestData[$counter], '##'.$localVersion) !== false)
+					if (mb_strpos($manifestData[$counter], '##'.$updateModel->app->localVersion.'.'.$updateModel->app->localBuild) !== false)
 					{
 						break;
 					}

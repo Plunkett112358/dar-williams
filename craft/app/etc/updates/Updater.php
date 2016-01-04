@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.etc.updates
  * @since     1.0
  */
@@ -44,13 +44,11 @@ class Updater
 	}
 
 	/**
-	 * @param $handle
-	 *
 	 * @return array
 	 */
-	public function getUpdateFileInfo($handle)
+	public function getUpdateFileInfo()
 	{
-		$md5 = craft()->et->getUpdateFileInfo($handle);
+		$md5 = craft()->et->getUpdateFileInfo();
 		return array('md5' => $md5);
 	}
 
@@ -67,19 +65,18 @@ class Updater
 
 	/**
 	 * @param string $md5
-	 * @param string $handle
 	 *
 	 * @throws Exception
 	 * @return array
 	 */
-	public function processDownload($md5, $handle)
+	public function processDownload($md5)
 	{
 		Craft::log('Starting to process the update download.', LogLevel::Info, true);
 		$tempPath = craft()->path->getTempPath();
 
 		// Download the package from ET.
 		Craft::log('Downloading patch file to '.$tempPath, LogLevel::Info, true);
-		if (($fileName = craft()->et->downloadUpdate($tempPath, $md5, $handle)) !== false)
+		if (($fileName = craft()->et->downloadUpdate($tempPath, $md5)) !== false)
 		{
 			$downloadFilePath = $tempPath.$fileName;
 		}
@@ -106,20 +103,17 @@ class Updater
 			throw new Exception(Craft::t('There was a problem unpacking the downloaded package.'));
 		}
 
-		if ($handle == 'craft')
-		{
-			Craft::log('Validating any new requirements from the patch file.');
-			$errors = $this->_validateNewRequirements($unzipFolder);
+		Craft::log('Validating any new requirements from the patch file.');
+		$errors = $this->_validateNewRequirements($unzipFolder);
 
-			if (!empty($errors))
-			{
-				throw new Exception(StringHelper::parseMarkdown(Craft::t('Your server does not meet the following minimum requirements for Craft to run:')."\n\n".$this->_markdownList($errors)));
-			}
+		if (!empty($errors))
+		{
+			throw new Exception(StringHelper::parseMarkdown(Craft::t('Your server does not meet the following minimum requirements for Craft to run:')."\n\n".$this->_markdownList($errors)));
 		}
 
 		// Validate that the paths in the update manifest file are all writable by Craft
 		Craft::log('Validating update manifest file paths are writable.', LogLevel::Info, true);
-		$writableErrors = $this->_validateManifestPathsWritable($unzipFolder, $handle);
+		$writableErrors = $this->_validateManifestPathsWritable($unzipFolder);
 
 		if (count($writableErrors) > 0)
 		{
@@ -131,18 +125,17 @@ class Updater
 
 	/**
 	 * @param $uid
-	 * @param $handle
 	 *
 	 * @throws Exception
 	 * @return null
 	 */
-	public function backupFiles($uid, $handle)
+	public function backupFiles($uid)
 	{
 		$unzipFolder = UpdateHelper::getUnzipFolderFromUID($uid);
 
 		// Backup any files about to be updated.
 		Craft::log('Backing up files that are about to be updated.', LogLevel::Info, true);
-		if (!$this->_backupFiles($unzipFolder, $handle))
+		if (!$this->_backupFiles($unzipFolder))
 		{
 			throw new Exception(Craft::t('There was a problem backing up your files for the update.'));
 		}
@@ -154,7 +147,7 @@ class Updater
 	 * @throws Exception
 	 * @return null
 	 */
-	public function updateFiles($uid, $handle)
+	public function updateFiles($uid)
 	{
 		$unzipFolder = UpdateHelper::getUnzipFolderFromUID($uid);
 
@@ -164,7 +157,7 @@ class Updater
 
 		// Update the files.
 		Craft::log('Performing file update.', LogLevel::Info, true);
-		if (!UpdateHelper::doFileUpdate(UpdateHelper::getManifestData($unzipFolder, $handle), $unzipFolder, $handle))
+		if (!UpdateHelper::doFileUpdate(UpdateHelper::getManifestData($unzipFolder), $unzipFolder))
 		{
 			throw new Exception(Craft::t('There was a problem updating your files.'));
 		}
@@ -226,12 +219,11 @@ class Updater
 
 	/**
 	 * @param $uid
-	 * @param $handle
 	 *
 	 * @throws Exception
 	 * @return bool
 	 */
-	public function cleanUp($uid, $handle)
+	public function cleanUp($uid)
 	{
 		// Clear the updates cache.
 		Craft::log('Clearing the update cache.', LogLevel::Info, true);
@@ -247,7 +239,7 @@ class Updater
 
 			// Clean-up any leftover files.
 			Craft::log('Cleaning up temp files after update.', LogLevel::Info, true);
-			$this->_cleanTempFiles($unzipFolder, $handle);
+			$this->_cleanTempFiles($unzipFolder);
 		}
 
 		Craft::log('Finished Updater.', LogLevel::Info, true);
@@ -261,19 +253,18 @@ class Updater
 	 * Remove any temp files and/or folders that might have been created.
 	 *
 	 * @param string $unzipFolder
-	 * @param string $handle
 	 *
 	 * @return null
 	 */
-	private function _cleanTempFiles($unzipFolder, $handle)
+	private function _cleanTempFiles($unzipFolder)
 	{
-		$path = ($handle == 'craft' ? craft()->path->getAppPath() : craft()->path->getPluginsPath().$handle.'/');
+		$appPath = craft()->path->getAppPath();
 
 		// Get rid of all the .bak files/folders.
-		$filesToDelete = IOHelper::getFolderContents($path, true, ".*\.bak$");
+		$filesToDelete = IOHelper::getFolderContents($appPath, true, ".*\.bak$");
 
 		// Now delete any files/folders that were marked for deletion in the manifest file.
-		$manifestData = UpdateHelper::getManifestData($unzipFolder, $handle);
+		$manifestData = UpdateHelper::getManifestData($unzipFolder);
 
 		if ($manifestData)
 		{
@@ -297,13 +288,7 @@ class Updater
 						$tempFilePath = $rowData[0];
 					}
 
-					$filesToDelete[] = $path.$tempFilePath;
-				}
-
-				// In case we did the whole app folder
-				if ($rowData[0][0] == '*')
-				{
-					$filesToDelete[] = rtrim(IOHelper::normalizePathSeparators($path), '/').'.bak/';
+					$filesToDelete[] = $appPath.$tempFilePath;
 				}
 			}
 
@@ -315,12 +300,6 @@ class Updater
 					{
 						Craft::log('Deleting file: '.$fileToDelete, LogLevel::Info, true);
 						IOHelper::deleteFile($fileToDelete, true);
-
-						// If that was the last file in this folder, nuke the folder.
-						if (IOHelper::isFolderEmpty(IOHelper::getFolderName($fileToDelete)))
-						{
-							IOHelper::deleteFolder(IOHelper::getFolderName($fileToDelete));
-						}
 					}
 				}
 				else
@@ -386,13 +365,12 @@ class Updater
 	 * Checks to see if the files that we are about to update are writable by Craft.
 	 *
 	 * @param string $unzipFolder
-	 * @param string $handle
 	 *
 	 * @return bool
 	 */
-	private function _validateManifestPathsWritable($unzipFolder, $handle)
+	private function _validateManifestPathsWritable($unzipFolder)
 	{
-		$manifestData = UpdateHelper::getManifestData($unzipFolder, $handle);
+		$manifestData = UpdateHelper::getManifestData($unzipFolder);
 		$writableErrors = array();
 
 		foreach ($manifestData as $row)
@@ -403,7 +381,7 @@ class Updater
 			}
 
 			$rowData = explode(';', $row);
-			$filePath = IOHelper::normalizePathSeparators($handle == 'craft' ? craft()->path->getAppPath() : craft()->path->getPluginsPath().$handle.'/'.$rowData[0]);
+			$filePath = IOHelper::normalizePathSeparators(craft()->path->getAppPath().$rowData[0]);
 
 			if (UpdateHelper::isManifestLineAFolder($filePath))
 			{
@@ -437,13 +415,12 @@ class Updater
 	 * extension. If there is an exception thrown, we attempt to roll back all of the changes.
 	 *
 	 * @param string $unzipFolder
-	 * @param string $handle
 	 *
 	 * @return bool
 	 */
-	private function _backupFiles($unzipFolder, $handle)
+	private function _backupFiles($unzipFolder)
 	{
-		$manifestData = UpdateHelper::getManifestData($unzipFolder, $handle);
+		$manifestData = UpdateHelper::getManifestData($unzipFolder);
 
 		try
 		{
@@ -461,7 +438,7 @@ class Updater
 				}
 
 				$rowData = explode(';', $row);
-				$filePath = IOHelper::normalizePathSeparators($handle == 'craft' ? craft()->path->getAppPath() : craft()->path->getPluginsPath().$handle.'/'.$rowData[0]);
+				$filePath = IOHelper::normalizePathSeparators(craft()->path->getAppPath().$rowData[0]);
 
 				// It's a folder
 				if (UpdateHelper::isManifestLineAFolder($filePath))
@@ -489,7 +466,7 @@ class Updater
 		catch (\Exception $e)
 		{
 			Craft::log('Error updating files: '.$e->getMessage(), LogLevel::Error);
-			UpdateHelper::rollBackFileChanges($manifestData, $handle);
+			UpdateHelper::rollBackFileChanges($manifestData);
 			return false;
 		}
 
@@ -516,7 +493,7 @@ class Updater
 		// Make sure we can write to craft/app/requirements
 		if (!IOHelper::isWritable(craft()->path->getAppPath().'etc/requirements/'))
 		{
-			throw new Exception(StringHelper::parseMarkdown(Craft::t('Craft needs to be able to write to your craft/app/etc/requirements folder and cannot. Please check your [permissions]({url}).', array('url' => 'http://craftcms.com/docs/updating#one-click-updating'))));
+			throw new Exception(StringHelper::parseMarkdown(Craft::t('Craft needs to be able to write to your craft/app/etc/requirements folder and cannot. Please check your [permissions]({url}).', array('url' => 'http://buildwithcraft.com/docs/updating#one-click-updating'))));
 		}
 
 		$tempFileName = StringHelper::UUID().'.php';

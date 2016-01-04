@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.variables
  * @since     1.0
  */
@@ -15,46 +15,6 @@ class HttpRequestVariable
 {
 	// Public Methods
 	// =========================================================================
-
-	/**
-	 * Returns whether this is a GET request.
-	 *
-	 * @return bool Whether this is a GET request
-	 */
-	public function isGet()
-	{
-		return craft()->request->getIsGetRequest();
-	}
-
-	/**
-	 * Returns whether this is a POST request.
-	 *
-	 * @return bool Whether this is a POST request
-	 */
-	public function isPost()
-	{
-		return craft()->request->getIsPostRequest();
-	}
-
-	/**
-	 * Returns whether this is a DELETE request.
-	 *
-	 * @return bool Whether this is a DELETE request
-	 */
-	public function isDelete()
-	{
-		return craft()->request->getIsDeleteRequest();
-	}
-
-	/**
-	 * Returns whether this is a PUT request.
-	 *
-	 * @return bool Whether this is a PUT request
-	 */
-	public function isPut()
-	{
-		return craft()->request->getIsPutRequest();
-	}
 
 	/**
 	 * Returns whether this is an Ajax request.

@@ -1,8 +1,8 @@
 /**
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.resources
  */
 
@@ -23,16 +23,18 @@ Craft.UpdatesWidget = Garnish.Base.extend(
 
 		if (!cached)
 		{
-			this.checkForUpdates(false);
+			this.lookLikeWereChecking();
+
+			Craft.cp.on('checkForUpdates', $.proxy(function(ev) {
+				this.showUpdateInfo(ev.updateInfo);
+			}, this))
 		}
 	},
 
 	initBtn: function()
 	{
 		this.$btn = this.$body.find('.btn:first');
-		this.addListener(this.$btn, 'click', function() {
-			this.checkForUpdates(true);
-		});
+		this.addListener(this.$btn, 'click', $.proxy(this, 'checkForUpdates'));
 	},
 
 	lookLikeWereChecking: function()
@@ -56,7 +58,12 @@ Craft.UpdatesWidget = Garnish.Base.extend(
 		}
 
 		this.lookLikeWereChecking();
-		Craft.cp.checkForUpdates(forceRefresh, $.proxy(this, 'showUpdateInfo'));
+
+		var data = {
+			forceRefresh: true
+		};
+
+		Craft.postActionRequest('app/checkForUpdates', data, $.proxy(this, 'showUpdateInfo'));
 	},
 
 	showUpdateInfo: function(info)

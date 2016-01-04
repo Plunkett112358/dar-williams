@@ -8,8 +8,8 @@ craft()->requireEdition(Craft::Pro);
  *
  * @author     Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright  Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license    http://craftcms.com/license Craft License Agreement
- * @see        http://craftcms.com
+ * @license    http://buildwithcraft.com/license Craft License Agreement
+ * @see        http://buildwithcraft.com
  * @package    craft.app.assetsourcetypes
  * @since      1.0
  * @deprecated This class will be removed in Craft 3.0.
@@ -381,32 +381,42 @@ class RackspaceAssetSourceType extends BaseAssetSourceType
 	// =========================================================================
 
 	/**
-	 * @inheritDoc BaseAssetSourceType::getNameReplacementInFolder()
+	 * @inheritDoc BaseAssetSourceType::getNameReplacement()
 	 *
 	 * @param AssetFolderModel $folder
 	 * @param string           $fileName
 	 *
 	 * @return string
 	 */
-	protected function getNameReplacementInFolder(AssetFolderModel $folder, $fileName)
+	protected function getNameReplacement(AssetFolderModel $folder, $fileName)
 	{
 		$prefix = $this->_getPathPrefix().$folder->path;
-		$fileList = $this->_getFileList($prefix);
+		$files = $this->_getFileList($prefix);
+		$fileList = array();
 
-		foreach ($fileList as &$file)
+		foreach ($files as $file)
 		{
-			$file = preg_replace('/^'.preg_quote($prefix, '/').'/', '', $file->name);
+			$fileList[mb_strtolower($file->name)] = true;
 		}
 
-		// Drop all the paths that have subfolders.
-		$fileList = array_filter($fileList,
-			function ($file)
-			{
-				return !(strpos($file, '/') !== false || empty($file));
-			}
-		);
+		// Double-check
+		if (!isset($fileList[mb_strtolower($fileName)]))
+		{
+			return $fileName;
+		}
 
-		return AssetsHelper::getFilenameReplacement($fileList, $fileName);
+		$fileNameParts = explode(".", $fileName);
+		$extension = array_pop($fileNameParts);
+
+		$fileNameStart = join(".", $fileNameParts).'_';
+		$index = 1;
+
+		while ( isset($fileList[mb_strtolower($prefix.$fileNameStart.$index.'.'.$extension)]))
+		{
+			$index++;
+		}
+
+		return $fileNameStart.$index.'.'.$extension;
 	}
 
 	/**

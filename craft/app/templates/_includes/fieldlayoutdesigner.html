@@ -15,7 +15,7 @@
 	"Give your tab a name."
 %}
 
-{% includecssfile "//fonts.googleapis.com/css?family=Coming+Soon" %}
+{% includeCssFile "//fonts.googleapis.com/css?family=Coming+Soon" %}
 
 {% macro tab(customizableTabs, tabName, tabFields) %}
 	<div class="fld-tab">
@@ -98,7 +98,7 @@
 
 </div>
 
-{% includejs %}
+{% set js %}
 	var initFLD = function() {
 		new Craft.FieldLayoutDesigner('#{{ "fieldlayoutform"|namespaceInputId }}', {
 			customizableTabs: {{ customizableTabs ? 'true' : 'false' }},
@@ -128,4 +128,6 @@
 		initFLD();
 
 	{% endif %}
-{% endincludejs %}
+{% endset %}
+
+{% includeJs js %}

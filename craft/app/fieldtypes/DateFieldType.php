@@ -6,12 +6,12 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.fieldtypes
  * @since     1.0
  */
-class DateFieldType extends BaseFieldType implements IPreviewableFieldType
+class DateFieldType extends BaseFieldType
 {
 	// Public Methods
 	// =========================================================================
@@ -100,27 +100,20 @@ class DateFieldType extends BaseFieldType implements IPreviewableFieldType
 
 		$input = '';
 
-		$showTime = $this->getSettings()->showTime;
-		$showDate = (!$showTime || $this->getSettings()->showDate);
-
-		if ($showDate && $showTime)
+		// In case nothing is selected, default to the date.
+		if (!$this->getSettings()->showDate && !$this->getSettings()->showTime)
 		{
-			$input .= '<div class="datetimewrapper">';
+			$this->getSettings()->showDate = true;
 		}
 
-		if ($showDate)
+		if ($this->getSettings()->showDate)
 		{
 			$input .= craft()->templates->render('_includes/forms/date', $variables);
 		}
 
-		if ($showTime)
+		if ($this->getSettings()->showTime)
 		{
 			$input .= ' '.craft()->templates->render('_includes/forms/time', $variables);
-		}
-
-		if ($showDate && $showTime)
-		{
-			$input .= '</div>';
 		}
 
 		return $input;
@@ -136,25 +129,6 @@ class DateFieldType extends BaseFieldType implements IPreviewableFieldType
 	public function prepValueFromPost($value)
 	{
 		return DateTime::createFromString($value, craft()->getTimeZone());
-	}
-
-	/**
-	 * @inheritDoc IPreviewableFieldType::getTableAttributeHtml()
-	 *
-	 * @param mixed $value
-	 *
-	 * @return string
-	 */
-	public function getTableAttributeHtml($value)
-	{
-		if ($value)
-		{
-			return '<span title="'.$value->localeDate().' '.$value->localeTime().'">'.$value->uiTimestamp().'</span>';
-		}
-		else
-		{
-			return '';
-		}
 	}
 
 	/**

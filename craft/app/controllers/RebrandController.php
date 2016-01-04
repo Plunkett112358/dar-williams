@@ -11,20 +11,13 @@ craft()->requireEdition(Craft::Client);
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.controllers
  * @since     1.0
  */
 class RebrandController extends BaseController
 {
-	/**
-	 * Allowed types of site images.
-	 *
-	 * @var array
-	 */
-	private $_allowedTypes = array('logo', 'icon');
-
 	// Public Methods
 	// =========================================================================
 
@@ -33,37 +26,26 @@ class RebrandController extends BaseController
 	 *
 	 * @return null
 	 */
-	public function actionUploadSiteImage()
+	public function actionUploadLogo()
 	{
 		$this->requireAjaxRequest();
 		$this->requireAdmin();
-		$type = craft()->request->getRequiredPost('type');
-
-		if (!in_array($type, $this->_allowedTypes))
-		{
-			$this->returnErrorJson(Craft::t('That is not an accepted site image type.'));
-		}
 
 		// Upload the file and drop it in the temporary folder
-		$file = UploadedFile::getInstanceByName('image-upload');
+		$file = $_FILES['image-upload'];
 
 		try
 		{
 			// Make sure a file was uploaded
-			if ($file)
+			if (!empty($file['name']) && !empty($file['size'])  )
 			{
-				$fileName = AssetsHelper::cleanAssetName($file->getName());
-
-				if (!ImageHelper::isImageManipulatable($file->getExtensionName()))
-				{
-					throw new Exception(Craft::t('The uploaded file is not an image.'));
-				}
-
 				$folderPath = craft()->path->getTempUploadsPath();
 				IOHelper::ensureFolderExists($folderPath);
 				IOHelper::clearFolder($folderPath, true);
 
-				move_uploaded_file($file->getTempName(), $folderPath.$fileName);
+				$fileName = AssetsHelper::cleanAssetName($file['name']);
+
+				move_uploaded_file($file['tmp_name'], $folderPath.$fileName);
 
 				// Test if we will be able to perform image actions on this image
 				if (!craft()->images->checkMemoryForImage($folderPath.$fileName))
@@ -72,21 +54,40 @@ class RebrandController extends BaseController
 					$this->returnErrorJson(Craft::t('The uploaded image is too large'));
 				}
 
-				craft()->images->
-					loadImage($folderPath.$fileName)->
-					scaleToFit(500, 500, false)->
-					saveAs($folderPath.$fileName);
+                list ($width, $height) = ImageHelper::getImageSize($folderPath.$fileName);
 
-				list ($width, $height) = ImageHelper::getImageSize($folderPath.$fileName);
+                if (IOHelper::getExtension($fileName) != 'svg')
+                {
+                    craft()->images->cleanImage($folderPath.$fileName);
+                }
+                else
+                {
+                    // Resave svg files as png
+                    $newFilename = preg_replace('/\.svg$/i', '.png', $fileName);
+
+                    craft()->images->
+                        loadImage($folderPath.$fileName, $width, $height)->
+                        saveAs($folderPath.$newFilename);
+
+                    IOHelper::deleteFile($folderPath.$fileName);
+                    $fileName = $newFilename;
+                }
+
+				$constraint = 500;
 
 				// If the file is in the format badscript.php.gif perhaps.
 				if ($width && $height)
 				{
+					// Never scale up the images, so make the scaling factor always <= 1
+					$factor = min($constraint / $width, $constraint / $height, 1);
+
 					$html = craft()->templates->render('_components/tools/cropper_modal',
 						array(
 							'imageUrl' => UrlHelper::getResourceUrl('tempuploads/'.$fileName),
-							'width' => $width,
-							'height' => $height,
+							'width' => round($width * $factor),
+							'height' => round($height * $factor),
+							'factor' => $factor,
+							'constraint' => $constraint,
                             'fileName' => $fileName
 						)
 					);
@@ -108,16 +109,10 @@ class RebrandController extends BaseController
 	 *
 	 * @return null
 	 */
-	public function actionCropSiteImage()
+	public function actionCropLogo()
 	{
 		$this->requireAjaxRequest();
 		$this->requireAdmin();
-		$type = craft()->request->getRequiredPost('type');
-
-		if (!in_array($type, $this->_allowedTypes))
-		{
-			$this->returnErrorJson(Craft::t('That is not a legal site image type.'));
-		}
 
 		try
 		{
@@ -134,20 +129,20 @@ class RebrandController extends BaseController
 
 			if (IOHelper::fileExists($imagePath) && craft()->images->checkMemoryForImage($imagePath))
 			{
-				$targetPath = craft()->path->getRebrandPath().$type.'/';
+				$targetPath = craft()->path->getStoragePath().'logo/';
 
 				IOHelper::ensureFolderExists($targetPath);
                 IOHelper::clearFolder($targetPath);
 
                 craft()->images
-						->loadImage($imagePath)
+						->loadImage($imagePath, 300, 300)
 						->crop($x1, $x2, $y1, $y2)
 						->scaleToFit(300, 300, false)
 						->saveAs($targetPath.$source);
 
 				IOHelper::deleteFile($imagePath);
 
-				$html = craft()->templates->render('settings/general/_images/'.$type);
+				$html = craft()->templates->render('settings/general/_logo');
 				$this->returnJson(array('html' => $html));
 			}
 
@@ -166,20 +161,13 @@ class RebrandController extends BaseController
 	 *
 	 * @return null
 	 */
-	public function actionDeleteSiteImage()
+	public function actionDeleteLogo()
 	{
 		$this->requireAdmin();
-		$type = craft()->request->getRequiredPost('type');
+		IOHelper::clearFolder(craft()->path->getStoragePath().'logo/');
 
-		if (!in_array($type, $this->_allowedTypes))
-		{
-			$this->returnErrorJson(Craft::t('That is not a legal site image type.'));
-		}
-
-		IOHelper::clearFolder(craft()->path->getRebrandPath().$type.'/');
-
-		$html = craft()->templates->render('settings/general/_images/'.$type);
-
+		$html = craft()->templates->render('settings/general/_logo');
 		$this->returnJson(array('html' => $html));
+
 	}
 }

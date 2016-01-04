@@ -8,8 +8,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.controllers
  * @since     2.3
  */
@@ -101,9 +101,17 @@ class ElementIndexController extends BaseElementsController
 	 */
 	public function actionGetElements()
 	{
-		$includeActions = ($this->_context == 'index');
-		$responseData = $this->_getElementResponseData(true, $includeActions);
-		$this->returnJson($responseData);
+		// Get the action head/foot HTML before any more is added to it from the element HTML
+		if ($this->_context == 'index')
+		{
+			$responseData['actions']  = $this->_getActionData();
+			$responseData['actionsHeadHtml'] = craft()->templates->getHeadHtml();
+			$responseData['actionsFootHtml'] = craft()->templates->getFootHtml();
+		}
+
+		$responseData['html'] = $this->_getElementHtml(true);
+
+		$this->_respond($responseData, true);
 	}
 
 	/**
@@ -113,8 +121,9 @@ class ElementIndexController extends BaseElementsController
 	 */
 	public function actionGetMoreElements()
 	{
-		$responseData = $this->_getElementResponseData(false, false);
-		$this->returnJson($responseData);
+		$this->_respond(array(
+			'html' => $this->_getElementHtml(false),
+		), true);
 	}
 
 	/**
@@ -179,47 +188,26 @@ class ElementIndexController extends BaseElementsController
 		$actionCriteria->positionedBefore = null;
 		$actionCriteria->id = $elementIds;
 
-		// Fire an 'onBeforePerformAction' event
-		$event = new ElementActionEvent($this, array(
-			'action'   => $action,
-			'criteria' => $actionCriteria
-		));
-
-		craft()->elements->onBeforePerformAction($event);
-
-		if ($event->performAction)
-		{
-			$success = $action->performAction($actionCriteria);
-			$message = $action->getMessage();
-
-			if ($success)
-			{
-				// Fire an 'onPerformAction' event
-				craft()->elements->onPerformAction(new Event($this, array(
-					'action'   => $action,
-					'criteria' => $actionCriteria
-				)));
-			}
-		}
-		else
-		{
-			$success = false;
-			$message = $event->message;
-		}
+		$success = $action->performAction($actionCriteria);
 
 		// Respond
-		$responseData = array(
+		$response = array(
 			'success' => $success,
-			'message' => $message
+			'message' => $action->getMessage(),
 		);
 
 		if ($success)
 		{
 			// Send a new set of elements
-			$responseData = array_merge($responseData, $this->_getElementResponseData(true, true));
+			$response['html'] = $this->_getElementHtml(false);
+			$includeLoadMoreInfo = true;
+		}
+		else
+		{
+			$includeLoadMoreInfo = false;
 		}
 
-		$this->returnJson($responseData);
+		$this->_respond($response, $includeLoadMoreInfo);
 	}
 
 	// Private Methods
@@ -271,16 +259,20 @@ class ElementIndexController extends BaseElementsController
 	 */
 	private function _getCriteria()
 	{
-		$criteria = craft()->elements->getCriteria($this->_elementType->getClassHandle());
+		$criteria = craft()->elements->getCriteria(
+			$this->_elementType->getClassHandle(),
+			craft()->request->getPost('criteria')
+		);
+
+		$criteria->limit = 50;
+		$criteria->offset = craft()->request->getParam('offset');
+		$criteria->search = craft()->request->getParam('search');
 
 		// Does the source specify any criteria attributes?
 		if (!empty($this->_source['criteria']))
 		{
 			$criteria->setAttributes($this->_source['criteria']);
 		}
-
-		// Override with the request's params
-		$criteria->setAttributes(craft()->request->getPost('criteria'));
 
 		// Exclude descendants of the collapsed element IDs
 		if (!$criteria->id)
@@ -343,27 +335,16 @@ class ElementIndexController extends BaseElementsController
 	/**
 	 * Returns the element HTML to be returned to the client.
 	 *
-	 * @param bool $includeContainer Whether the element container should be included in the response data
-	 * @param bool $includeActions   Whether info about the available actions should be included in the response data
+	 * @param bool $includeContainer Whether the element container should be included in the HTML.
 	 *
 	 * @return string
 	 */
-	private function _getElementResponseData($includeContainer, $includeActions)
+	private function _getElementHtml($includeContainer)
 	{
-		$responseData = array();
-
-		// Get the action head/foot HTML before any more is added to it from the element HTML
-		if ($includeActions)
-		{
-			$responseData['actions'] = $this->_getActionData();
-			$responseData['actionsHeadHtml'] = craft()->templates->getHeadHtml();
-			$responseData['actionsFootHtml'] = craft()->templates->getFootHtml();
-		}
-
 		$disabledElementIds = craft()->request->getParam('disabledElementIds', array());
 		$showCheckboxes = !empty($this->_actions);
 
-		$responseData['html'] = $this->_elementType->getIndexHtml(
+		return $this->_elementType->getIndexHtml(
 			$this->_criteria,
 			$disabledElementIds,
 			$this->_viewState,
@@ -372,11 +353,6 @@ class ElementIndexController extends BaseElementsController
 			$includeContainer,
 			$showCheckboxes
 		);
-
-		$responseData['headHtml'] = craft()->templates->getHeadHtml();
-		$responseData['footHtml'] = craft()->templates->getFootHtml();
-
-		return $responseData;
 	}
 
 	/**
@@ -436,5 +412,38 @@ class ElementIndexController extends BaseElementsController
 
 			return $actionData;
 		}
+	}
+
+	/**
+	 * Responds to the request.
+	 *
+	 * @param array $responseData
+	 * @param bool  $includeLoadMoreInfo
+	 *
+	 * @return null
+	 */
+	private function _respond($responseData, $includeLoadMoreInfo)
+	{
+		if ($includeLoadMoreInfo)
+		{
+			$totalElementsInBatch = count($this->_criteria);
+			$responseData['totalVisible'] = $this->_criteria->offset + $totalElementsInBatch;
+
+			if ($this->_criteria->limit)
+			{
+				// We'll risk a pointless additional Ajax request in the unlikely event that there are exactly a factor of
+				// 50 elements, rather than running two separate element queries
+				$responseData['more'] = ($totalElementsInBatch == $this->_criteria->limit);
+			}
+			else
+			{
+				$responseData['more'] = false;
+			}
+		}
+
+		$responseData['headHtml'] = craft()->templates->getHeadHtml();
+		$responseData['footHtml'] = craft()->templates->getFootHtml();
+
+		$this->returnJson($responseData);
 	}
 }

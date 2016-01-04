@@ -5,15 +5,8 @@
 	{ label: "Settings"|t, url: url('settings') }
 ] %}
 
-{% set navItems = {
-	sources: { label: "Asset Sources"|t, url: url('settings/assets') },
+
+{% set tabs = {
+	sources: { label: "Sources"|t, url: url('settings/assets') },
 	transforms: { label: "Image Transforms"|t, url: url('settings/assets/transforms') },
 } %}
-
-{% set docTitle = navItems[selectedNavItem].label~' - '~title %}
-
-{% block sidebar %}
-	<nav>
-		{% include "_includes/nav" with { items: navItems, selectedItem: selectedNavItem } only %}
-	</nav>
-{% endblock %}

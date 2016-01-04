@@ -6,8 +6,8 @@
 
 {% import "_includes/forms" as forms %}
 
-{% includejsresource "js/locales.js" %}
-{% includecssresource "css/locales.css" %}
+{% includeJsResource "js/locales.js" %}
+{% includeCssResource "css/locales.css" %}
 
 {% includeTranslations
 	"Are you sure you want to delete “{name}” and all its associated content?",
@@ -28,7 +28,7 @@
 ] %}
 
 
-{% block content %}
+{% set content %}
 	<form method="post" accept-charset="UTF-8">
 		<input type="hidden" name="action" value="languageSettings/save">
 		<input type="hidden" name="redirect" value="settings">
@@ -62,9 +62,9 @@
 			</div>
 		</div>
 	</form>
-{% endblock %}
+{% endset %}
 
-{% includejs %}
+{% set js %}
 	new Craft.Locales(
 	{
 		{%- for locale in craft.i18n.getAllLocales() %}
@@ -80,4 +80,6 @@
 		{%- endfor -%}
 
 	]);
-{% endincludejs %}
+{% endset %}
+
+{% includeJs js %}

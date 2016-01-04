@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -109,22 +109,14 @@ class SearchService extends BaseApplicationComponent
 	 * @param mixed $query        The search query (either a string or a SearchQuery instance)
 	 * @param bool  $scoreResults Whether to order the results based on how closely they match the query.
 	 * @param mixed $localeId     The locale to filter by.
-	 * @param bool  $returnScores Whether the search scores should be included in the results. If true, results will be returned as `element ID => score`.
 	 *
 	 * @return array The filtered list of element IDs.
 	 */
-	public function filterElementIdsByQuery($elementIds, $query, $scoreResults = true, $localeId = null, $returnScores = false)
+	public function filterElementIdsByQuery($elementIds, $query, $scoreResults = true, $localeId = null)
 	{
 		if (is_string($query))
 		{
-			$query = new SearchQuery($query, craft()->config->get('defaultSearchTermOptions'));
-		}
-		else if (is_array($query))
-		{
-			$options = $query;
-			$query = $options['query'];
-			unset($options['query']);
-			$query = new SearchQuery($query, $options);
+			$query = new SearchQuery($query);
 		}
 
 		// Get tokens for query
@@ -201,15 +193,8 @@ class SearchService extends BaseApplicationComponent
 			// Sort found elementIds by score
 			arsort($scoresByElementId);
 
-			if ($returnScores)
-			{
-				return $scoresByElementId;
-			}
-			else
-			{
-				// Just return the ordered element IDs
-				return array_keys($scoresByElementId);
-			}
+			// Store entry ids in return value
+			$elementIds = array_keys($scoresByElementId);
 		}
 		else
 		{
@@ -221,8 +206,11 @@ class SearchService extends BaseApplicationComponent
 				$elementIds[] = $row['elementId'];
 			}
 
-			return array_unique($elementIds);
+			$elementIds = array_unique($elementIds);
 		}
+
+		// Return elementIds
+		return $elementIds;
 	}
 
 	// Private Methods
@@ -392,18 +380,18 @@ class SearchService extends BaseApplicationComponent
 		}
 
 		// Account for substrings
-		if (!$term->subLeft)
-		{
-			$keywords = ' '.$keywords;
-		}
-
-		if (!$term->subRight)
+		if ($term->subLeft)
 		{
 			$keywords = $keywords.' ';
 		}
 
+		if ($term->subRight)
+		{
+			$keywords = ' '.$keywords;
+		}
+
 		// Get haystack and safe word count
-		$haystack  = $row['keywords'];
+		$haystack  = $this->_removePadding($row['keywords'], true);
 		$wordCount = count(array_filter(explode(' ', $haystack)));
 
 		// Get number of matches

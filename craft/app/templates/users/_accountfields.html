@@ -1,5 +1,4 @@
 {% import "_includes/forms" as forms %}
-{% set meta = meta is defined ? meta : false %}
 
 {% if not craft.config.useEmailAsUsername %}
 	{{ forms.textField({
@@ -15,10 +14,8 @@
 	}) }}
 {% endif %}
 
-{% if not meta %}
 <div class="grid" data-cols="2" data-mode="pct">
 	<div class="item" data-colspan="1">
-{% endif %}
 		{{ forms.textField({
 			label: "First Name"|t,
 			id: 'firstName',
@@ -27,10 +24,8 @@
 			errors: (account is defined ? account.getErrors('firstName') : null),
 			autofocus: craft.config.useEmailAsUsername
 		}) }}
-{% if not meta %}
 	</div>
 	<div class="item" data-colspan="1">
-{% endif %}
 		{{ forms.textField({
 			label: "Last Name"|t,
 			id: 'lastName',
@@ -38,7 +33,5 @@
 			value: (account is defined ? account.lastName : null),
 			errors: (account is defined ? account.getErrors('lastName') : null)
 		}) }}
-{% if not meta %}
 	</div>
 </div>
-{% endif %}

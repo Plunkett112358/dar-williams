@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @link      http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @link      http://buildwithcraft.com
  * @package   craft.app.elementactions
  * @since     2.3
  */
@@ -52,9 +52,9 @@ class NewChildElementAction extends BaseElementAction
 		}
 	});
 
-	if (Craft.elementIndex.view.structureTableSort)
+	if (Craft.elementIndex.structureTableSort)
 	{
-		Craft.elementIndex.view.structureTableSort.on('positionChange', $.proxy(trigger, 'updateTrigger'));
+		Craft.elementIndex.structureTableSort.on('positionChange', $.proxy(trigger, 'updateTrigger'));
 	}
 })();
 EOT;
@@ -73,7 +73,7 @@ EOT;
 	protected function defineParams()
 	{
 		return array(
-			'label'       => array(AttributeType::String, 'default' => Craft::t('New child')),
+			'label'       => array(AttributeType::String, 'default' => Craft::t('New Child')),
 			'maxLevels'   => AttributeType::Number,
 			'newChildUrl' => AttributeType::String,
 		);

@@ -1,17 +1,13 @@
 <?php
 namespace Craft;
 
-use lsolesen\pel\PelJpeg;
-use lsolesen\pel\PelTag;
-use lsolesen\pel\PelDataWindow;
-
 /**
  * Service for image operations.
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -34,7 +30,7 @@ class ImagesService extends BaseApplicationComponent
 	{
 		if ($this->_isGd === null)
 		{
-			if (strtolower(craft()->config->get('imageDriver')) == 'gd')
+			if (craft()->config->get('imageDriver') == 'gd')
 			{
 				$this->_isGd = true;
 			}
@@ -78,33 +74,20 @@ class ImagesService extends BaseApplicationComponent
 	 * Loads an image from a file system path.
 	 *
 	 * @param string $path
-	 * @param bool   $rasterize whether or not the image will be rasterized if it's an SVG
-	 * @param int    $svgSize   The size SVG should be scaled up to, if rasterized
+	 * @param int $minSvgWidth The minimum width that the image should be loaded with if it’s an SVG.
+	 * @param int $minSvgHeight The minimum width that the image should be loaded with if it’s an SVG.
 	 *
 	 * @throws \Exception
-	 * @return BaseImage
+	 * @return Image
 	 */
-	public function loadImage($path, $rasterize = false, $svgSize = 1000)
+	public function loadImage($path, $minSvgWidth = 1000, $minSvgHeight = 1000)
 	{
-		if (StringHelper::toLowerCase(IOHelper::getExtension($path)) == 'svg')
-		{
-			$image = new SvgImage();
-			$image->loadImage($path);
+		$image = new Image();
 
-			if ($rasterize)
-			{
-				$image->scaleToFit($svgSize, $svgSize);
-				$svgString = $image->getSvgString();
-				$image = new Image();
-				$image->loadFromSVG($svgString);
-			}
-		}
-		else
-		{
-			$image = new Image();
-			$image->loadImage($path);
-		}
+		$image->minSvgWidth = $minSvgWidth;
+		$image->minSvgHeight = $minSvgHeight;
 
+		$image->loadImage($path);
 		return $image;
 	}
 
@@ -113,7 +96,7 @@ class ImagesService extends BaseApplicationComponent
 	 *
 	 * The code was adapted from http://www.php.net/manual/en/function.imagecreatefromjpeg.php#64155. It will first
 	 * attempt to do it with available memory. If that fails, Craft will bump the memory to amount defined by the
-	 * [phpMaxMemoryLimit](http://craftcms.com/docs/config-settings#phpMaxMemoryLimit) config setting, then try again.
+	 * [phpMaxMemoryLimit](http://buildwithcraft.com/docs/config-settings#phpMaxMemoryLimit) config setting, then try again.
 	 *
 	 * @param string $filePath The path to the image file.
 	 * @param bool   $toTheMax If set to true, will set the PHP memory to the config setting phpMaxMemoryLimit.
@@ -122,11 +105,6 @@ class ImagesService extends BaseApplicationComponent
 	 */
 	public function checkMemoryForImage($filePath, $toTheMax = false)
 	{
-		if (StringHelper::toLowerCase(IOHelper::getExtension($filePath)) == 'svg')
-		{
-			return true;
-		}
-
 		if (!function_exists('memory_get_usage'))
 		{
 			return false;
@@ -236,13 +214,13 @@ class ImagesService extends BaseApplicationComponent
 			}
 		}
 
-		if ($degrees === false)
-		{
-			return false;
-		}
+        if ($degrees === false)
+        {
+            return false;
+        }
 
 		$image = $this->loadImage($filePath)->rotate($degrees);
-		return $image->saveAs($filePath);
+		return $image->saveAs($filePath, true);
 	}
 
 	/**
@@ -278,21 +256,12 @@ class ImagesService extends BaseApplicationComponent
 			return null;
 		}
 
-		// Quick and dirty, if possible
-		if ($this->isImagick() && method_exists('Imagick', 'setImageProperty'))
-		{
-			$image = new \Imagick($filePath);
-			$image->setImageOrientation(\Imagick::ORIENTATION_UNDEFINED);
-			$image->writeImages($filePath, true);
-			return true;
-		}
-
-		$data = new PelDataWindow(IOHelper::getFileContents($filePath));
+		$data = new \PelDataWindow(IOHelper::getFileContents($filePath));
 
 		// Is this a valid JPEG?
-		if (PelJpeg::isValid($data))
+		if (\PelJpeg::isValid($data))
 		{
-			$jpeg = $file = new PelJpeg();
+			$jpeg = $file = new \PelJpeg();
 			$jpeg->load($data);
 			$exif = $jpeg->getExif();
 
@@ -302,7 +271,7 @@ class ImagesService extends BaseApplicationComponent
 				$ifd0 = $tiff->getIfd();
 
 				// Delete the Orientation entry and re-save the file
-				$ifd0->offsetUnset(PelTag::ORIENTATION);
+				$ifd0->offsetUnset(\PelTag::ORIENTATION);
 				$file->saveFile($filePath);
 
 				return true;

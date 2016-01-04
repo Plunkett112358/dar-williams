@@ -21,12 +21,12 @@ class EasyPeasyICS
 {
     /**
      * The name of the calendar
-     * @var string
+     * @type string
      */
     protected $calendarName;
     /**
      * The array of events to add to this calendar
-     * @var array
+     * @type array
      */
     protected $events = array();
 

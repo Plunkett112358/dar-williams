@@ -8,8 +8,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.records
  * @since     1.0
  */
@@ -67,8 +67,8 @@ class AssetFileRecord extends BaseRecord
 		return array(
 			'filename'		=> array(AttributeType::String, 'required' => true),
 			'kind'			=> array('column' => ColumnType::Varchar, 'maxLength' => 50, 'required' => true, 'default' => 'unknown'),
-			'width'			=> array(AttributeType::Number, 'min' => 0, 'column' => ColumnType::Int),
-			'height'		=> array(AttributeType::Number, 'min' => 0, 'column' => ColumnType::Int),
+			'width'			=> array(AttributeType::Number, 'min' => 0, 'column' => ColumnType::SmallInt),
+			'height'		=> array(AttributeType::Number, 'min' => 0, 'column' => ColumnType::SmallInt),
 			'size'			=> array(AttributeType::Number, 'min' => 0, 'column' => ColumnType::Int),
 			'dateModified'	=> AttributeType::DateTime
 		);

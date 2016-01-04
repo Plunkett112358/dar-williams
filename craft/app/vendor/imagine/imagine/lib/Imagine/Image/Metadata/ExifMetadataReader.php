@@ -21,14 +21,9 @@ class ExifMetadataReader extends AbstractMetadataReader
 {
     public function __construct()
     {
-        if (!self::isSupported()) {
+        if (!function_exists('exif_read_data')) {
             throw new NotSupportedException('PHP exif extension is required to use the ExifMetadataReader');
         }
-    }
-
-    public static function isSupported()
-    {
-        return function_exists('exif_read_data');
     }
 
     /**

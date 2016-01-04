@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.fieldtypes
  * @since     1.0
  */
@@ -112,7 +112,7 @@ abstract class BaseFieldType extends BaseSavableComponentType implements IFieldT
 	}
 
 	/**
-	 * @inheritDoc IFieldType::getStaticHtml()
+	 * Returns static HTML for the field's value.
 	 *
 	 * @param mixed $value
 	 *
@@ -180,20 +180,6 @@ abstract class BaseFieldType extends BaseSavableComponentType implements IFieldT
 	public function getSearchKeywords($value)
 	{
 		return StringHelper::arrayToString($value, ' ');
-	}
-
-	/**
-	 * @inheritDoc IPreviewableFieldType::getTableAttributeHtml()
-	 *
-	 * @param mixed $value
-	 *
-	 * @return string
-	 */
-	public function getTableAttributeHtml($value)
-	{
-		$value = (string) $value;
-
-		return StringHelper::stripHtml($value);
 	}
 
 	/**

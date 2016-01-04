@@ -1,5 +1,5 @@
 /*!
- * jquery-timepicker v1.8.3 - A jQuery timepicker plugin inspired by Google Calendar. It supports both mouse and keyboard navigation.
+ * jquery-timepicker v1.7.0 - A jQuery timepicker plugin inspired by Google Calendar. It supports both mouse and keyboard navigation.
  * Copyright (c) 2015 Jon Thornton - http://jonthornton.github.com/jquery-timepicker/
  * License: MIT
  */
@@ -60,11 +60,7 @@
 					_render(self);
 				} else {
 					self.prop('autocomplete', 'off');
-					if (settings.showOn) {
-						for (i in settings.showOn) {
-							self.on(settings.showOn[i]+'.timepicker', methods.show);
-						}
-					}
+					self.on('click.timepicker focus.timepicker', methods.show);
 					self.on('change.timepicker', _formatValue);
 					self.on('keydown.timepicker', _keydownhandler);
 					self.on('keyup.timepicker', _keyuphandler);
@@ -83,6 +79,10 @@
 			var settings = self.data('timepicker-settings');
 
 			if (e) {
+				if (!settings.showOnFocus) {
+					return true;
+				}
+
 				e.preventDefault();
 			}
 
@@ -158,9 +158,8 @@
 			var selected = list.find('.ui-timepicker-selected');
 
 			if (!selected.length) {
-				var timeInt = _time2int(_getTimeValue(self));
-				if (timeInt !== null) {
-					selected = _findRow(self, list, timeInt);
+				if (_getTimeValue(self)) {
+					selected = _findRow(self, list, _time2int(_getTimeValue(self)));
 				} else if (settings.scrollDefault) {
 					selected = _findRow(self, list, settings.scrollDefault());
 				}
@@ -171,15 +170,6 @@
 				list.scrollTop(topOffset);
 			} else {
 				list.scrollTop(0);
-			}
-
-			// prevent scroll propagation
-			if(settings.stopScrollPropagation) {
-				$(document).on('wheel.ui-timepicker', '.ui-timepicker-wrapper', function(e){
-					e.preventDefault();
-					var currentScroll = $(this).scrollTop();
-					$(this).scrollTop(currentScroll + e.originalEvent.deltaY);
-				});
 			}
 
 			// attach close handlers
@@ -380,10 +370,6 @@
 
 		if ($.type(settings.timeFormat) === "string" && settings.timeFormat.match(/[gh]/)) {
 			settings._twelveHourTime = true;
-		}
-
-		if (settings.showOnFocus === false && settings.showOn.indexOf('focus') != -1) {
-			settings.showOn.splice(settings.showOn.indexOf('focus'), 1);
 		}
 
 		if (settings.disableTimeRanges.length > 0) {
@@ -1123,7 +1109,7 @@
 		var timeInt = hours*3600 + minutes*60 + seconds;
 
 		// if no am/pm provided, intelligently guess based on the scrollDefault
-		if (hour < 12 && !ampm && settings && settings._twelveHourTime && settings.scrollDefault) {
+		if (!ampm && settings && settings._twelveHourTime && settings.scrollDefault) {
 			var delta = timeInt - settings.scrollDefault();
 			if (delta < 0 && delta >= _ONE_DAY / -2) {
 				timeInt = (timeInt + (_ONE_DAY / 2)) % _ONE_DAY;
@@ -1153,18 +1139,19 @@
 	};
 	// Global defaults
 	$.fn.timepicker.defaults = {
-		appendTo: 'body',
 		className: null,
-		closeOnWindowScroll: false,
-		disableTextInput: false,
-		disableTimeRanges: [],
-		disableTouchKeyboard: false,
-		durationTime: null,
-		forceRoundTime: false,
-		maxTime: null,
 		minTime: null,
-		noneOption: false,
-		orientation: 'l',
+		maxTime: null,
+		durationTime: null,
+		step: 30,
+		showDuration: false,
+		showOnFocus: true,
+		timeFormat: 'g:ia',
+		scrollDefault: null,
+		selectOnBlur: false,
+		disableTextInput: false,
+		disableTouchKeyboard: false,
+		forceRoundTime: false,
 		roundingFunction: function(seconds, settings) {
 			if (seconds === null) {
 				return null;
@@ -1182,16 +1169,12 @@
 				return seconds;
 			}
 		},
-		scrollDefault: null,
-		selectOnBlur: false,
-		show2400: false,
-		showDuration: false,
-		showOn: ['click', 'focus'],
-		showOnFocus: true,
-		step: 30,
-		stopScrollPropagation: false,
-		timeFormat: 'g:ia',
+		appendTo: 'body',
+		orientation: 'l',
+		disableTimeRanges: [],
+		closeOnWindowScroll: false,
 		typeaheadHighlight: true,
-		useSelect: false
+		noneOption: false,
+		show2400: false
 	};
 }));

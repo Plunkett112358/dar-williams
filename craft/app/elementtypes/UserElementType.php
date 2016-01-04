@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.elementtypes
  * @since     1.0
  */
@@ -80,29 +80,15 @@ class UserElementType extends BaseElementType
 
 		if (craft()->getEdition() == Craft::Pro)
 		{
-			// Admin source
-			$sources['admins'] = array(
-				'label' => Craft::t('Admins'),
-				'criteria' => array('admin' => true),
-				'hasThumbs' => true
-			);
-
-			$groups = craft()->userGroups->getAllGroups();
-
-			if ($groups)
+			foreach (craft()->userGroups->getAllGroups() as $group)
 			{
-				$sources[] = array('heading' => Craft::t('Groups'));
+				$key = 'group:'.$group->id;
 
-				foreach ($groups as $group)
-				{
-					$key = 'group:'.$group->id;
-
-					$sources[$key] = array(
-						'label'     => Craft::t($group->name),
-						'criteria'  => array('groupId' => $group->id),
-						'hasThumbs' => true
-					);
-				}
+				$sources[$key] = array(
+					'label'     => Craft::t($group->name),
+					'criteria'  => array('groupId' => $group->id),
+					'hasThumbs' => true
+				);
 			}
 		}
 
@@ -181,8 +167,6 @@ class UserElementType extends BaseElementType
 				'lastName'      => Craft::t('Last Name'),
 				'dateCreated'   => Craft::t('Join Date'),
 				'lastLoginDate' => Craft::t('Last Login'),
-				'dateCreated'   => Craft::t('Date Created'),
-				'dateUpdated'   => Craft::t('Date Updated'),
 			);
 		}
 		else
@@ -194,8 +178,6 @@ class UserElementType extends BaseElementType
 				'email'         => Craft::t('Email'),
 				'dateCreated'   => Craft::t('Join Date'),
 				'lastLoginDate' => Craft::t('Last Login'),
-				'dateCreated'   => Craft::t('Date Created'),
-				'dateUpdated'   => Craft::t('Date Updated'),
 			);
 		}
 
@@ -206,71 +188,38 @@ class UserElementType extends BaseElementType
 	}
 
 	/**
-	 * @inheritDoc IElementType::defineAvailableTableAttributes()
-	 *
-	 * @return array
-	 */
-	public function defineAvailableTableAttributes()
-	{
-
-		if (craft()->config->get('useEmailAsUsername'))
-		{
-			// Start with Email and don't even give Username as an option
-			$attributes = array(
-				'email' => array('label' => Craft::t('Email')),
-			);
-		}
-		else
-		{
-			$attributes = array(
-				'username' => array('label' => Craft::t('Username')),
-				'email'    => array('label' => Craft::t('Email')),
-			);
-		}
-
-		$attributes['fullName'] = array('label' => Craft::t('Full Name'));
-		$attributes['firstName'] = array('label' => Craft::t('First Name'));
-		$attributes['lastName'] = array('label' => Craft::t('Last Name'));
-
-		if (craft()->isLocalized())
-		{
-			$attributes['preferredLocale'] = array('label' => Craft::t('Preferred Locale'));
-		}
-
-		$attributes['id']            = array('label' => Craft::t('ID'));
-		$attributes['dateCreated']   = array('label' => Craft::t('Join Date'));
-		$attributes['lastLoginDate'] = array('label' => Craft::t('Last Login'));
-		$attributes['dateCreated']   = array('label' => Craft::t('Date Created'));
-		$attributes['dateUpdated']   = array('label' => Craft::t('Date Updated'));
-
-		// Allow plugins to modify the attributes
-		$pluginAttributes = craft()->plugins->call('defineAdditionalUserTableAttributes', array(), true);
-
-		foreach ($pluginAttributes as $thisPluginAttributes)
-		{
-			$attributes = array_merge($attributes, $thisPluginAttributes);
-		}
-
-		return $attributes;
-	}
-
-	/**
-	 * @inheritDoc IElementType::getDefaultTableAttributes()
+	 * @inheritDoc IElementType::defineTableAttributes()
 	 *
 	 * @param string|null $source
 	 *
 	 * @return array
 	 */
-	public function getDefaultTableAttributes($source = null)
+	public function defineTableAttributes($source = null)
 	{
 		if (craft()->config->get('useEmailAsUsername'))
 		{
-			$attributes = array('fullName', 'dateCreated', 'lastLoginDate');
+			$attributes = array(
+				'email'         => Craft::t('Email'),
+				'firstName'     => Craft::t('First Name'),
+				'lastName'      => Craft::t('Last Name'),
+				'dateCreated'   => Craft::t('Join Date'),
+				'lastLoginDate' => Craft::t('Last Login'),
+			);
 		}
 		else
 		{
-			$attributes = array('fullName', 'email', 'dateCreated', 'lastLoginDate');
+			$attributes = array(
+				'username'      => Craft::t('Username'),
+				'firstName'     => Craft::t('First Name'),
+				'lastName'      => Craft::t('Last Name'),
+				'email'         => Craft::t('Email'),
+				'dateCreated'   => Craft::t('Join Date'),
+				'lastLoginDate' => Craft::t('Last Login'),
+			);
 		}
+
+		// Allow plugins to modify the attributes
+		craft()->plugins->call('modifyUserTableAttributes', array(&$attributes, $source));
 
 		return $attributes;
 	}
@@ -302,22 +251,6 @@ class UserElementType extends BaseElementType
 				if ($email)
 				{
 					return HtmlHelper::encodeParams('<a href="mailto:{email}">{email}</a>', array('email' => $email));
-				}
-				else
-				{
-					return '';
-				}
-			}
-
-			case 'preferredLocale':
-			{
-				$localeId = $element->preferredLocale;
-
-				if ($localeId)
-				{
-					$locale = new LocaleModel($localeId);
-
-					return $locale->getName();
 				}
 				else
 				{
@@ -571,7 +504,6 @@ class UserElementType extends BaseElementType
 		$html = craft()->templates->render('users/_accountfields', array(
 			'account'      => $element,
 			'isNewAccount' => false,
-			'meta'         => true,
 		));
 
 		$html .= parent::getEditorHtml($element);

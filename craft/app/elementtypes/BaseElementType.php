@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.elementtypes
  * @since     1.0
  */
@@ -222,7 +222,7 @@ abstract class BaseElementType extends BaseComponentType implements IElementType
 			case 'table':
 			{
 				// Get the table columns
-				$variables['attributes'] = $this->getTableAttributesForSource($sourceKey);
+				$variables['attributes'] = $this->defineTableAttributes($sourceKey);
 
 				break;
 			}
@@ -241,53 +241,19 @@ abstract class BaseElementType extends BaseComponentType implements IElementType
 	 */
 	public function defineSortableAttributes()
 	{
-		$tableAttributes = craft()->elementIndexes->getAvailableTableAttributes($this->getClassHandle());
-		$sortableAttributes = array();
-
-		foreach ($tableAttributes as $key => $labelInfo)
-		{
-			$sortableAttributes[$key] = $labelInfo['label'];
-		}
-
-		return $sortableAttributes;
+		return $this->defineTableAttributes();
 	}
 
 	/**
-	 * @inheritDoc IElementType::defineAvailableTableAttributes()
-	 *
-	 * @return array
-	 */
-	public function defineAvailableTableAttributes()
-	{
-		if (method_exists($this, 'defineTableAttributes'))
-		{
-			// Classic.
-			return $this->defineTableAttributes();
-		}
-
-		return array();
-	}
-
-	/**
-	 * @inheritDoc IElementType::getDefaultTableAttributes()
+	 * @inheritDoc IElementType::defineTableAttributes()
 	 *
 	 * @param string|null $source
 	 *
 	 * @return array
 	 */
-	public function getDefaultTableAttributes($source = null)
+	public function defineTableAttributes($source = null)
 	{
-		if (method_exists($this, 'defineTableAttributes'))
-		{
-			// Classic.
-			$availableTableAttributes = $this->defineTableAttributes($source);
-		}
-		else
-		{
-			$availableTableAttributes = $this->defineAvailableTableAttributes();
-		}
-
-		return array_keys($availableTableAttributes);
+		return array();
 	}
 
 	/**
@@ -302,20 +268,6 @@ abstract class BaseElementType extends BaseComponentType implements IElementType
 	{
 		switch ($attribute)
 		{
-			case 'link':
-			{
-				$url = $element->getUrl();
-
-				if ($url)
-				{
-					return '<a href="'.$url.'" target="_blank" data-icon="world" title="'.Craft::t('Visit webpage').'"></a>';
-				}
-				else
-				{
-					return '';
-				}
-			}
-
 			case 'uri':
 			{
 				$url = $element->getUrl();
@@ -345,7 +297,7 @@ abstract class BaseElementType extends BaseComponentType implements IElementType
 						$value = str_replace($find, $replace, $value);
 					}
 
-					return '<a href="'.$url.'" target="_blank" class="go" title="'.Craft::t('Visit webpage').'"><span dir="ltr">'.$value.'</span></a>';
+					return '<a href="'.$url.'" target="_blank" class="go"><span dir="ltr">'.$value.'</span></a>';
 				}
 				else
 				{
@@ -355,28 +307,6 @@ abstract class BaseElementType extends BaseComponentType implements IElementType
 
 			default:
 			{
-				// Is this a custom field?
-				if (strncmp($attribute, 'field:', 6) === 0)
-				{
-					$fieldId = substr($attribute, 6);
-					$field = craft()->fields->getFieldById($fieldId);
-
-					if ($field)
-					{
-						$fieldType = $field->getFieldType();
-
-						if ($fieldType && $fieldType instanceof IPreviewableFieldType)
-						{
-							$value = $element->getFieldValue($field->handle);
-							$fieldType->setElement($element);
-
-							return $fieldType->getTableAttributeHtml($value);
-						}
-					}
-
-					return '';
-				}
-
 				$value = $element->$attribute;
 
 				if ($value instanceof DateTime)
@@ -572,21 +502,6 @@ abstract class BaseElementType extends BaseComponentType implements IElementType
 	 */
 	public function onAfterMoveElementInStructure(BaseElementModel $element, $structureId)
 	{
-	}
-
-	// Protected Methods
-	// =========================================================================
-
-	/**
-	 * Returns the attributes that should be shown for the given source.
-	 *
-	 * @param string $sourceKey The source key
-	 *
-	 * @return array The attributes that should be shown for the given source
-	 */
-	protected function getTableAttributesForSource($sourceKey)
-	{
-		return craft()->elementIndexes->getTableAttributes($this->getClassHandle(), $sourceKey);
 	}
 
 	// Private Methods

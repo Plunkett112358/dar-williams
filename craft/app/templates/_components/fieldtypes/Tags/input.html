@@ -24,11 +24,13 @@
 	</div>
 </div>
 
-{% includejs %}
+{% set js %}
 	new Craft.TagSelectInput(
 		"{{ id   | namespaceInputId   | e('js') }}",
 		"{{ name | namespaceInputName | e('js') }}",
 		{{ tagGroupId }},
 		{{ sourceElementId ?: 'null' }}
 	);
-{% endincludejs %}
+{% endset %}
+
+{% includeJs js %}

@@ -105,17 +105,7 @@
 
 
 {% macro textField(config) %}
-	{% if config.unit is defined %}
-		{% set input %}
-			<div class="flex">
-				<div class="textwrapper">{{ _self.text(config) }}</div>
-				<div class="label light">{{ config.unit }}</div>
-			</div>
-		{% endset %}
-	{% else %}
-		{% set input = _self.text(config) %}
-	{% endif %}
-	{{ _self.field(config, input) }}
+	{{ _self.field(config, _self.text(config)) }}
 {% endmacro %}
 
 
@@ -140,13 +130,7 @@
 
 
 {% macro dateTimeField(config) %}
-	{% set input %}
-		<div class="datetimewrapper">
-			{{ _self.date(config) }}
-			{{ _self.time(config) }}
-		</div>
-	{% endset %}
-	{{ _self.field(config, input) }}
+	{{ _self.field(config, _self.date(config)~_self.time(config)) }}
 {% endmacro %}
 
 
@@ -166,17 +150,13 @@
 
 
 {% macro checkboxField(config) %}
-	{% if config.fieldLabel is defined %}
-		{{ _self.field(config|merge({label: config.fieldLabel}), _self.checkbox(config)) }}
-	{% else %}
-		{% set instructions = config.instructions is defined ? config.instructions -%}
-		<div class="field checkboxfield{% if config.first is defined and config.first %} first{% endif %}{% if instructions %} has-instructions{% endif %}"{% if config.id is defined and config.id %} id="{{ config.id }}-field"{% endif %}>
-			{{ _self.checkbox(config) }}
-			{% if instructions %}
-				<div class="instructions">{{ instructions|md }}</div>
-			{% endif %}
-		</div>
-	{% endif %}
+	{% set instructions = config.instructions is defined ? config.instructions -%}
+	<div class="field checkboxfield{% if config.first is defined and config.first %} first{% endif %}{% if instructions %} has-instructions{% endif %}"{% if config.id is defined and config.id %} id="{{ config.id }}-field"{% endif %}>
+		{{ _self.checkbox(config) }}
+		{% if instructions %}
+			<div class="instructions">{{ instructions|md }}</div>
+		{% endif %}
+	</div>
 {% endmacro %}
 
 

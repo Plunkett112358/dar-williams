@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.widgets
  * @since     1.0
  */
@@ -29,6 +29,13 @@ abstract class BaseWidget extends BaseSavableComponentType implements IWidget
 	 * @var bool
 	 */
 	protected $multi = true;
+
+	/**
+	 * How many columns the widget should span, if there's enough room.
+	 *
+	 * @var bool
+	 */
+	protected $colspan = 1;
 
 	// Public Methods
 	// =========================================================================
@@ -62,12 +69,13 @@ abstract class BaseWidget extends BaseSavableComponentType implements IWidget
 	}
 
 	/**
-	 * @inheritDoc IWidget::getIconPath()
+	 * @inheritDoc IWidget::getColspan()
 	 *
-	 * @return string
+	 * @return int
 	 */
-	public function getIconPath()
+	public function getColspan()
 	{
+		return $this->colspan;
 	}
 
 	/**
@@ -80,20 +88,5 @@ abstract class BaseWidget extends BaseSavableComponentType implements IWidget
 		return '<div style="margin: 0 -30px -30px;">' .
 				'<img style="display: block; width: 100%;" src="'.UrlHelper::getResourceUrl('images/prg.jpg').'">' .
 			'</div>';
-	}
-
-	/**
-	 * @inheritDoc IWidget::getMaxColspan()
-	 *
-	 * @return int
-	 */
-	public function getMaxColspan()
-	{
-		if (method_exists($this, 'getColspan'))
-		{
-		    return $this->getColspan();
-		}
-
-		return null;
 	}
 }

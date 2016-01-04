@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.etc.behaviors
  * @since     1.2
  */
@@ -184,7 +184,7 @@ class AppBehavior extends BaseBehavior
 	 */
 	public function getEdition()
 	{
-		return (int) $this->getInfo('edition');
+		return $this->getInfo('edition');
 	}
 
 	/**
@@ -208,7 +208,7 @@ class AppBehavior extends BaseBehavior
 
 		if ($licensedEdition !== false)
 		{
-			return (int) $licensedEdition;
+			return $licensedEdition;
 		}
 	}
 
@@ -890,11 +890,11 @@ class AppBehavior extends BaseBehavior
 
 		if (!empty($unixSocket))
 		{
-			return 'mysql:unix_socket='.$unixSocket.';dbname='.craft()->config->get('database', ConfigFile::Db).';';
+			return strtolower('mysql:unix_socket='.$unixSocket.';dbname=').craft()->config->get('database', ConfigFile::Db).';';
 		}
 		else
 		{
-			return 'mysql:host='.craft()->config->get('server', ConfigFile::Db).';dbname='.craft()->config->get('database', ConfigFile::Db).';port='.craft()->config->get('port', ConfigFile::Db).';';
+			return strtolower('mysql:host='.craft()->config->get('server', ConfigFile::Db).';dbname=').craft()->config->get('database', ConfigFile::Db).strtolower(';port='.craft()->config->get('port', ConfigFile::Db).';');
 		}
 	}
 

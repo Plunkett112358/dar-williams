@@ -7,8 +7,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.elementtypes
  * @since     2.0
  */
@@ -188,10 +188,8 @@ class CategoryElementType extends BaseElementType
 	public function defineSortableAttributes()
 	{
 		$attributes = array(
-			'title'        => Craft::t('Title'),
-			'uri'          => Craft::t('URI'),
-			'dateCreated'  => Craft::t('Date Created'),
-			'dateUpdated'  => Craft::t('Date Updated'),
+			'title' => Craft::t('Title'),
+			'uri'   => Craft::t('URI'),
 		);
 
 		// Allow plugins to modify the attributes
@@ -201,42 +199,21 @@ class CategoryElementType extends BaseElementType
 	}
 
 	/**
-	 * @inheritDoc IElementType::defineAvailableTableAttributes()
-	 *
-	 * @return array
-	 */
-	public function defineAvailableTableAttributes()
-	{
-		$attributes = array(
-			'title'       => array('label' => Craft::t('Title')),
-			'uri'         => array('label' => Craft::t('URI')),
-			'link'        => array('label' => Craft::t('Link'), 'icon' => 'world'),
-			'id'          => array('label' => Craft::t('ID')),
-			'dateCreated' => array('label' => Craft::t('Date Created')),
-			'dateUpdated' => array('label' => Craft::t('Date Updated')),
-		);
-
-		// Allow plugins to modify the attributes
-		$pluginAttributes = craft()->plugins->call('defineAdditionalCategoryTableAttributes', array(), true);
-
-		foreach ($pluginAttributes as $thisPluginAttributes)
-		{
-			$attributes = array_merge($attributes, $thisPluginAttributes);
-		}
-
-		return $attributes;
-	}
-
-	/**
-	 * @inheritDoc IElementType::getDefaultTableAttributes()
+	 * @inheritDoc IElementType::defineTableAttributes()
 	 *
 	 * @param string|null $source
 	 *
 	 * @return array
 	 */
-	public function getDefaultTableAttributes($source = null)
+	public function defineTableAttributes($source = null)
 	{
-		$attributes = array('link');
+		$attributes = array(
+			'title' => Craft::t('Title'),
+			'uri'   => Craft::t('URI'),
+		);
+
+		// Allow plugins to modify the attributes
+		craft()->plugins->call('modifyCategoryTableAttributes', array(&$attributes, $source));
 
 		return $attributes;
 	}

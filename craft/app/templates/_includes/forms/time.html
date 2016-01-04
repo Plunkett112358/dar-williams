@@ -8,7 +8,7 @@
 	{% set name = name ~ '[time]' -%}
 {% endif -%}
 
-{% includejsresource 'lib/jquery.timepicker/jquery.timepicker'~(craft.config.useCompressedJs ? '.min' : '')~'.js' -%}
+{% includeJsResource 'lib/jquery.timepicker/jquery.timepicker'~(craft.config.useCompressedJs ? '.min' : '')~'.js' -%}
 
 {% if value is not defined -%}
 	{% set value = null -%}
@@ -20,12 +20,13 @@
 
 {%-	set localeData = craft.i18n.getLocaleData() %}
 
-{%- includejs %}
+{%- set js %}
+
 	var $timePicker = $('#{{ id|namespaceInputId|e('js') }}');
 	$timePicker.timepicker({
 		timeFormat: '{{ craft.i18n.timepickerJsFormat }}',
 		closeOnWindowScroll: false,
-		orientation: '{{ localeData.getOrientation() == 'ltr' ? 'l' : 'r' }}',
+		orientation: '{{ localeData.getOrientation() }}',
 		{% if minuteIncrement is defined %}step: '{{ minuteIncrement }}',{% endif %}
 		lang: {
 			am: '{{ localeData.getAMName() }}',
@@ -35,8 +36,5 @@
 		}
 	});
 
-	{% if value and value.format is defined %}
-		$timePicker.timepicker('setTime', {{ value|date('G') }}*3600 + {{ value|date('i') }}*60 + {{ value|date('s') }});
-	{% endif %}
-
-{%- endincludejs %}
+{%- endset %}
+{%- includeJs js %}

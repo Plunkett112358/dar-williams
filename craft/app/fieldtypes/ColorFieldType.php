@@ -6,12 +6,12 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.fieldtypes
  * @since     1.0
  */
-class ColorFieldType extends BaseFieldType implements IPreviewableFieldType
+class ColorFieldType extends BaseFieldType
 {
 	// Public Methods
 	// =========================================================================
@@ -60,7 +60,7 @@ class ColorFieldType extends BaseFieldType implements IPreviewableFieldType
 	}
 
 	/**
-	 * @inheritDoc IFieldType::getStaticHtml()
+	 * @inheritDoc BaseFieldType::getStaticHtml()
 	 *
 	 * @param mixed $value
 	 *
@@ -71,27 +71,7 @@ class ColorFieldType extends BaseFieldType implements IPreviewableFieldType
 		if ($value)
 		{
 			return HtmlHelper::encodeParams('<div class="color" style="cursor: default;"><div class="colorpreview" style="background-color: {bgColor};"></div></div>'.
-				'<div class="colorhex code">{bgColor}</div>', array('bgColor' => $value));
-		}
-	}
-
-	/**
-	 * @inheritDoc IPreviewableFieldType::getTableAttributeHtml()
-	 *
-	 * @param mixed $value
-	 *
-	 * @return string
-	 */
-	public function getTableAttributeHtml($value)
-	{
-		if ($value && $value != '#000000')
-		{
-			return '<div class="color small static"><div class="colorpreview" style="background-color: '.$value.';"></div></div>'.
-				'<div class="colorhex code">'.$value.'</div>';
-		}
-		else
-		{
-			return '';
+				'<div class="colorhex">{bgColor}</div>', array('bgColor' => $value));
 		}
 	}
 }

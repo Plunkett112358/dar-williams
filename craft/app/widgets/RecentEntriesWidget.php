@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.widgets
  * @since     1.0
  */
@@ -53,17 +53,20 @@ class RecentEntriesWidget extends BaseWidget
 	 */
 	public function getTitle()
 	{
-		$sectionId = $this->getSettings()->section;
-
-		if (is_numeric($sectionId))
+		if (craft()->getEdition() >= Craft::Client)
 		{
-			$section = craft()->sections->getSectionById($sectionId);
+			$sectionId = $this->getSettings()->section;
 
-			if ($section)
+			if (is_numeric($sectionId))
 			{
-				$title = Craft::t('Recent {section} Entries', array(
-					'section' => Craft::t($section->name)
-				));
+				$section = craft()->sections->getSectionById($sectionId);
+
+				if ($section)
+				{
+					$title = Craft::t('Recent {section} Entries', array(
+						'section' => Craft::t($section->name)
+					));
+				}
 			}
 		}
 
@@ -89,16 +92,6 @@ class RecentEntriesWidget extends BaseWidget
 	}
 
 	/**
-	 * @inheritDoc IWidget::getIconPath()
-	 *
-	 * @return string
-	 */
-	public function getIconPath()
-	{
-		return craft()->path->getResourcesPath().'images/widgets/recent-entries.svg';
-	}
-
-	/**
 	 * @inheritDoc IWidget::getBodyHtml()
 	 *
 	 * @return string|false
@@ -107,11 +100,14 @@ class RecentEntriesWidget extends BaseWidget
 	{
 		$params = array();
 
-		$sectionId = $this->getSettings()->section;
-
-		if (is_numeric($sectionId))
+		if (craft()->getEdition() >= Craft::Client)
 		{
-			$params['sectionId'] = (int)$sectionId;
+			$sectionId = $this->getSettings()->section;
+
+			if (is_numeric($sectionId))
+			{
+				$params['sectionId'] = (int)$sectionId;
+			}
 		}
 
 		$js = 'new Craft.RecentEntriesWidget('.$this->model->id.', '.JsonHelper::encode($params).');';

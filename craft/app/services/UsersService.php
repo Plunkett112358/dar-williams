@@ -8,8 +8,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -137,7 +137,7 @@ class UsersService extends BaseApplicationComponent
 	 * Returns whether a verification code is valid for the given user.
 	 *
 	 * This method first checks if the code has expired past the
-	 * [verificationCodeDuration](http://craftcms.com/docs/config-settings#verificationCodeDuration) config
+	 * [verificationCodeDuration](http://buildwithcraft.com/docs/config-settings#verificationCodeDuration) config
 	 * setting. If it is still valid, then, the checks the validity of the contents of the code.
 	 *
 	 * @param UserModel $user The user to check the code for.
@@ -524,13 +524,7 @@ class UsersService extends BaseApplicationComponent
 		{
 			// We want to hide the CP trigger if they don't have access to the CP.
 			$path = craft()->config->get('actionTrigger').'/users/verifyemail';
-			$params = array(
-				'code' => $unhashedVerificationCode,
-				'id' => $userRecord->uid
-			);
-			$protocol = craft()->request->isSecureConnection() ? 'https' : 'http';
-			$locale = $user->preferredLocale ?: craft()->i18n->getPrimarySiteLocaleId();
-			$url = UrlHelper::getSiteUrl($path, $params, $protocol, $locale);
+			$url = UrlHelper::getSiteUrl($path, array('code' => $unhashedVerificationCode, 'id' => $userRecord->uid), craft()->request->isSecureConnection() ? 'https' : 'http');
 		}
 
 		return $url;
@@ -562,8 +556,7 @@ class UsersService extends BaseApplicationComponent
 		}
 		else
 		{
-			$locale = $user->preferredLocale ?: craft()->i18n->getPrimarySiteLocaleId();
-			return UrlHelper::getSiteUrl($path, $params, $scheme, $locale);
+			return UrlHelper::getSiteUrl($path, $params, $scheme);
 		}
 	}
 
@@ -571,13 +564,13 @@ class UsersService extends BaseApplicationComponent
 	 * Crops and saves a user’s photo.
 	 *
 	 * @param string    $fileName The name of the file.
-	 * @param BaseImage $image    The image.
+	 * @param Image     $image    The image.
 	 * @param UserModel $user     The user.
 	 *
 	 * @throws \Exception
 	 * @return bool Whether the photo was saved successfully.
 	 */
-	public function saveUserPhoto($fileName, BaseImage $image, UserModel $user)
+	public function saveUserPhoto($fileName, Image $image, UserModel $user)
 	{
 		$userName = AssetsHelper::cleanAssetName($user->username, false);
 		$userPhotoFolder = craft()->path->getUserPhotosPath().$userName.'/';
@@ -586,8 +579,7 @@ class UsersService extends BaseApplicationComponent
 		IOHelper::ensureFolderExists($userPhotoFolder);
 		IOHelper::ensureFolderExists($targetFolder);
 
-		$fileName = AssetsHelper::cleanAssetName($fileName);
-		$targetPath = $targetFolder.$fileName;
+		$targetPath = $targetFolder.AssetsHelper::cleanAssetName($fileName);
 
 		$result = $image->saveAs($targetPath);
 
@@ -1278,7 +1270,7 @@ class UsersService extends BaseApplicationComponent
 	 * Deletes any pending users that have shown zero sense of urgency and are just taking up space.
 	 *
 	 * This method will check the
-	 * [purgePendingUsersDuration](http://craftcms.com/docs/config-settings#purgePendingUsersDuration) config
+	 * [purgePendingUsersDuration](http://buildwithcraft.com/docs/config-settings#purgePendingUsersDuration) config
 	 * setting, and if it is set to a valid duration, it will delete any user accounts that were created that duration
 	 * ago, and have still not activated their account.
 	 *

@@ -1,10 +1,6 @@
 @charset "UTF-8";
-/* Flexbox stuff */
-/* Other */
 /* RTL stuff */
-#action-menubtn { margin: -6px 0; }
-
-#action-spinner { position: absolute; top: 10px; }
+#action-spinner { position: absolute; top: 24px; }
 body.ltr #action-spinner { right: 0; }
 body.rtl #action-spinner { left: 0; }
 
@@ -13,5 +9,5 @@ body.rtl #action-spinner { left: 0; }
 #verifypasswordmodal .buttons { margin-top: 1em; }
 
 #verifypasswordmodal .buttons .spinner { position: absolute; top: 0; margin-top: 0; }
-body.ltr #verifypasswordmodal .buttons .spinner { right: 0; }
-body.rtl #verifypasswordmodal .buttons .spinner { left: 0; }
+body.ltr #verifypasswordmodal .buttons .spinner { right: -19px; }
+body.rtl #verifypasswordmodal .buttons .spinner { left: -19px; }

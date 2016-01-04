@@ -17,10 +17,7 @@
     "require": {
         "php": ">=5.0.0"
     },
-    "require-dev" : {
-        "lastcraft/simpletest": ">=1.1"
-    },
     "autoload": {
-        "psr-4": {"lsolesen\\pel\\": "src/"}
+        "psr-4": {"": "src/"}
     }
 }

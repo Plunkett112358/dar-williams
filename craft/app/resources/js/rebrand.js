@@ -1,79 +1,61 @@
 /**
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.resources
  */
 
 (function($) {
 
-	function refreshImage($target, response)
-	{
-		if (typeof response.html != "undefined")
+	var ImageUpload = null;
+
+	var settings = {
+		modalClass: "logo-modal",
+
+		uploadAction: 'rebrand/uploadLogo',
+
+		deleteMessage: Craft.t('Are you sure you want to delete the logo?'),
+		deleteAction: 'rebrand/deleteLogo',
+
+		cropAction: 'rebrand/cropLogo',
+
+		areaToolOptions:
 		{
-			$html = $(response.html);
+			aspectRatio: "",
+			initialRectangle: {
+				mode: "auto"
+			}
+		},
 
-			// Switch out the old image uploader and HTML with the new stuff.
-			unsetImageUpload($target);
-			$target.replaceWith($html);
-			initImageUpload($html);
+		onImageSave: function(response)
+		{
+			refreshImage(response);
+		},
+
+		onImageDelete: function(response)
+		{
+			refreshImage(response);
 		}
-	}
 
-	function initImageUpload($target)
-	{
-			var imageType = $target.data('type'),
-				settings = {
-				modalClass: "cp-image-modal",
-				uploadAction: 'rebrand/uploadSiteImage',
+	};
 
-				deleteMessage: Craft.t('Are you sure you want to delete the uploaded image?'),
-				deleteAction: 'rebrand/deleteSiteImage',
-
-				cropAction: 'rebrand/cropSiteImage',
-
-				constraint: 300,
-
-				areaToolOptions: {
-					aspectRatio: "",
-					initialRectangle: {
-						mode: "auto"
-					}
-				}
-			};
-
-			settings.onImageSave = $.proxy(function(response)
-			{
-				refreshImage($(this), response);
-			}, $target);
-
-			settings.onImageDelete = $.proxy(function(response)
-			{
-				refreshImage($(this), response);
-			}, $target);
-
-			settings.uploadButton = $target.find('.upload');
-			settings.deleteButton = $target.find('.delete');
-			settings.postParameters = {type: imageType};
-
-		$target.data('imageUpload', new Craft.ImageUpload(settings));
-	}
-
-	function unsetImageUpload($target)
-	{
-		if (typeof $target.data('imageUpload') == "object") {
-			// Destroy the old ImageUpload object
-			$target.data('imageUpload').destroy();
-			$target.data('imageUpload', null);
+	function refreshImage(response) {
+		if (typeof response.html != "undefined") {
+			$('.cp-logo').replaceWith(response.html);
+			initImageUpload();
 		}
+
 	}
 
-	var $images = $('.cp-image');
-
-	for (var i = 0; i < $images.length; i++)
+	function initImageUpload()
 	{
-		initImageUpload($images.eq(i));
+		// These change dynamically after each HTML overwrite, so we can't have them in the initial settings array.
+		settings.uploadButton = $('.logo-controls .upload-logo');
+		settings.deleteButton = $('.logo-controls .delete-logo');
+		ImageUpload = new Craft.ImageUpload(settings);
 	}
+
+	initImageUpload();
 
 })(jQuery);

@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.etc.templating.twigextensions
  * @since     2.0
  */
@@ -85,7 +85,7 @@ class Cache_Node extends \Twig_Node
 				->write("\$cacheBody{$n} = null;\n")
 			->outdent()
 			->write("}\n")
-			->write("if (\$cacheBody{$n} === null) {\n")
+			->write("if (empty(\$cacheBody{$n})) {\n")
 			->indent()
 				->write("if (!\$ignoreCache{$n}) {\n")
 				->indent()

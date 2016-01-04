@@ -10,8 +10,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://craftcms.com/license Craft License Agreement
- * @see       http://craftcms.com
+ * @license   http://buildwithcraft.com/license Craft License Agreement
+ * @see       http://buildwithcraft.com
  * @package   craft.app.controllers
  * @since     1.0
  */
@@ -84,6 +84,7 @@ class EntriesController extends BaseEntriesController
 		// ---------------------------------------------------------------------
 
 		if (
+			craft()->getEdition() >= Craft::Client &&
 			$variables['section']->type == SectionType::Structure &&
 			$variables['section']->maxLevels != 1
 		)
@@ -126,19 +127,11 @@ class EntriesController extends BaseEntriesController
 
 			if ($parentId === null && $variables['entry']->id)
 			{
-				// Is it already set on the model (e.g. if we're loading a draft)?
-				if ($variables['entry']->parentId)
-				{
-					$parentId = $variables['entry']->parentId;
-				}
-				else
-				{
-					$parentIds = $variables['entry']->getAncestors(1)->status(null)->localeEnabled(null)->ids();
+				$parentIds = $variables['entry']->getAncestors(1)->status(null)->localeEnabled(null)->ids();
 
-					if ($parentIds)
-					{
-						$parentId = $parentIds[0];
-					}
+				if ($parentIds)
+				{
+					$parentId = $parentIds[0];
 				}
 			}
 
@@ -175,23 +168,26 @@ class EntriesController extends BaseEntriesController
 		// ---------------------------------------------------------------------
 
 		// Page title w/ revision label
-		switch ($variables['entry']->getClassHandle())
+		if (craft()->getEdition() >= Craft::Client)
 		{
-			case 'EntryDraft':
+			switch ($variables['entry']->getClassHandle())
 			{
-				$variables['revisionLabel'] = $variables['entry']->name;
-				break;
-			}
+				case 'EntryDraft':
+				{
+					$variables['revisionLabel'] = $variables['entry']->name;
+					break;
+				}
 
-			case 'EntryVersion':
-			{
-				$variables['revisionLabel'] = Craft::t('Version {num}', array('num' => $variables['entry']->num));
-				break;
-			}
+				case 'EntryVersion':
+				{
+					$variables['revisionLabel'] = Craft::t('Version {num}', array('num' => $variables['entry']->num));
+					break;
+				}
 
-			default:
-			{
-				$variables['revisionLabel'] = Craft::t('Current');
+				default:
+				{
+					$variables['revisionLabel'] = Craft::t('Current');
+				}
 			}
 		}
 
@@ -203,7 +199,7 @@ class EntriesController extends BaseEntriesController
 		{
 			$variables['docTitle'] = $variables['title'] = $variables['entry']->title;
 
-			if ($variables['entry']->getClassHandle() != 'Entry')
+			if (craft()->getEdition() >= Craft::Client && $variables['entry']->getClassHandle() != 'Entry')
 			{
 				$variables['docTitle'] .= ' ('.$variables['revisionLabel'].')';
 			}
@@ -325,10 +321,6 @@ class EntriesController extends BaseEntriesController
 			($variables['entry']->authorId == $currentUser->id && $currentUser->can('deleteEntries'.$variables['permissionSuffix'])) ||
 			($variables['entry']->authorId != $currentUser->id && $currentUser->can('deletePeerEntries'.$variables['permissionSuffix']))
 		);
-
-		// Full page form variables
-		$variables['fullPageForm'] = true;
-		$variables['saveShortcutRedirect'] = $variables['continueEditingUrl'];
 
 		// Include translations
 		craft()->templates->includeTranslations('Live Preview');
@@ -760,7 +752,7 @@ class EntriesController extends BaseEntriesController
 				{
 					$variables['entry'] = craft()->entries->getEntryById($variables['entryId'], $variables['localeId']);
 
-					if ($variables['entry'])
+					if ($variables['entry'] && craft()->getEdition() == Craft::Pro)
 					{
 						$versions = craft()->entryRevisions->getVersionsByEntryId($variables['entryId'], $variables['localeId'], 1, true);
 

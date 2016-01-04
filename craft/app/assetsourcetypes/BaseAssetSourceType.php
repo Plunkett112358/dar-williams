@@ -6,8 +6,8 @@ namespace Craft;
  *
  * @author     Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright  Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license    http://craftcms.com/license Craft License Agreement
- * @see        http://craftcms.com
+ * @license    http://buildwithcraft.com/license Craft License Agreement
+ * @see        http://buildwithcraft.com
  * @package    craft.app.assetsourcetypes
  * @since      1.0
  * @deprecated This class will be removed in Craft 3.0.
@@ -168,19 +168,19 @@ abstract class BaseAssetSourceType extends BaseSavableComponentType
 	 *
 	 * @param string           $localFilePath    The local file path of the file to insert.
 	 * @param AssetFolderModel $folder           The assetFolderModel where the file should be uploaded to.
-	 * @param string           $filename         The name of the file to insert.
+	 * @param string           $fileName         The name of the file to insert.
 	 * @param bool             $preventConflicts If set to true, will ensure that a conflict is not encountered by
 	 *                                           checking the file name prior insertion.
 	 *
 	 * @return AssetOperationResponseModel
 	 */
-	public function insertFileByPath($localFilePath, AssetFolderModel $folder, $filename, $preventConflicts = false)
+	public function insertFileByPath($localFilePath, AssetFolderModel $folder, $fileName, $preventConflicts = false)
 	{
 		// Fire an 'onBeforeUploadAsset' event
 		$event = new Event($this, array(
 			'path'     => $localFilePath,
 			'folder'   => $folder,
-			'filename' => $filename
+			'filename' => $fileName
 		));
 
 		craft()->assets->onBeforeUploadAsset($event);
@@ -198,26 +198,26 @@ abstract class BaseAssetSourceType extends BaseSavableComponentType
 
 			$mobileUpload = false;
 
-			if (IOHelper::getFileName($filename, false) == "image" && craft()->request->isMobileBrowser(true))
+			if (IOHelper::getFileName($fileName, false) == "image" && craft()->request->isMobileBrowser(true))
 			{
 				$mobileUpload = true;
 				$date = DateTimeHelper::currentUTCDateTime();
-				$filename = "image_".$date->format('Ymd_His').".".IOHelper::getExtension($filename);
+				$fileName = "image_".$date->format('Ymd_His').".".IOHelper::getExtension($fileName);
 			}
 
 			if ($preventConflicts)
 			{
-				$newFileName = $this->getNameReplacementInFolder($folder, $filename);
+				$newFileName = $this->getNameReplacement($folder, $fileName);
 				$response = $this->insertFileInFolder($folder, $localFilePath, $newFileName);
 			}
 			else
 			{
-				$response = $this->insertFileInFolder($folder, $localFilePath, $filename);
+				$response = $this->insertFileInFolder($folder, $localFilePath, $fileName);
 
 				// Naming conflict. create a new file and ask the user what to do with it
 				if ($response->isConflict())
 				{
-					$newFileName = $this->getNameReplacementInFolder($folder, $filename);
+					$newFileName = $this->getNameReplacement($folder, $fileName);
 					$conflictResponse = $response;
 					$response = $this->insertFileInFolder($folder, $localFilePath, $newFileName);
 				}
@@ -225,16 +225,12 @@ abstract class BaseAssetSourceType extends BaseSavableComponentType
 
 			if ($response->isSuccess())
 			{
+				$filename = IOHelper::getFileName($response->getDataItem('filePath'));
 
 				$fileModel = new AssetFileModel();
-
-				$fileModel->getContent()->title = $fileModel->generateAttributeLabel(IOHelper::getFileName($filename, false));
-
-				$filename = IOHelper::getFileName($response->getDataItem('filePath'));
-				$fileModel->filename = IOHelper::getFileName($filename);
-
 				$fileModel->sourceId = $this->model->id;
 				$fileModel->folderId = $folder->id;
+				$fileModel->filename = IOHelper::getFileName($filename);
 				$fileModel->kind = IOHelper::getFileKind(IOHelper::getExtension($filename));
 				$fileModel->size = filesize($localFilePath);
 				$fileModel->dateModified = IOHelper::getLastTimeModified($localFilePath);
@@ -315,7 +311,7 @@ abstract class BaseAssetSourceType extends BaseSavableComponentType
 
 				case AssetConflictResolution::KeepBoth:
 				{
-					$filename = $this->getNameReplacementInFolder($folder, $filename);
+					$filename = $this->getNameReplacement($folder, $filename);
 					break;
 				}
 			}
@@ -392,7 +388,7 @@ abstract class BaseAssetSourceType extends BaseSavableComponentType
 
 				case AssetConflictResolution::KeepBoth:
 				{
-					$filename = $this->getNameReplacementInFolder($targetFolder, $filename);
+					$filename = $this->getNameReplacement($targetFolder, $filename);
 					break;
 				}
 			}
@@ -472,7 +468,7 @@ abstract class BaseAssetSourceType extends BaseSavableComponentType
 
 		if (empty($filenameToUse))
 		{
-			$replaceWith->filename = $this->getNameReplacementInFolder($folder, $replaceWith->filename);
+			$replaceWith->filename = $this->getNameReplacement($folder, $replaceWith->filename);
 			craft()->assets->storeFile($replaceWith);
 		}
 		else
@@ -605,9 +601,9 @@ abstract class BaseAssetSourceType extends BaseSavableComponentType
 		$response = new AssetOperationResponseModel();
 
 		return $response->setSuccess()
-				->setDataItem('folderId', $folderId)
-				->setDataItem('parentId', $parentFolder->id)
-				->setDataItem('folderName', $folderName);
+			->setDataItem('folderId', $folderId)
+			->setDataItem('parentId', $parentFolder->id)
+			->setDataItem('folderName', $folderName);
 	}
 
 	/**
@@ -839,7 +835,7 @@ abstract class BaseAssetSourceType extends BaseSavableComponentType
 	 *
 	 * @return mixed
 	 */
-	abstract protected function getNameReplacementInFolder(AssetFolderModel $folder, $fileName);
+	abstract protected function getNameReplacement(AssetFolderModel $folder, $fileName);
 
 	/**
 	 * Delete just the file inside of a source for an Assets File.

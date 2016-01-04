@@ -84,10 +84,10 @@ class Layers extends AbstractLayers
                 $this->resource->setFormat($format);
 
                 if (null !== $delay) {
-                    $layer->getImagick()->setImageDelay($delay / 10);
-                    $layer->getImagick()->setImageTicksPerSecond(100);
+                    $this->resource->setImageDelay($delay / 10);
+                    $this->resource->setImageTicksPerSecond(100);
                 }
-                $layer->getImagick()->setImageIterations($loops);
+                $this->resource->setImageIterations($loops);
 
                 $this->resource->setImage($layer->getImagick());
             }
