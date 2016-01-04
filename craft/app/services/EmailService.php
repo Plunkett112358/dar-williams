@@ -8,8 +8,8 @@ namespace Craft;
  *
  * @author    Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @copyright Copyright (c) 2014, Pixel & Tonic, Inc.
- * @license   http://buildwithcraft.com/license Craft License Agreement
- * @see       http://buildwithcraft.com
+ * @license   http://craftcms.com/license Craft License Agreement
+ * @see       http://craftcms.com
  * @package   craft.app.services
  * @since     1.0
  */
@@ -83,7 +83,7 @@ class EmailService extends BaseApplicationComponent
 	 * Craft has four predefined email keys: account_activation, verify_new_email, forgot_password, and test_email.
 	 *
 	 * Plugins can register additional email keys using the
-	 * [registerEmailMessages](http://buildwithcraft.com/docs/plugins/hooks-reference#registerEmailMessages) hook, and
+	 * [registerEmailMessages](http://craftcms.com/docs/plugins/hooks-reference#registerEmailMessages) hook, and
 	 * by providing the corresponding language strings.
 	 *
 	 * ```php
@@ -265,6 +265,9 @@ class EmailService extends BaseApplicationComponent
 		// Is the event giving us the go-ahead?
 		if ($event->performAction)
 		{
+			// In case a plugin changed any variables in onBeforeSendEmail
+			$variables = $event->params['variables'];
+
 			$email = new \PHPMailer(true);
 
 			// Default the charset to UTF-8
