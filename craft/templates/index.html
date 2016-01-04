@@ -117,7 +117,7 @@
             <div class="note-content">
         
           <h4>Info & Application</h4>
-          {{entry.secondBlock[0].body}}
+          {{entry.body2}}
         </div>
         </div>
       </div>
@@ -126,37 +126,37 @@
       <div class="note-block" style="min-height: 869px;">
          <div class="row">
         <div class="col-md-9 col-md-offset-1">
-      <h4>{{entry.secondBlock[0].pricing}}</h4>
+      <h4>{{entry.pricing}}</h4>
       <h5 >Early bird registration: $1500 <span class="green">/</span> Regular registration: $1700</h5>
 
       <h5 class="sessions">FIRST RETREAT <span class="green">/</span> {{ firstSessionDate.date |upper }}</h5>
-      <p>{{entry.secondBlock[0].firstRetreat}}</p>
+      <p>{{entry.firstRetreat}}</p>
 
        <h5 class="sessions">SECOND RETREAT <span class="green">/</span> {{ secondSessionDate.date | upper }}</h5>
-      <p>{{entry.secondBlock[0].secondRetreat}}</p>
+      <p>{{entry.secondRetreat}}</p>
 
-       <h5 class="sessions">{{entry.secondBlock[0].lodgingTitle}}</h5>
-       <p>{{entry.secondBlock[0].lodging}}</p>
+       <h5 class="sessions">{{entry.lodgingTitle}}</h5>
+       <p>{{entry.lodging}}</p>
 
-       <h5 class="sessions">{{entry.secondBlock[0].registrationTitle}}</h5>
-       <p>{{entry.secondBlock[0].regInfo}}</p>
+       <h5 class="sessions">{{entry.registrationTitle}}</h5>
+       <p>{{entry.regInfo}}</p>
   </div>
 </div>
     </div>
    
   </div>
   <div class="col-md-3 col-xs-12">
-    {% if entry.secondBlock[0].pattern |length %}
-    <img class="img-responsive pattern" src="{{entry.secondBlock[0].pattern[0].url}}" alt="">
+    {% if entry.pattern |length %}
+    <img class="img-responsive pattern" src="{{entry.pattern[0].url}}" alt="">
     {% endif %}
    
 
        
-        <img class="img-responsive " src="{{entry.secondBlock[0].photo1[0].url}}" alt="">
-         <img style="margin-top:10px" class="img-responsive " src="{{entry.secondBlock[0].photo2[0].url}}" alt="">
-        <img style="margin-top:6px;" class="img-responsive pattern" src="{{entry.secondBlock[0].quote[0].url}}" alt="">
-        {% if entry.secondBlock[0].pattern |length %}
-           <img  class="img-responsive pattern" src="{{entry.secondBlock[0].pattern[0].url}}" alt="">
+        <img class="img-responsive " src="{{entry.photo5[0].url}}" alt="">
+         <img style="margin-top:10px" class="img-responsive " src="{{entry.photo6[0].url}}" alt="">
+        <img style="margin-top:6px;" class="img-responsive pattern" src="{{entry.quoteHome[0].url}}" alt="">
+        {% if entry.pattern |length %}
+           <img  class="img-responsive pattern" src="{{entry.pattern[0].url}}" alt="">
         {% endif %}
          
   </div>
