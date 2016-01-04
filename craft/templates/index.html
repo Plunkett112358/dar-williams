@@ -47,14 +47,17 @@
         <div class="row">
           <div class="col-md-3 col-md-offset-1">
             <ul class="blue-bullets">
-            {% for bullet in entry.bulletPoints1  %}
-            <li><span>{{bullet.point}}</span></li> 
-            {% endfor %}
+            {% if entry.bulletPoints1 %}
+              {% for bullet in entry.bulletPoints1  %}
+
+              <li><span>{{bullet.point}}</span></li> 
+              {% endfor %}
+            {% endif %}
              </ul>
           </div>
           <div class="col-md-8 col-xs-12">
               <ul class="blue-bullets">
-            {% for bullet in entry.bulletpoints2  %}
+            {% for bullet in entry.bulletPoints2  %}
             <li><span>{{bullet.points}}</span></li> 
             {% endfor %}
              </ul>
