@@ -50,7 +50,7 @@
             {% if entry.bulletPoints1 %}
               {% for bullet in entry.bulletPoints1  %}
 
-              <li><span>{{bullet}}</span></li> 
+              <li><span>{{bullet.col1}}</span></li> 
               {% endfor %}
             {% endif %}
              </ul>
@@ -58,7 +58,7 @@
           <div class="col-md-8 col-xs-12">
               <ul class="blue-bullets">
             {% for bullet in entry.bulletPoints2  %}
-            <li><span>{{bullet}}</span></li> 
+            <li><span>{{bullet.col1}}</span></li> 
             {% endfor %}
              </ul>
           </div>
