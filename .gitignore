@@ -10,6 +10,7 @@ public/bower_components
 
 
 craft/storage/* 
+craft/app/* 
 
 codekit-config.json
 
