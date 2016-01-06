@@ -89,6 +89,13 @@
   </div>
 </div>
 
+{% set height = {
+          mode: 'crop',
+          width: 390,
+          height: 254,
+          quality: 75,
+          position: 'bottom-center'
+      } %}
 
 <div class="row">
 
@@ -98,10 +105,10 @@
      
     </div>
      <div class="col-md-3 col-xs-12">
-    <img style="padding-right:10px; padding-left:3px;" class="img-responsive gutter mobile-photo" src="{{ entry.photo3[0].getUrl(wide)}}">
+    <img style="padding-right:10px; padding-left:3px; height:254px;" class="img-responsive gutter mobile-photo" src="{{ entry.photo3[0].getUrl()}}">
     </div>
      <div class="col-md-4 col-xs-12">
-     <img class="img-responsive mobile-photo" src="{{ entry.photo4[0].getUrl(wide)}}">
+     <img class="img-responsive mobile-photo" src="{{ entry.photo4[0].getUrl(height)}}">
 
     </div>
   </div>
