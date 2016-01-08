@@ -53,6 +53,7 @@
 {% endif %}
 
 {% if currentUser %}
+{% set pageEntry = craft.entries.section('finalDetails').first() %}
 <!-- <h1 class="text-center">This Page Coming Soon!</h1> -->
 <!-- <a href="{{ logoutUrl }}">Logout</a> -->
 <div class="final-details-content">
@@ -71,6 +72,9 @@
 
 {% set thisYear= now|date('Y') %}
 
+{% if pageEntry.announcementOnOff %}
+<div class="alert alert-success" role="alert">{{ pageEntry.topOfPageAnnouncement}}</div>
+{% endif %}
 
 <form method="post" action="" enctype="multipart/form-data" accept-charset="UTF-8">
     {{ getCsrfInput() }}
@@ -165,8 +169,8 @@
                                 <option name="fields[paymentMethod]" value="{{thing}}">{{ thing.label }}</option>
                                   {% endfor %}
                             </select>
-                     <p>To make a credit card payment by phone, please contact Raquel Vidal directly at: 917-449-6687</p>
-                     <p>To make a payment by check, please make check payable to Dar Williams Project and  mail to:  Raquel Vidal / 33 Perks Blvd. / Cold Spring, NY 10516</p>
+
+                     <p>{{ pageEntry.paymentField1 }}</p>
                     </div>
 
 
