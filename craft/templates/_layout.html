@@ -130,9 +130,11 @@
 
           <img class=" img-responsive" src="../images/thankyouFeather@2x.png" alt="">
 
-         
+           {% else %}
+          <img class=" feather img-responsive" src="/images/feather-logo.png">
+         {% endif %}
 
-          {% elseif  craft.request.getLastSegment() == 'thanks' %}
+          {% if  craft.request.getLastSegment() == 'thanks' %}
           {% set clip = {
               mode: 'crop',
               width: 1000,
@@ -158,7 +160,6 @@
             </div>
           </div>
           
-              
 
                {% else %}
           <img class=" feather img-responsive" src="/images/feather-logo.png">
