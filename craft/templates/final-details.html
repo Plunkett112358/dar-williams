@@ -45,7 +45,9 @@
 
  </div>
     <div class="col-md-4" style="padding-left: 0px;">
+      {% if entry.photo|length %}
       <img class="img-responsive" src="{{ entry.photo[0].url }}" alt="">
+      {% endif %}
     </div>
  
   
@@ -61,7 +63,11 @@
 
 
 <div class="page-header">
-    <a class="pull-right" href="{{ logoutUrl }}">Logout</a>
+    <div class="pull-right">
+       <a class=" btn btn-outline" style="margin-right:20px;" href="/thanks">Skip To Payment</a>
+    <a class="" href="{{ logoutUrl }}">Logout</a>
+    </div>
+   
   <h4>
     FINAL DETAILS
   </h4>
@@ -73,13 +79,16 @@
 {% set thisYear= now|date('Y') %}
 
 {% if pageEntry.announcementOnOff %}
-<div class="alert alert-success" role="alert">{{ pageEntry.topOfPageAnnouncement}}</div>
+<div class="alert alert-success" role="alert">{{ pageEntry.topOfPageAnnouncement}}
+
+
+</div>
 {% endif %}
 
 <form method="post" action="" enctype="multipart/form-data" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="guestEntries/saveEntry">
-    <input type="hidden" name="redirect" value="thankyou">
+    <input type="hidden" name="redirect" value="thanks">
     <input type="hidden" name="sectionId" value="4">
      <input type="hidden" name="fields[status]" value="live">
      <div class="row">
@@ -172,6 +181,8 @@
 
                      <p>{{ pageEntry.paymentField1 }}</p>
                     </div>
+
+
 
 
 

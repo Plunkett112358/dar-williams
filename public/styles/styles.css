@@ -6902,7 +6902,7 @@ footer {
   border-radius: 0px;
 }
 .btn-outline:hover {
-  color: white;
+  color: #53782d;
 }
 @media (max-width: 767px) {
   .mobile-photo {
