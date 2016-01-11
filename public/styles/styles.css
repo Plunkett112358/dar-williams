@@ -6910,4 +6910,11 @@ footer {
     padding-bottom: 10px;
   }
 }
+.thankyou-form p {
+  color: #53782d;
+}
+.thankyou-form h3 {
+  font-family: 'Kreon', serif, 'Bodoni MT', 'Palatino', Calisto MT, "Times New Roman", Times, serif;
+  color: #62b1bf;
+}
 /*# sourceMappingURL=/styles/styles.map */
