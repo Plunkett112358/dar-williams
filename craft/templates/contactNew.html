@@ -107,10 +107,12 @@
         <h3>FAQs</h3>
     </div>
 
-        {% for faq in entry.faq %}
-         <h4>{{ faq.question}}</h4>
-         <p>{{ faq.answer }}</p>
+      {% if entry.faqs | length %}
+        {% for row in entry.faqs %}
+         <h4>{{ row.question}}</h4>
+         <p>{{ row.answer }}</p>
         {% endfor %}
+      {% end if %}
         
 <!--                 <h4>Do I need to play guitar or play guitar well to join? Are piano players or other instrumentalists welcome?</h4>
                 
