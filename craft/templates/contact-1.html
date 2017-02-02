@@ -1,0 +1,155 @@
+{% extends '_layout' %}
+
+{% block content %}
+
+<!-- </div>  -->
+<!-- end container -->
+<div class="register-splash">
+
+<!-- <div class="container"> -->
+    <div style="margin-top:20px;" class="pull-right">
+        <a target="_blank"  href=" https://www.facebook.com/groups/839695362732001/"><img style="width:30px;" src="../images/facebook29.png"></a>
+      <!-- <a target="_blank"  href=" https://twitter.com/darwilliamstour/status/450467921589186560"><img style="width:30px;" src="../images/twitter14.png"></a> -->
+      </div> 
+
+
+{% macro errorList(errors) %}
+    {% if errors %}
+        <ul class="errors">
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+{% from _self import errorList %}
+
+<div class="contact-content">
+<div class="page-header">
+   
+        <h3>CONTACT</h3>
+        <p><small>{{ entry.body }}</small></p>
+        <!-- <p>If you are having trouble with this form please contact <a href="mailto:darwilliamsretreat@gmail.com"> darwilliamsretreat@gmail.com</a></p> -->
+        </div>
+
+<div class="row">
+    <div class="col-md-6">
+      
+        <form method="post" action="" accept-charset="UTF-8">
+            {{ getCsrfInput() }}
+            <input type="hidden" name="action" value="contactForm/sendMessage">
+            <input type="hidden" name="redirect" value="contact/thankyou">
+
+             <div class="form-group">
+                <h5 for="fromName">Name</h5>
+                <input class="form-control" id="fromName" type="text" name="fromName" value="{% if message is defined %}{{ message.fromName }}{% endif %}">
+                {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
+            </div>
+            
+            
+
+           <div class="form-group">
+                <h5 for="fromEmail">Email</h5>
+            <input class="form-control" id="fromEmail" type="text" name="fromEmail" value="{% if message is defined %}{{ message.fromEmail }}{% endif %}">
+            {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
+           </div>
+          
+           <div class="form-group">
+                <h5 for="subject">Subject</h5>
+            <input class="form-control" id="subject" type="text" name="subject" value="{% if message is defined %}{{ message.subject }}{% endif %}">
+            {{ message is defined and message ? errorList(message.getErrors('subject')) }}
+           </div>
+
+           <!--   <div class="form-group">
+              <h5 for="phone">Phone Number</h5>
+            <input class="form-control" id="phone" type="text" name="message[Phone]" value=""> 
+           </div> -->
+          
+           
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+                <h5 for="message">Message</h5>
+            <textarea class="form-control" rows="8" cols="20" id="message" name="message[body]">{% if message is defined %}{{ message.message }}{% endif %}</textarea>
+           </div>
+         
+         
+           
+
+
+                <input type="submit" class="btn btn-lg btn-outline pull-right" value="Send">
+        </form>
+            
+        </div>
+    </div>
+  
+</div>
+
+
+<!-- </div> -->
+
+<!-- </div> -->
+
+
+
+</div>
+
+<div style="margin-top:6px">
+
+
+  <div class="row">
+      <div class="col-md-8" style="padding-right:6px;">
+        <div class="faq-block">
+        <div class="page-header">
+
+        <h3>FAQs</h3>
+    </div>
+
+        {% for faq in entry.faq %}
+         <h4>{{ faq.question}}</h4>
+         <p>{{ faq.answer }}</p>
+        {% endfor %}
+        
+<!--                 <h4>Do I need to play guitar or play guitar well to join? Are piano players or other instrumentalists welcome?</h4>
+                
+            
+                <p>All instruments are welcome. We've had percussionists, xylophone players, keyboard players, and vocalists, too.</p>
+          
+                  <h4>I'm nervous and have only played one open mic! How important is performance to this retreat?</h4>
+               
+                <p> Some people sit out for a couple of days and some never perform a song.  We aim to create an environment where there is at least one person with whom you feel comfortable sharing your work!</p>
+             
+                 <h4>What kind of songwriting supplies should we bring?</h4>
+               
+                <p> We recommend a notebook for lyrics, a notebook for writing other thoughts (it can be the same notebook if you want), your lucky pen, and a simple recording device for ideas such as a cell phone, iPad or laptop.  If you have an instrument that you can't bring, let us know.  We can track something down for you.</p>
+              
+                 <h4>Is there internet access?</h4>
+               
+                <p> Yes.</p>
+            
+                 <h4>Will Dar actually hear my song? Will we see her individually or as a group?</h4>
+               
+               <p> Dar will be around throughout the day. She will have a short one-on-one with every person individually and will run the afternoon clinics where everyone will have an opportunity to share a song with the group.</p>
+             
+                <h4>Should I expect (am I expected) to write a song by the end of the retreat?</h4>
+               
+                <p> This is a retreat, not a boot camp!  When something matters to us, we reveal it in our own time. The challenge is to find the words we want to say or the practice that feels like the right fit. For some, a deadline and a little pressure is helpful, but Dar is quick to point out that at least one of her songs took three years to write.</p>
+              
+                <h4> Is there a store nearby?</h4>
+               
+                <p> The closest strip of stores (drugstore, grocery, bank, liquor store and post office) is about 5 miles away and we can make a run for you if you don't have a car.   </p> -->
+      </div>
+       </div>
+      <div class="col-md-4" style="padding-left:0px;">
+         {% for image in entry.images3 %}
+          <div style="padding-left:0px; padding-right:0px;" class="col-md-12">
+            <img style="margin-top: 6px; " class="img-responsive" src="{{image.url}}">
+          </div>
+          {% endfor %}
+      </div>
+   
+  </div>
+</div>
+{% endblock %}
