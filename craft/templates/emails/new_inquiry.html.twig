@@ -4,7 +4,10 @@
 <h5><strong>Name: </strong>{{ entry.title }}</h5> <br/>
 <h5><strong>Email: {{ entry.email }}</strong></h5> <br/>
 <h5><strong>Phone: {{entry.phone }}</strong></h5> <br/>
-<h5><strong>Phone: {{entry.checkbox }}</strong></h5> <br/>
+<h5><strong>Health Clause: 
+{% if entry.checkbox = 1 %}
+Yes, I agree 
+{% endif %} </strong></h5> <br/>
 
 <h5><strong>Returning?: {{entry.returningToRetreat }}</strong></h5> <br/>
 <h5><strong>Session Date: {{ entry.sessionDate.label }} </strong></h5><br/>
